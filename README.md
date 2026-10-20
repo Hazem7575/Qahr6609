@@ -12,6 +12,8 @@
 | ![الشجرة الذهبية](docs/images/goldentree.jpg) **الشجرة الذهبية** — زي الرسمي: جوايز، تكلفة القطف، Reset CD والعداد | ![جزيرة التنين](docs/images/dragonisland.jpg) **جزيرة التنين** — البوس في ميعاده وترتيب الضرر لايف |
 | ![النرد](docs/images/dice.jpg) **النرد (Sic Bo)** — بشباك الكلاينت الأصلي | ![اللوتري](docs/images/lottery.jpg) **اللوتري** — الصناديق بأنواعها زي الرسمي |
 | ![Celestial Chest](docs/images/celestialchest.jpg) **مهرجان Celestial Chest** — الـ Celestial Elder وBliss Boy في تون سيتي | ![أيقونات الأحداث](docs/images/twincity_events.jpg) **أيقونات الأحداث** فوق — Golden Tree والنرد والبوكر… |
+| ![قطف الشجرة](docs/images/goldentree_pick.jpg) **وانت بتقطف** — الصندوق بيتفتح وتطلعلك الجايزة | ![سحب اللوتري](docs/images/lottery_draw.jpg) **سحب اللوتري** — الجايزة وزرار +Ticket للتغيير زي الرسمي |
+| ![البوكر](docs/images/poker_lobby.jpg) **البوكر (Texas Hold'em)** — شباك البطولات | ![طاولات البوكر](docs/images/poker_tables.jpg) **Instant Play** — الطاولات بالرهانات |
 | ![الشخصية](docs/images/character.jpg) **شخصية كاملة في أمر واحد** — `@maxme` + `@setclass ninja` | |
 
 ---
