@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "tag": "event",
+      "title_ar": "أسطورة الهلال الأخير",
+      "title_en": "The Legend of the Last Crescent",
+      "body_ar": "الهلال الأخير طلع مطفي! كلّم حارس الهلال في توين سيتي (306,267) وابدأ القصة.\nجمّع الأدلة والأختام الأربعة، دافع عن قافلة النور الساعة 1 و7 و10:30 بالليل، وواجه سيد الكسوف.\nمهام يومية، 30 ختم فانوس، ومتجر الهلال بعملات الإيفنت.",
+      "body_en": "The Last Crescent rose dark! Talk to the Guardian of the Crescent in Twin City (306,267).\nFind the clues and the four seals, defend the Caravan of Light at 13:00, 19:00 and 22:30, then face the Eclipse Sovereign.\nNightly tasks, 30 lantern stamps and the Crescent Bazaar.",
+      "date": "2026-10-11T12:00:00Z",
+      "author": "Hazem",
+      "image": "news/img/1.jpg",
+      "link": ""
+    },
+    {
+      "id": 2,
+      "tag": "news",
+      "title_ar": "أهلاً بيكم في سيرفر Hazem",
+      "title_en": "Welcome to the Hazem server",
+      "body_ar": "تم افتتاح السيرفر وإصلاح مشاكل الاتصال بالداتابيز.\nاللانشر بينزّل أي ملفات جديدة تلقائياً قبل ما تلعب، فمتقلقش من التحديثات.\nبالتوفيق ومستنيينكم في اللعبة!",
+      "body_en": "The server is open and the database connection issues are fixed.\nThe launcher downloads any new files automatically before you play.\nGood luck, see you in game!",
+      "date": "2026-10-10T21:00:00Z",
+      "author": "Hazem",
+      "image": "news/img/2.jpg",
+      "link": ""
+    },
+    {
+      "id": 3,
+      "tag": "event",
+      "title_ar": "إيفنت الويك إند: خبرة مضاعفة",
+      "title_en": "Weekend event: double EXP",
+      "body_ar": "خبرة مضاعفة طول الويك إند، متفوّتوهاش!",
+      "body_en": "Double experience all weekend long. Don't miss it!",
+      "date": "2026-10-09T18:00:00Z",
+      "author": "Hazem",
+      "image": "news/img/3.jpg",
+      "link": ""
+    }
+  ]
+}

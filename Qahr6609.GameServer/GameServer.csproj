@@ -1,0 +1,167 @@
+<Project>
+  <!--
+    The game server: .NET 10 x64 only (the .NET Framework 4.8 x86 project was removed 2026-10-19), as Qahr's GameServer.csproj.
+    Sources: globbed (**\*.cs) - a new .cs file on disk is compiled, nothing to list here.
+    Output: bin\Debug\ (the server runs there: shell.ini, ServerDataBase\). Qahr6609.Tools\Server\ServerCtl\step2_build.bat builds into
+    _buildcheck\game\ first and apply.bat copies the result into bin\Debug only when the build succeeded.
+    Build: set DOTNET_ROOT=D:\dotnet10 & D:\dotnet10\dotnet.exe build GameServer.csproj -c Debug -v minimal -nologo
+    Shared code: ..\Qahr6609.Shared\**\*.cs is compiled here and in Qahr6609.AccServer (written once, as in Qahr).
+  -->
+
+  <!-- Must be set BEFORE Sdk.props is imported (restore/project.assets.json go here, not into obj\). -->
+  <PropertyGroup>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseOutputPath>bin\</BaseOutputPath>
+  </PropertyGroup>
+
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+
+    <Platforms>x64</Platforms>
+    <Platform>x64</Platform>
+    <PlatformTarget>x64</PlatformTarget>
+
+    <RootNamespace>Conquer6609</RootNamespace>
+    <AssemblyName>GameServer</AssemblyName>
+    <StartupObject>Conquer6609.Program</StartupObject>
+    <ApplicationIcon>$this.Icon.ico</ApplicationIcon>
+    <NoWin32Manifest>true</NoWin32Manifest>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- Server GC (as Qahr): a heap + GC thread per core, better throughput and fewer pauses under many
+         connections than Workstation GC. Concurrent background GC keeps collections off the game thread. -->
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+
+    <!-- The symbols the server has always been built with. -->
+    <DefineConstants>TRACE;DEBUG;Jiang;PROTECTION_SPEEDHACK;Poker;PoPEditsJiang;ItemTime;NewActionHelperPOP;AttackDurability;Roullete;MiningSystem;PoP_AttackEditor;RetreatSystem</DefineConstants>
+
+    <OutputPath>bin\Debug\</OutputPath>
+    <!-- [DevHotReload] Qahr6609.Tools\Server\ServerCtl\dev_hotreload.bat sets HotReloadDev=true: that build goes to bin\Dev\ (unoptimized, see below)
+         and still runs in bin\Debug\, so the optimized bin\Debug\GameServer.dll of the real server is never replaced by it. -->
+    <OutDir Condition="'$(OutDir)' == '' and '$(HotReloadDev)' == 'true'">bin\Dev\</OutDir>
+    <OutDir Condition="'$(OutDir)' == ''">bin\Debug\</OutDir>
+    <RunWorkingDirectory>$(MSBuildProjectDirectory)\bin\Debug\</RunWorkingDirectory>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+
+    <!-- Output folders, third-party dlls and the disabled modules stay out of the glob. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin\**;obj\**;packages\**;libs\**;Modules\Custom\_off\**;Modules\_*\**;Modules\**\content\**;Modules\**\data\**;Modules\**\client\**;Modules\**\.build\**</DefaultItemExcludes>
+
+    <!-- Old source written with warnings; keep the build's noise down to things that matter. -->
+    <NoWarn>$(NoWarn);CS0162;CS0168;CS0169;CS0219;CS0414;CS0649;CS0612;CS0618;CA1416;SYSLIB0006;SYSLIB0014;SYSLIB0021;SYSLIB0022;SYSLIB0023;SYSLIB0041;SYSLIB0060;MSB3277;NU1701;NU1702;WFAC010;WFO1000;PBN0009;PBN0015;CS8981;CS0675;PBN0020;WFDEV004</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <!-- the live server runs the Debug build: keep the JIT optimizer on. Exception: the dev launcher
+         (Qahr6609.Tools\Server\ServerCtl\dev_hotreload.bat) sets HotReloadDev=true, because .NET Hot Reload cannot patch an optimized build. -->
+    <Optimize Condition="'$(HotReloadDev)' == 'true'">false</Optimize>
+    <Optimize Condition="'$(HotReloadDev)' != 'true'">true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <!-- Manifest names the code looks up. -->
+  <ItemGroup>
+    <EmbeddedResource Update="Bootstrap\Properties\Resources.resx" LogicalName="Conquer6609.Properties.Resources.resources" />
+    <None Remove="**\*" />
+    <!-- [Storage] the players column map and the SQL migrations next to the exe (they are also found in the source tree) -->
+    <None Include="Persistence\Database\Storage\players_columns.csv" Link="players_columns.csv" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="Persistence\Database\Migrations\*.sql" Link="Migrations\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- replaces MySql.Data 6.x (.NET Framework only) -->
+    <PackageReference Include="MySqlConnector" Version="2.6.2" />
+    <!-- replaces protobuf-net 2.0.0.668 -->
+    <PackageReference Include="protobuf-net" Version="3.4.30" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <!-- runtime modules: ServerDataBase\Modules\<Name>\*.cs compiled when the server starts (Modules\RuntimeModules.cs) -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
+    <!-- .NET Framework parts that are separate packages on .NET -->
+    <PackageReference Include="System.Management" Version="10.0.0" />
+    <PackageReference Include="System.Data.OleDb" Version="10.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="10.0.0" />
+  </ItemGroup>
+
+  <!-- .NET Framework 4.x libraries, referenced from libs\ (read only). -->
+  <ItemGroup>
+    <Reference Include="Extensions"><HintPath>libs\Extensions.dll</HintPath><Private>true</Private></Reference>
+    <!-- PacketStudio connector (Qahr6609.Tools\Releases\PacketStudio): packetbridge.ini next to the exe turns it on -->
+    <Reference Include="PacketBridge"><HintPath>libs\PacketBridge.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="BouncyCastle.Crypto"><HintPath>libs\BouncyCastle.Crypto.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+
+  <!-- Optional DevExpress GM panel (console "cp"): Admin\Panel\Co_Panle.cs/.Designer.cs/.resx need the commercial
+       DevExpress v21.2 WinForms dlls, which are NOT in the public repo. Copy them into libs\ and the panel is built
+       (constant HAS_DEVEXPRESS); without them the server builds without it and "cp" prints "panel not installed".
+       The game-side part (skill damage table, GM whisper history) is in Co_Panle.Logic.cs and is always built. -->
+  <PropertyGroup Condition="Exists('libs\DevExpress.XtraEditors.v21.2.dll') and Exists('libs\DevExpress.XtraBars.v21.2.dll') and Exists('libs\DevExpress.Utils.v21.2.dll') and Exists('libs\DevExpress.Data.v21.2.dll')">
+    <HasDevExpress>true</HasDevExpress>
+    <DefineConstants>$(DefineConstants);HAS_DEVEXPRESS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(HasDevExpress)' == 'true'">
+    <Reference Include="DevExpress.Data.Desktop.v21.2"><HintPath>libs\DevExpress.Data.Desktop.v21.2.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="DevExpress.Data.v21.2"><HintPath>libs\DevExpress.Data.v21.2.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="DevExpress.Printing.v21.2.Core"><HintPath>libs\DevExpress.Printing.v21.2.Core.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="DevExpress.Utils.v21.2"><HintPath>libs\DevExpress.Utils.v21.2.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="DevExpress.XtraBars.v21.2"><HintPath>libs\DevExpress.XtraBars.v21.2.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="DevExpress.XtraEditors.v21.2"><HintPath>libs\DevExpress.XtraEditors.v21.2.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(HasDevExpress)' != 'true'">
+    <Compile Remove="Admin\Panel\Co_Panle.cs;Admin\Panel\Co_Panle.Designer.cs" />
+    <EmbeddedResource Remove="Admin\Panel\Co_Panle.resx" />
+  </ItemGroup>
+
+  <!-- single-source files shared with AccServer (written once in ..\Qahr6609.Shared, no duplication) -->
+  <ItemGroup>
+    <Compile Include="..\Qahr6609.Shared\**\*.cs" Link="Shared\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <!-- a LIVE module (Modules\<Name>\ with an empty ".live" file) is not built into the server: in development mode the
+       running server compiles it from this folder and reloads it whenever one of its .cs files is saved
+       (Modules\RuntimeModules.cs, Modules\ModuleWatcher.cs). Delete .live to build it into the server again. -->
+  <Target Name="RemoveLiveModules" BeforeTargets="CoreCompile">
+    <ItemGroup>
+      <_LiveModule Include="Modules\*\.live;Modules\Custom\*\.live" />
+      <_LiveModuleCode Include="%(_LiveModule.RelativeDir)**\*.cs" Condition="'@(_LiveModule)' != ''" />
+      <Compile Remove="@(_LiveModuleCode)" />
+    </ItemGroup>
+    <Message Importance="high" Text="Live modules (not built in): @(_LiveModule->'%(RelativeDir)')" Condition="'@(_LiveModule)' != ''" />
+  </Target>
+
+  <!-- A module written in the source (Modules\<Name>\ or Modules\Custom\<Name>\) is compiled into the server by this build;
+       its game data goes with it: content\ is copied to <out>\ServerDataBase\Modules\<Name>\content\ (updated on every build),
+       data\ to ...\Modules\<Name>\ only for files that are not there yet (it holds what the module saves at run time).
+       ServerDataBase then reads content\ at start-up (Modules\ModuleContent.cs). A folder starting with _ is skipped. -->
+  <Target Name="CopyModuleContent" AfterTargets="Build" Condition="Exists('$(OutDir)ServerDataBase')">
+    <ItemGroup>
+      <_ModuleContent Include="Modules\*\content\**\*;Modules\Custom\*\content\**\*" Exclude="Modules\_*\**;Modules\Custom\_*\**" />
+      <_ModuleContent><Dest>$([System.Text.RegularExpressions.Regex]::Replace('%(RecursiveDir)', '^Custom\\', ''))</Dest></_ModuleContent>
+      <_ModuleData Include="Modules\*\data\**\*;Modules\Custom\*\data\**\*" Exclude="Modules\_*\**;Modules\Custom\_*\**" />
+      <_ModuleData><Dest>$([System.Text.RegularExpressions.Regex]::Replace('%(RecursiveDir)', '^(Custom\\)?([^\\]+)\\data\\', '$2\'))</Dest></_ModuleData>
+      <_ModuleDataNew Include="@(_ModuleData)" Condition="!Exists('$(OutDir)ServerDataBase\Modules\%(Dest)%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_ModuleContent)" DestinationFiles="@(_ModuleContent->'$(OutDir)ServerDataBase\Modules\%(Dest)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_ModuleDataNew)" DestinationFiles="@(_ModuleDataNew->'$(OutDir)ServerDataBase\Modules\%(Dest)%(Filename)%(Extension)')" />
+  </Target>
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+</Project>

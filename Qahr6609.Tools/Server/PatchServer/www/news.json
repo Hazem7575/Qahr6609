@@ -1,0 +1,69 @@
+{
+  "items": [
+    {
+      "tag": "رمضان",
+      "title": "أسطورة الهلال الأخير",
+      "date": "2026-10-11 12:00",
+      "author": "scripthazem",
+      "body": "الهلال الأخير طلع مطفي! كلّم حارس الهلال في توين سيتي (306,267) وابدأ القصة.\nجمّع الأدلة والأختام الأربعة، دافع عن قافلة النور الساعة 1 و7 و10:30 بالليل، وواجه سيد الكسوف.\nمهام يومية، 30 ختم فانوس، ومتجر الهلال بعملات الإيفنت.",
+      "link": "",
+      "tag_en": "RAMADAN",
+      "title_en": "The Legend of the Last Crescent",
+      "body_en": "The Last Crescent rose dark! Talk to the Guardian of the Crescent in Twin City (306,267).\nFind the clues and the four seals, defend the Caravan of Light at 13:00, 19:00 and 22:30, then face the Eclipse Sovereign.\nNightly tasks, 30 lantern stamps and the Crescent Bazaar."
+    },
+    {
+      "tag": "تحديث",
+      "title": "أهلاً بيكم في سيرفر scripthazem",
+      "date": "2026-10-10 21:00",
+      "author": "scripthazem",
+      "body": "تم افتتاح السيرفر وإصلاح مشاكل الاتصال بالداتابيز.\nاللانشر بينزّل أي ملفات جديدة تلقائياً قبل ما تلعب، فمتقلقش من التحديثات.\nبالتوفيق ومستنيينكم في اللعبة!",
+      "link": "",
+      "tag_en": "UPDATE",
+      "title_en": "Welcome to the scripthazem server",
+      "body_en": "The server is open and the database connection issues are fixed.\nThe launcher downloads any new files automatically before you play.\nGood luck, see you in game!"
+    },
+    {
+      "tag": "إيفنت",
+      "title": "إيفنت الويك إند: خبرة مضاعفة",
+      "date": "2026-10-09 18:00",
+      "author": "scripthazem",
+      "body": "خبرة مضاعفة طول الويك إند، متفوّتوهاش!",
+      "link": "",
+      "tag_en": "EVENT",
+      "title_en": "Weekend event: double EXP",
+      "body_en": "Double experience all weekend long. Don't miss it!"
+    }
+  ],
+  "images": [
+    {
+      "url": "news/ramadan_lanterns.jpg",
+      "caption": "أسطورة الهلال الأخير",
+      "link": "",
+      "caption_en": "The Legend of the Last Crescent"
+    },
+    {
+      "url": "news/ramadan_caravan.jpg",
+      "caption": "قافلة النور - 1 و7 و10:30",
+      "link": "",
+      "caption_en": "Caravan of Light - 13:00 / 19:00 / 22:30"
+    },
+    {
+      "url": "news/duel.jpg",
+      "caption": "حرب النقابات - السبت 9 مساءً",
+      "link": "",
+      "caption_en": "Guild War - Saturday 9 PM"
+    },
+    {
+      "url": "news/dragon.jpg",
+      "caption": "تحديث جديد",
+      "link": "",
+      "caption_en": "New update"
+    },
+    {
+      "url": "news/lanterns.jpg",
+      "caption": "إيفنت الويك إند",
+      "link": "",
+      "caption_en": "Weekend event"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+/autohp 1
+/autohp 0
+/rolescale 50
+/scale 120
+/fps 900

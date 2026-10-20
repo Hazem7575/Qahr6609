@@ -1,0 +1,3 @@
+{ "name": "compatchecker", "version": "1.0.0", "main": "main.js", "bin": "main.js",
+  "pkg": { "assets": ["ui.html", "engine.js"], "targets": ["node22-win-x64"], "outputPath": "dist" },
+  "dependencies": { "iconv-lite": "0.6.3" }, "devDependencies": { "@yao-pkg/pkg": "6.6.0" } }

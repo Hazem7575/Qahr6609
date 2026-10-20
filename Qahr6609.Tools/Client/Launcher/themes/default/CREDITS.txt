@@ -1,0 +1,42 @@
+scripthazem launcher - image & font credits
+============================================
+
+Images (free for commercial use, attribution not required but given):
+- images/bg_main.jpg      <- "Pagoda overlooking city and mountain" by Sarmat Batagov, Unsplash (Unsplash License)
+                             https://unsplash.com/photos/pagoda-overlooking-city-and-mountain-st43FCuVor0  (colour graded)
+- images/char_main.png    <- AI-generated samurai by sergeikolo, Pixabay (Pixabay Content License)
+                             https://pixabay.com/illustrations/ai-generated-man-human-samurai-9564276/
+- images/news_dragon.jpg  <- "Bronze dragon sculpture on roof" by Annie Spratt, Unsplash (Unsplash License)
+                             https://unsplash.com/photos/bronze-dragon-sculpture-on-roof-rdVLN3UFmpU
+- images/news_lanterns.jpg <- "Two red lanterns" by Nhi Ly, Unsplash (Unsplash License)
+                             https://unsplash.com/photos/two-red-lanterns-hanging-against-a-black-background-nYKv2G_CBRI
+- images/news_duel.jpg    <- "Samurai duel katana silhouette" by Vilkasss, Pixabay (Pixabay Content License)
+                             https://pixabay.com/illustrations/samurai-duel-katana-silhouette-9931463/
+- images/texture_clouds.jpg <- "Pattern texture design chinese" by fitmedesignpath, Pixabay (Pixabay Content License)
+                             https://pixabay.com/illustrations/pattern-texture-design-chinese-9636142/
+- images/texture_parchment.jpg <- "Grunge leather texture" by ekavesh, Pixabay (Pixabay Content License)
+                             https://pixabay.com/illustrations/grunge-leather-texture-7471492/
+- images/logo.png         <- made for scripthazem with the Cinzel Decorative font
+- images/originals/       <- untouched downloads (other unused options: bg1, bg3, char2, char3, news4, ...)
+
+Fonts:
+- fonts/CinzelDecorative-*.ttf  Cinzel Decorative by Natanael Gama, SIL Open Font License 1.1 (fonts/OFL-Cinzel.txt)
+
+Launcher v2 (2026-10-12):
+- images/char_flame.png    <- cropped from the owner's official Conquer Online character art (D:\صور\zy-hds-20211201.png), soft left/bottom fade
+- images/logo_conquer.png  <- official Conquer Online client logo (data2\playskin\Conquer\IMAGE_LOGO.png) with a baked glow/shadow
+- images/card_paper.png, images/frame_smoke.png, ..\ramadan\images\card_paper.png, frame_night.png
+                           <- procedural (made by Qahr6609.Tools\Client\LauncherArt\launcher_art\gen_textures.py, no third-party art)
+- fonts/Cairo-Regular/SemiBold/Bold.ttf  Cairo by the Cairo Project Authors, SIL OFL 1.1 (fonts/OFL-Cairo.txt);
+                           static instances made from the Google Fonts variable font with fontTools
+- fonts/Cinzel-Bold.ttf    Cinzel by the Cinzel Project Authors, SIL OFL 1.1 (fonts/OFL-Cinzel-Bold.txt); static instance (wght 700)
+- the HAZEM emblem (fallback when [Logo] Image is empty) is drawn in code with WPF shapes (Emblem.cs)
+
+Background slideshow + music (2026-10-12):
+- backgrounds/bg1_sunset.jpg, bg2_forest.jpg, bg3_desert.jpg, bg4_night.jpg
+                           <- procedural fantasy landscapes (~1600x900), self-generated with Python/Pillow
+                              (scratchpad gen_bg_music.py). No third-party or commercial-mock-up art. Free to use/replace.
+                              Drop your own 16:9 scenes here (jpg/png) to change the slideshow - see [Background] in theme.ini.
+- music/theme.wav          <- a short (16 s) seamless ambient synth pad, self-generated (same script). PLACEHOLDER:
+                              royalty-free (owner-owned), low level. Replace with your own loop at themes\default\music\
+                              (wav is safest; mp3/ogg need a codec on the PC). Toggle/volume live in [Music] in theme.ini.

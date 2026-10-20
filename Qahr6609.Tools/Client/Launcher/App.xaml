@@ -1,0 +1,561 @@
+<Application x:Class="ScriptHazemLauncher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <Application.Resources>
+        <!-- Defaults only. Real values come from themes\<name>\theme.ini (Theme.ApplyResources). -->
+        <LinearGradientBrush x:Key="GoldBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFE7A8" Offset="0"/>
+            <GradientStop Color="#FFE8B64E" Offset="0.45"/>
+            <GradientStop Color="#FF8A5512" Offset="0.75"/>
+            <GradientStop Color="#FFFFE7A8" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="GoldFrameBrush" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#FFF6D88E" Offset="0"/>
+            <GradientStop Color="#FF8A5512" Offset="0.35"/>
+            <GradientStop Color="#FFE8B64E" Offset="0.65"/>
+            <GradientStop Color="#FF8A5512" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="GoldText" Color="#FFE8B64E"/>
+        <SolidColorBrush x:Key="ThinGold" Color="#70E8B64E"/>
+        <SolidColorBrush x:Key="OrnamentGold" Color="#C0C9A25A"/>
+        <SolidColorBrush x:Key="SoftText" Color="#FFE9DCC8"/>
+        <SolidColorBrush x:Key="DimText" Color="#FF9C8A78"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#FFF0A040"/>
+        <SolidColorBrush x:Key="AuthorBrush" Color="#FFE0503A"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#D0120605"/>
+        <SolidColorBrush x:Key="BarTrackBrush" Color="#FF0C0403"/>
+        <SolidColorBrush x:Key="FileBarBrush" Color="#FFD02A1E"/>
+        <SolidColorBrush x:Key="TotalBarBrush" Color="#FFF0A030"/>
+        <SolidColorBrush x:Key="PlayTextBrush" Color="#FF3A1504"/>
+        <!-- light news card -->
+        <SolidColorBrush x:Key="CardTitle" Color="#FF2E2420"/>
+        <SolidColorBrush x:Key="CardText" Color="#FF4A403A"/>
+        <SolidColorBrush x:Key="CardDim" Color="#FF8C827A"/>
+        <SolidColorBrush x:Key="CardTag" Color="#FFE0874A"/>
+        <SolidColorBrush x:Key="CardLink" Color="#FF3A302A"/>
+        <SolidColorBrush x:Key="CardAuthor" Color="#FFD3352B"/>
+        <SolidColorBrush x:Key="CardLine" Color="#FFB8AFA6"/>
+        <FontFamily x:Key="TitleFont">Palatino Linotype, Georgia</FontFamily>
+        <FontFamily x:Key="LogoFont">Palatino Linotype, Georgia</FontFamily>
+        <FontFamily x:Key="BodyFont">Segoe UI</FontFamily>
+
+        <!-- ===== round light icon button (top row, like the reference) ===== -->
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#FF2B1D18"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse Margin="-2.5" Fill="#66000000"/>
+                            <Ellipse x:Name="Ring" StrokeThickness="1.4" Stroke="#FF6E6258">
+                                <Ellipse.Fill>
+                                    <RadialGradientBrush GradientOrigin="0.4,0.3" Center="0.45,0.4" RadiusX="0.7" RadiusY="0.7">
+                                        <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                                        <GradientStop Color="#FFE4DFD8" Offset="0.55"/>
+                                        <GradientStop Color="#FFA59D93" Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse x:Name="Hover" Margin="1.2" Stroke="{DynamicResource GoldFrameBrush}" StrokeThickness="1.6" Opacity="0"/>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Hover" Property="Opacity" Value="1"/>
+                                <Setter Property="Foreground" Value="#FF8A1E12"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Ring" Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== big ornamental play button. Content = main text, Tag = small line. Colours via PlayFace/PlayEdge/PlayInk (set per state) ===== -->
+        <Style x:Key="PlayButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!-- dark under-plate -->
+                            <Path Stretch="Fill" Margin="-5,-5,-5,-9" Fill="#C0000000"
+                                  Data="M14,0 L186,0 L200,14 L200,58 L186,72 L14,72 L0,58 L0,14 Z"/>
+                            <!-- gold plate -->
+                            <Path x:Name="Plate" Stretch="Fill" Stroke="#FF4A2606" StrokeThickness="1.5" Fill="{DynamicResource PlayFace}"
+                                  Data="M12,0 L178,0 L190,12 L190,52 L178,64 L12,64 L0,52 L0,12 Z"/>
+                            <!-- bevel highlight -->
+                            <Path Stretch="Fill" Margin="2,2,2,30" IsHitTestVisible="False" Opacity="0.55"
+                                  Data="M10,0 L176,0 L186,10 L186,32 L0,32 L0,10 Z">
+                                <Path.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#90FFFFFF" Offset="0"/>
+                                        <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Path.Fill>
+                            </Path>
+                            <!-- inner ornamental border -->
+                            <Path Stretch="Fill" Margin="5" Stroke="{DynamicResource PlayEdge}" StrokeThickness="1" IsHitTestVisible="False"
+                                  Data="M9,0 L171,0 L180,9 L180,45 L171,54 L9,54 L0,45 L0,9 Z"/>
+                            <Path Stretch="Fill" Margin="8" Stroke="#60FFF6D8" StrokeThickness="0.7" IsHitTestVisible="False"
+                                  Data="M8,0 L166,0 L174,8 L174,40 L166,48 L8,48 L0,40 L0,8 Z"/>
+                            <!-- corner studs -->
+                            <Rectangle Width="5" Height="5" Fill="{DynamicResource PlayEdge}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2.5,0,0,0" RenderTransformOrigin="0.5,0.5">
+                                <Rectangle.RenderTransform><RotateTransform Angle="45"/></Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle Width="5" Height="5" Fill="{DynamicResource PlayEdge}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,2.5,0" RenderTransformOrigin="0.5,0.5">
+                                <Rectangle.RenderTransform><RotateTransform Angle="45"/></Rectangle.RenderTransform>
+                            </Rectangle>
+                            <!-- bottom knot -->
+                            <Path VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-7" Width="34" Height="11" Stretch="Fill"
+                                  Fill="{DynamicResource PlayFace}" Stroke="#FF4A2606" StrokeThickness="1"
+                                  Data="M0,0 L34,0 L30,6 L22,6 L20,11 L14,11 L12,6 L4,6 Z"/>
+                            <Path VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-4" Width="10" Height="4" Stretch="Fill"
+                                  Stroke="#FF4A2606" StrokeThickness="0.9" Data="M0,0 L0,4 L10,4 L10,0"/>
+                            <!-- hover sheen (no effects: just a brighter overlay) -->
+                            <Path x:Name="Sheen" Stretch="Fill" Margin="1" Opacity="0" IsHitTestVisible="False"
+                                  Data="M12,0 L178,0 L190,12 L190,52 L178,64 L12,64 L0,52 L0,12 Z">
+                                <Path.Fill>
+                                    <RadialGradientBrush Center="0.5,0.35" GradientOrigin="0.5,0.3" RadiusX="0.6" RadiusY="0.9">
+                                        <GradientStop Color="#70FFFFFF" Offset="0"/>
+                                        <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                    </RadialGradientBrush>
+                                </Path.Fill>
+                            </Path>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-1,0,0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock x:Name="Glyph" Text="{Binding Uid, RelativeSource={RelativeSource TemplatedParent}}" FontFamily="Segoe MDL2 Assets" FontSize="14"
+                                               Foreground="{DynamicResource PlayInk}" VerticalAlignment="Center" Margin="0,1,7,0"/>
+                                    <TextBlock x:Name="Main" Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" FontFamily="{DynamicResource PlayFont}" FontWeight="Bold"
+                                               FontSize="{DynamicResource PlayFontSize}" Foreground="{DynamicResource PlayInk}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <TextBlock x:Name="Sub" Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" FontSize="10.5" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource PlayInk}" Opacity="0.8" HorizontalAlignment="Center" Margin="0,-3,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="{x:Null}">
+                                <Setter TargetName="Sub" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="Tag" Value="">
+                                <Setter TargetName="Sub" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="Uid" Value="">
+                                <Setter TargetName="Glyph" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Sheen" Property="Opacity" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Plate" Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.55"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- play button colours (Ready); MainWindow swaps them per state -->
+        <LinearGradientBrush x:Key="PlayFace" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#FFFFE9AE" Offset="0"/>
+            <GradientStop Color="#FFEDBC5C" Offset="0.45"/>
+            <GradientStop Color="#FFC4842C" Offset="0.62"/>
+            <GradientStop Color="#FFE9AE4E" Offset="0.9"/>
+            <GradientStop Color="#FFFFD98A" Offset="1"/>
+        </LinearGradientBrush>
+        <SolidColorBrush x:Key="PlayEdge" Color="#FF8A5512"/>
+        <SolidColorBrush x:Key="PlayInk" Color="#FF3E1C06"/>
+        <FontFamily x:Key="PlayFont">Palatino Linotype</FontFamily>
+        <sys:Double x:Key="PlayFontSize">17</sys:Double>
+
+        <!-- ===== small gold button ===== -->
+        <Style x:Key="SmallButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#FF2E1104"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="18,5"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="B" CornerRadius="2" BorderThickness="1" BorderBrush="#FF5A3008" Background="{DynamicResource PlayFace}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="BorderBrush" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- dark outline button (settings: repair) -->
+        <Style x:Key="GhostButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="{DynamicResource GoldText}"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="B" CornerRadius="2" BorderThickness="1" BorderBrush="{DynamicResource ThinGold}" Background="#40000000" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="BorderBrush" Value="{DynamicResource GoldText}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ===== progress bars (flat, glossy, no effects) ===== -->
+        <Style x:Key="BarBase" TargetType="ProgressBar">
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <!-- slim rounded bar: thin gold/bronze frame, dark track, glossy gradient fill + leading-edge glow -->
+                        <Border CornerRadius="3" BorderThickness="1" Padding="1" Background="{DynamicResource BarTrackBrush}">
+                            <Border.BorderBrush>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#FFCBA14A" Offset="0"/>
+                                    <GradientStop Color="#FF7A5A24" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.BorderBrush>
+                            <Grid>
+                                <Border x:Name="PART_Track"/>
+                                <Border x:Name="PART_Indicator" HorizontalAlignment="Left" CornerRadius="2"
+                                        Background="{TemplateBinding Foreground}" ClipToBounds="True">
+                                    <Grid>
+                                        <!-- glossy highlight near the top -->
+                                        <Border Height="4" VerticalAlignment="Top" CornerRadius="2,2,0,0">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="#66FFFFFF" Offset="0"/>
+                                                    <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                        <!-- soft glow at the leading edge of the fill -->
+                                        <Border Width="12" HorizontalAlignment="Right">
+                                            <Border.Background>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                    <GradientStop Color="#00FFF3D6" Offset="0"/>
+                                                    <GradientStop Color="#A8FFF3D6" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FileBar" TargetType="ProgressBar" BasedOn="{StaticResource BarBase}">
+            <Setter Property="Foreground" Value="{DynamicResource FileBarBrush}"/>
+        </Style>
+        <Style x:Key="TotalBar" TargetType="ProgressBar" BasedOn="{StaticResource BarBase}">
+            <Setter Property="Foreground" Value="{DynamicResource TotalBarBrush}"/>
+        </Style>
+
+        <!-- ===== inputs in settings ===== -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#FF0E0504"/>
+            <Setter Property="Foreground" Value="#FFF3E3C8"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource ThinGold}"/>
+            <Setter Property="CaretBrush" Value="#FFF0C66A"/>
+            <Setter Property="Padding" Value="4,2"/>
+            <Setter Property="Width" Value="72"/>
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="Foreground" Value="#FFF3E3C8"/>
+            <Setter Property="Margin" Value="0,0,16,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#FFF3E3C8"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- outline button on parchment -->
+        <Style x:Key="PaperButton" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#FF3A2A20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="14,4"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="B" CornerRadius="2" BorderThickness="1" BorderBrush="#FFB39A70" Background="#50FFFFFF" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="BorderBrush" Value="#FF8A5512"/>
+                                <Setter TargetName="B" Property="Background" Value="#90FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ================= parchment panels (settings, dialogs, server list) ================= -->
+        <SolidColorBrush x:Key="PaperInk" Color="#FF2E2420"/>
+        <SolidColorBrush x:Key="PaperDim" Color="#FF7E7268"/>
+        <SolidColorBrush x:Key="PaperField" Color="#90FFFFFF"/>
+
+        <!-- segmented option (RadioButton) -->
+        <Style x:Key="SegmentRadio" TargetType="RadioButton">
+            <Setter Property="Foreground" Value="{DynamicResource PaperInk}"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border x:Name="B" CornerRadius="2" BorderThickness="1" BorderBrush="#FFB39A70" Background="#40FFFFFF" Padding="12,2" MinWidth="64">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="B" Property="BorderBrush" Value="#FF8A5512"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="{DynamicResource PlayFace}"/>
+                                <Setter TargetName="B" Property="BorderBrush" Value="#FF6A3E0C"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Foreground" Value="#FF3E1C06"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- toggle switch (CheckBox) -->
+        <Style x:Key="ToggleSwitch" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{DynamicResource PaperInk}"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Width="38" Height="20" VerticalAlignment="Center">
+                                <Border x:Name="Track" CornerRadius="10" Background="#FFCFC5B6" BorderBrush="#FF9C8A70" BorderThickness="1"/>
+                                <Ellipse x:Name="Knob" Width="14" Height="14" HorizontalAlignment="Left" Margin="3,0,0,0" Stroke="#FF6A5440" StrokeThickness="0.8">
+                                    <Ellipse.Fill>
+                                        <RadialGradientBrush GradientOrigin="0.4,0.3">
+                                            <GradientStop Color="#FFFFFFFF" Offset="0"/>
+                                            <GradientStop Color="#FFD8D0C4" Offset="1"/>
+                                        </RadialGradientBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                            </Grid>
+                            <ContentPresenter Grid.Column="1" Margin="9,0,0,0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Track" Property="Background" Value="{DynamicResource PlayFace}"/>
+                                <Setter TargetName="Track" Property="BorderBrush" Value="#FF6A3E0C"/>
+                                <Setter TargetName="Knob" Property="HorizontalAlignment" Value="Right"/>
+                                <Setter TargetName="Knob" Property="Margin" Value="0,0,3,0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- slider -->
+        <Style x:Key="SliderThumb" TargetType="Thumb">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Grid Width="16" Height="16" Background="Transparent">
+                            <Rectangle Width="11" Height="11" Fill="{DynamicResource PlayFace}" Stroke="#FF5A3008" StrokeThickness="1" RenderTransformOrigin="0.5,0.5">
+                                <Rectangle.RenderTransform><RotateTransform Angle="45"/></Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderStepEmpty" TargetType="RepeatButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Border Background="Transparent"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SliderStepFilled" TargetType="RepeatButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RepeatButton">
+                        <Grid Background="Transparent">
+                            <Border Height="4" CornerRadius="2" Background="{DynamicResource TotalBarBrush}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="GoldSlider" TargetType="Slider">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="IsMoveToPointEnabled" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid Height="18">
+                            <Border Height="4" CornerRadius="2" Background="#FFCFC5B6" BorderBrush="#FF9C8A70" BorderThickness="0.8" VerticalAlignment="Center"/>
+                            <Track x:Name="PART_Track">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="Slider.DecreaseLarge" Style="{StaticResource SliderStepFilled}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="Slider.IncreaseLarge" Style="{StaticResource SliderStepEmpty}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource SliderThumb}"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- text box on paper -->
+        <Style x:Key="PaperBox" TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource PaperField}"/>
+            <Setter Property="Foreground" Value="{DynamicResource PaperInk}"/>
+            <Setter Property="BorderBrush" Value="#FFB39A70"/>
+            <Setter Property="CaretBrush" Value="#FF8A5512"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="B" CornerRadius="2" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="B" Property="BorderBrush" Value="#FF8A5512"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- dropdown -->
+        <Style x:Key="PaperComboItem" TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="{DynamicResource PaperInk}"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FlowDirection" Value="LeftToRight"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="B" Padding="8,3" Background="Transparent">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="B" Property="Background" Value="#40C9A25A"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="PaperCombo" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="{DynamicResource PaperInk}"/>
+            <Setter Property="FontSize" Value="12.5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource PaperComboItem}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="Toggle" Focusable="False" ClickMode="Press"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="B" CornerRadius="2" BorderThickness="1" BorderBrush="#FFB39A70" Background="{DynamicResource PaperField}">
+                                            <TextBlock Text="&#xE70D;" FontFamily="Segoe MDL2 Assets" FontSize="9" Foreground="#FF8A5512" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="B" Property="BorderBrush" Value="#FF8A5512"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" Margin="8,2,26,2" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="False"/>
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" AllowsTransparency="True" PopupAnimation="Fade" Focusable="False">
+                                <Border MinWidth="{TemplateBinding ActualWidth}" MaxHeight="220" Background="#FFF3EFE8" BorderBrush="#FFB39A70" BorderThickness="1" Margin="0,2,0,0">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <StackPanel IsItemsHost="True"/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,20 @@
+# Apache: deny EVERYTHING in this folder from the web except the three example forms (which still refuse unless
+# config.php has web_examples=true and the visitor IP is in web_allow_ips). config.php, QahrApi.php, _common.php,
+# gen_key.php, selftest.php, example.php, README, .gitignore ... are never served.
+# (Needs AllowOverride All/AuthConfig+Limit. nginx ignores this file: add the same rules in the nginx config.)
+Options -Indexes
+
+<IfModule mod_authz_core.c>
+    Require all denied
+    <FilesMatch "^(send_cps|give_item|inventory)\.php$">
+        Require all granted
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+    <FilesMatch "^(send_cps|give_item|inventory)\.php$">
+        Order allow,deny
+        Allow from all
+    </FilesMatch>
+</IfModule>

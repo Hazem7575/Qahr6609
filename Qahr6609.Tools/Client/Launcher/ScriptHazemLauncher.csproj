@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Single self-contained exe: runs on any Windows 10/11 PC without installing .NET.
+       Build: Qahr6609.Tools\Client\LauncherArt\build_launcher.bat  (dotnet publish -c Release) -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>ScriptHazemLauncher</RootNamespace>
+    <AssemblyName>scripthazemLauncher</AssemblyName>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Version>2.0.0</Version>
+
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>embedded</DebugType>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- lower memory: no background GC thread (the launcher allocates very little) -->
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <NoWarn>$(NoWarn);SYSLIB0014;CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="app.ico" />
+    <!-- default theme + launcher.ini are embedded and extracted on first run when missing -->
+    <EmbeddedResource Include="themes\**\*" Exclude="themes\**\originals\**" LogicalName="theme/%(RecursiveDir)%(Filename)%(Extension)" />
+    <EmbeddedResource Include="launcher.ini" LogicalName="launcher.ini" />
+    <None Remove="themes\**" />
+  </ItemGroup>
+
+</Project>

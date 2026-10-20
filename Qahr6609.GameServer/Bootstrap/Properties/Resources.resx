@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AnyConv_com__liuxing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__liuxing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType1000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType1000.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType1001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType1001.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType1002" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType1002.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11030" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11030.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11040" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11040.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11070" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11070.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11100.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11110.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11170" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11170.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11180" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11180.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11190" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11190.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11230" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11230.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11600" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11600.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11650" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11650.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11660" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11660.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11960" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11960.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11980" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11980.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType11990" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType11990.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12070" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12070.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12080.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12110.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12120" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12120.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12130" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12130.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12140" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12140.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12160" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12160.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12170" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12170.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12200.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12240" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12240.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12300" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12300.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12320" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12320.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12330" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12330.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12340" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12340.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12350" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12350.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12370" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12370.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12380" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12380.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12400" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12400.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12670" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12670.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12690" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12690.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12840" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12840.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12850" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12850.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12890" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12890.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12930" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12930.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12940" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12940.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12980" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12980.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType12990" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType12990.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType13000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType13000.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType13020" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType13020.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__MagicSkillType13030" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__MagicSkillType13030.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__shang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__shang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill10309" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill10309.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill10310" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill10310.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill10311" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill10311.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill10313" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill10313.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill10315" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill10315.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill12550" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill12550.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill12560" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill12560.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill12570" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill12570.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill19" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill19.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill23" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill23.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill29" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill29.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill33" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill33.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill39" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill39.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill6000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill6000.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill6003" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill6003.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill6010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill6010.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill6011" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill6011.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__skill7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__skill7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__XpSkillType10390" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__XpSkillType10390.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__XpSkillType11610" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__XpSkillType11610.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__XpSkillType11970" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__XpSkillType11970.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__XpSkillType12290" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__XpSkillType12290.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__XpSkillType12700" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__XpSkillType12700.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AnyConv_com__XpSkillType12860" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AnyConv.com__XpSkillType12860.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Bruce_Lee_Conquer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Bruce-Lee-Conquer.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dota_2_defense_of_the_ancients_command_conquer_generals_video_game_dota" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dota-2-defense-of-the-ancients-command-conquer-generals-video-game-dota.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dota_2_defense_of_the_ancients_command_conquer_generals_video_game_dota1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dota-2-defense-of-the-ancients-command-conquer-generals-video-game-dota.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_26" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 26.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_36" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 36.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_44" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 44.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Image_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Image 48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_transparent_infantry_conquer_online_figurine_conquer_conquer_online_military_organization_infantry_thumbnail__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png-transparent-infantry-conquer-online-figurine-conquer-conquer-online-military-organization-infantry-thumbnail (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Screenshot_7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Screenshot_7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill10381" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill10381.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill10415" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill10415.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill10490" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill10490.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill11000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill11000.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill11005" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill11005.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill11140" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill11140.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skill34" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skill34.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="XpSkillType11050" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\XpSkillType11050.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="XpSkillType11060" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\XpSkillType11060.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+</root>

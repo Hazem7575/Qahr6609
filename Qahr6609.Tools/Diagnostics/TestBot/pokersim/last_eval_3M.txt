@@ -1,0 +1,7 @@
+== evaluator: exhaustive 5-card hands
+  2598960 hands, 7462 equivalence classes (expected 2598960 / 7462), failures 0
+== evaluator: 3000000 random 7-card deals (2 players + board each)
+  ties (split pots) 122145, category histogram 522818,1314378,705212,145384,138654,90103,77424,5061,855,111, failures 0
+== evaluator: edge cases
+  failures 0  (212 s)
+ALL OK

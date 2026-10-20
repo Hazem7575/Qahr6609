@@ -1,0 +1,651 @@
+<Window x:Class="ScriptHazemLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hazem" Width="1060" Height="625"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        FontFamily="{DynamicResource BodyFont}" Icon="app.ico"
+        UseLayoutRounding="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Opacity="0" ShowInTaskbar="True"
+        Loaded="Window_Loaded" ContentRendered="Window_ContentRendered" Closing="Window_Closing">
+
+    <Window.Resources>
+        <!-- corner hook used on the card and the band (top-left orientation) -->
+        <Geometry x:Key="CornerGeo">M0,30 L0,0 L30,0 M4,22 L4,4 L22,4 M8,8 L13,8 L13,13 L8,13 Z</Geometry>
+    </Window.Resources>
+
+    <!-- The whole launcher is drawn on a fixed 1060 x 625 design canvas; the Viewbox scales it down on small screens. -->
+    <Viewbox Stretch="Uniform">
+        <Canvas x:Name="Root" Width="1060" Height="625">
+            <Canvas.RenderTransform>
+                <TranslateTransform x:Name="RootShift" Y="0"/>
+            </Canvas.RenderTransform>
+
+            <!-- ================= frame (dark smoky body, baked shadow) ================= -->
+            <Grid x:Name="FrameLayer" Canvas.Left="-30" Canvas.Top="32" Width="1000" Height="608" IsHitTestVisible="True" Background="Transparent">
+                <Image x:Name="FrameImage" Stretch="Fill"/>
+                <!-- fallback when the theme has no Frame image -->
+                <Border x:Name="FrameFallback" Margin="60" Background="{DynamicResource PanelBrush}" Visibility="Collapsed">
+                    <Image x:Name="BgImage" Stretch="UniformToFill" Opacity="0.5"/>
+                </Border>
+            </Grid>
+
+            <!-- ================= background slideshow (cross-fades behind the card) =================
+                 Two image layers that cross-fade slowly (a DoubleAnimation on Opacity only, at the
+                 transition); zero CPU between transitions, paused when the window is unfocused/minimized.
+                 Masked by the frame PNG so the cycling scene keeps the launcher silhouette & soft edges.
+                 Hidden (fallback to the static [Hero]/[Images] Frame) when no slideshow images are set. -->
+            <Grid x:Name="BgSlideshow" Canvas.Left="-30" Canvas.Top="32" Width="1000" Height="608" IsHitTestVisible="False" Visibility="Collapsed">
+                <Grid.OpacityMask><ImageBrush x:Name="BgSlideMask" Stretch="Fill"/></Grid.OpacityMask>
+                <MediaElement x:Name="BgVideo" Stretch="UniformToFill" LoadedBehavior="Manual" UnloadedBehavior="Stop" IsMuted="True" Visibility="Collapsed"/>
+                <Image x:Name="BgSlideA" Stretch="UniformToFill"/>
+                <Image x:Name="BgSlideB" Stretch="UniformToFill" Opacity="0"/>
+                <!-- static veil: keeps the scene readable behind the card/band (no per-frame cost) -->
+                <Rectangle x:Name="BgSlideVeil">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#58140806" Offset="0"/>
+                            <GradientStop Color="#20000000" Offset="0.4"/>
+                            <GradientStop Color="#58140806" Offset="0.72"/>
+                            <GradientStop Color="#A0120806" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+
+            <!-- embers: few soft dots inside the frame only, below the card -->
+            <Canvas x:Name="EmberCanvas" Canvas.Left="30" Canvas.Top="92" Width="880" Height="488" ClipToBounds="True" IsHitTestVisible="False"/>
+
+            <!-- ================= light rice-paper card ================= -->
+            <Grid x:Name="CardLayer" Canvas.Left="30" Canvas.Top="102" Width="880" Height="332" IsHitTestVisible="False">
+                <Image x:Name="CardImage" Stretch="Fill"/>
+                <Rectangle x:Name="CardTint" Opacity="0"/>
+            </Grid>
+
+            <!-- card ornaments: thin gold frame with corner hooks -->
+            <Grid x:Name="CardOrnaments" Canvas.Left="46" Canvas.Top="122" Width="848" Height="292" IsHitTestVisible="False" Opacity="0.85">
+                <Rectangle Stroke="{DynamicResource OrnamentGold}" StrokeThickness="0.8" Opacity="0.55" Margin="0"/>
+                <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,-4,0,0"/>
+                <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-4,0,0,-4" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform><ScaleTransform ScaleY="-1"/></Path.RenderTransform>
+                </Path>
+                <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-4,0" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform><ScaleTransform ScaleX="-1"/></Path.RenderTransform>
+                </Path>
+                <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-4,-4" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform><ScaleTransform ScaleX="-1" ScaleY="-1"/></Path.RenderTransform>
+                </Path>
+            </Grid>
+
+            <!-- ================= news (inside the card, left column) ================= -->
+            <Grid x:Name="NewsCard" Canvas.Left="74" Canvas.Top="164" Width="456" Height="244"
+                  MouseEnter="NewsCard_MouseEnter" MouseLeave="NewsCard_MouseLeave" Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- header: avatar + title + posted line + pager -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="56" Height="52" BorderThickness="2" BorderBrush="{DynamicResource GoldFrameBrush}" Margin="0,0,12,0" Background="#FF2A1A14">
+                        <Border BorderThickness="1" BorderBrush="#B0000000">
+                            <Image x:Name="AvatarImage" Stretch="UniformToFill" FlowDirection="LeftToRight"/>
+                        </Border>
+                    </Border>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Name="NewsHeader" TextTrimming="CharacterEllipsis" FontSize="15" Cursor="Hand" MouseLeftButtonUp="NewsTitle_Click">
+                            <Run x:Name="NewsTag" Text="[UPDATE]" Foreground="{DynamicResource CardTag}" FontWeight="SemiBold"/>
+                            <Run x:Name="NewsTitle" Text="..." Foreground="{DynamicResource CardTitle}" FontWeight="SemiBold"/>
+                        </TextBlock>
+                        <TextBlock FontSize="12" Margin="0,1,0,0" Foreground="{DynamicResource CardDim}">
+                            <Run x:Name="PostedRun" Text="Posted"/>
+                            <Run x:Name="NewsDate" Text="-" Foreground="{DynamicResource CardTitle}" FontWeight="SemiBold"/>
+                            <Run x:Name="ByRun" Text="by"/>
+                            <Run x:Name="NewsAuthor" Text="" Foreground="{DynamicResource CardAuthor}"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <!-- pager: round prev/next + clickable dots -->
+                    <StackPanel x:Name="NewsPager" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="6,0,0,0" FlowDirection="LeftToRight" Visibility="Collapsed">
+                        <Button x:Name="PagerPrevBtn" Style="{StaticResource IconButton}" Width="24" Height="24" FontSize="9" Content="&#xE76B;" Click="NewsPrev_Click" ToolTip="{x:Null}"/>
+                        <ItemsControl x:Name="NewsDots" Margin="7,0" VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Ellipse Width="{Binding Size}" Height="{Binding Size}" Fill="{Binding Fill}" Stroke="#70000000" StrokeThickness="0.5" Margin="3,0" Cursor="Hand" Tag="{Binding Index}" MouseLeftButtonUp="NewsDot_Click" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Button x:Name="PagerNextBtn" Style="{StaticResource IconButton}" Width="24" Height="24" FontSize="9" Content="&#xE76C;" Click="NewsNext_Click" ToolTip="{x:Null}"/>
+                    </StackPanel>
+                </Grid>
+                <!-- 3-line excerpt -->
+                <TextBlock x:Name="NewsBody" Grid.Row="1" Margin="0,8,0,0" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" FontSize="13" LineHeight="20"
+                           LineStackingStrategy="BlockLineHeight" MaxHeight="60" Foreground="{DynamicResource CardText}"/>
+                <!-- divider -->
+                <Rectangle Grid.Row="2" Height="1" Margin="0,10,0,10">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#00A0968C" Offset="0"/>
+                            <GradientStop Color="#C0A0968C" Offset="0.25"/>
+                            <GradientStop Color="#C0A0968C" Offset="0.75"/>
+                            <GradientStop Color="#00A0968C" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <!-- three thumbnails -->
+                <ItemsControl x:Name="Gallery" Grid.Row="3" VerticalAlignment="Top">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" Rows="1"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border x:Name="Card" Margin="0,0,14,0" Height="96" BorderThickness="2" BorderBrush="{DynamicResource GoldFrameBrush}"
+                                    Background="#FF2A1A14" Cursor="Hand" Tag="{Binding Index}" ToolTip="{Binding Caption}" MouseLeftButtonUp="GalleryItem_Click">
+                                <Border BorderThickness="1" BorderBrush="#A0000000" ClipToBounds="True">
+                                    <Image Source="{Binding Image}" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" FlowDirection="LeftToRight">
+                                        <Image.RenderTransform>
+                                            <ScaleTransform x:Name="Zoom" ScaleX="1" ScaleY="1"/>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </Border>
+                                <Border.Triggers>
+                                    <EventTrigger RoutedEvent="MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="Zoom" Storyboard.TargetProperty="ScaleX" To="1.08" Duration="0:0:0.25"/>
+                                                <DoubleAnimation Storyboard.TargetName="Zoom" Storyboard.TargetProperty="ScaleY" To="1.08" Duration="0:0:0.25"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="Zoom" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.25"/>
+                                                <DoubleAnimation Storyboard.TargetName="Zoom" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.25"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Border.Triggers>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+
+            <!-- ================= character (breaks out of the frame) ================= -->
+            <Ellipse x:Name="CharGlow" Canvas.Left="560" Canvas.Top="150" Width="360" Height="380" IsHitTestVisible="False" Opacity="0.4">
+                <Ellipse.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop x:Name="CharGlowStop" Color="#FFFF7A30" Offset="0"/>
+                        <GradientStop Color="#00FF7A30" Offset="1"/>
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Image x:Name="CharImage" Canvas.Left="470" Canvas.Top="58" Height="560" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5"
+                   RenderOptions.BitmapScalingMode="HighQuality">
+                <Image.RenderTransform>
+                    <ScaleTransform x:Name="CharFlip" ScaleX="1"/>
+                </Image.RenderTransform>
+            </Image>
+
+            <!-- ================= dark band: progress ================= -->
+            <Grid x:Name="BandOrnaments" Canvas.Left="46" Canvas.Top="448" Width="848" Height="110" IsHitTestVisible="False" Opacity="0.85">
+                <!-- side lines with hooks -->
+                <Path Data="M0,30 L0,0 L14,0 M4,24 L4,4 L10,4" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Rectangle Width="1" Fill="{DynamicResource OrnamentGold}" HorizontalAlignment="Left" Margin="0,30,0,4" Opacity="0.7"/>
+                <Path Data="M0,30 L0,0 L14,0 M4,24 L4,4 L10,4" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.1" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                    <Path.RenderTransform><ScaleTransform ScaleX="-1"/></Path.RenderTransform>
+                </Path>
+                <Rectangle Width="1" Fill="{DynamicResource OrnamentGold}" HorizontalAlignment="Right" Margin="0,30,0,4" Opacity="0.7"/>
+                <!-- bottom line with centre knot -->
+                <Rectangle Height="1" VerticalAlignment="Bottom" Margin="0,0,0,4" Fill="{DynamicResource OrnamentGold}"/>
+                <Rectangle Height="1" VerticalAlignment="Bottom" Margin="6,0,6,0" Fill="{DynamicResource OrnamentGold}" Opacity="0.5"/>
+                <Path VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-2" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.1" Fill="#FF1A0D0A"
+                      Data="M0,8 L10,8 L10,2 L18,2 L18,0 L42,0 L42,2 L50,2 L50,8 L60,8 M14,8 L14,5 L22,5 L22,3 L38,3 L38,5 L46,5 L46,8 M26,8 L26,7 L34,7 L34,8"/>
+            </Grid>
+
+            <Grid x:Name="ProgressCard" Canvas.Left="74" Canvas.Top="449" Width="576" Height="100">
+                <StackPanel>
+                    <Grid>
+                        <DockPanel Margin="0,0,170,0" LastChildFill="True">
+                            <TextBlock x:Name="DownloadingLabel" DockPanel.Dock="Left" Text="Downloading:" FontSize="12.5" LineHeight="18" LineStackingStrategy="BlockLineHeight" Foreground="{DynamicResource SoftText}" Margin="0,0,5,0"/>
+                            <TextBlock FontSize="12.5" LineHeight="18" LineStackingStrategy="BlockLineHeight" FlowDirection="LeftToRight" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left">
+                                <Run x:Name="FileName" Text="-" Foreground="{DynamicResource AccentBrush}"/>
+                                <Run x:Name="FileSizeRun" Text="" Foreground="{DynamicResource DimText}"/>
+                            </TextBlock>
+                        </DockPanel>
+                        <TextBlock x:Name="FileInfoText" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource GoldText}" HorizontalAlignment="Right" FlowDirection="LeftToRight"/>
+                    </Grid>
+                    <ProgressBar x:Name="FileBar" Style="{StaticResource FileBar}" Height="12" Margin="0,3,0,8"/>
+                    <Grid>
+                        <TextBlock x:Name="TotalLabel" Text="Total Progress:" FontSize="12.5" LineHeight="18" LineStackingStrategy="BlockLineHeight" Foreground="{DynamicResource SoftText}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock x:Name="TotalInfo" FontSize="12" FontWeight="SemiBold" Foreground="{DynamicResource GoldText}" FlowDirection="LeftToRight"/>
+                            <TextBlock x:Name="TotalEta" FontSize="12" Foreground="{DynamicResource DimText}" Margin="6,0,0,0"/>
+                        </StackPanel>
+                    </Grid>
+                    <ProgressBar x:Name="TotalBar" Style="{StaticResource TotalBar}" Height="12" Margin="0,3,0,3"/>
+                    <TextBlock x:Name="StateText" FontSize="11" LineHeight="15" LineStackingStrategy="BlockLineHeight" Foreground="{DynamicResource GoldText}" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- (events live in a popup opened by the calendar button; see EventsOverlay below) -->
+
+            <!-- maintenance banner (amber): shown when the PatchServer reports maintenance for the chosen server -->
+            <Border x:Name="MaintBanner" Canvas.Left="62" Canvas.Top="454" Width="584" Height="92" Visibility="Collapsed"
+                    CornerRadius="4" Background="#E6301A06" BorderThickness="1.2">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#60F0A840" Offset="0"/>
+                        <GradientStop Color="#F0F0A840" Offset="0.5"/>
+                        <GradientStop Color="#60F0A840" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid x:Name="MaintPanel" Margin="12,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="30" Height="30" VerticalAlignment="Top" Margin="0,0,11,0">
+                        <Ellipse Fill="#33F0A840" Stroke="#FFE7B86A" StrokeThickness="1"/>
+                        <TextBlock Text="&#xE7BA;" FontFamily="Segoe MDL2 Assets" FontSize="15" Foreground="#FFF4D089" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Name="MaintTitle" Text="" Foreground="#FFF4CE8A" FontWeight="Bold" FontSize="14"/>
+                        <TextBlock x:Name="MaintMessage" Text="" Foreground="#FFEAD9BA" FontSize="12" TextWrapping="Wrap" MaxHeight="38" TextTrimming="CharacterEllipsis" Margin="0,3,0,0"/>
+                        <TextBlock x:Name="MaintUntil" Text="" Foreground="#FFCFAD72" FontSize="11.5" Margin="0,3,0,0" Visibility="Collapsed"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- status / server picker above the play button -->
+            <Grid x:Name="StatusCard" Canvas.Left="672" Canvas.Top="446" Width="198" Height="20" Visibility="Collapsed">
+                <Border x:Name="StatusBox" Background="#A0100605" BorderBrush="{DynamicResource ThinGold}" BorderThickness="1" Padding="7,0" Cursor="Arrow" MouseLeftButtonUp="StatusBox_Click">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse x:Name="StatusDot" Width="8" Height="8" Fill="Gray" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="StatusText" Text="..." Foreground="{DynamicResource SoftText}" FontSize="11.5" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="140"/>
+                        </StackPanel>
+                        <TextBlock x:Name="VersionText" Foreground="{DynamicResource DimText}" FontSize="10.5" HorizontalAlignment="Right" VerticalAlignment="Center" FlowDirection="LeftToRight"/>
+                        <TextBlock x:Name="ServerArrow" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets" FontSize="9" Foreground="{DynamicResource GoldText}" HorizontalAlignment="Right" VerticalAlignment="Center" Visibility="Collapsed"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- status pill under the play button: green = online, red = offline, amber = maintenance -->
+            <Grid x:Name="StatusFooter" Canvas.Left="646" Canvas.Top="557" Width="250" Height="20">
+                <Border x:Name="StatusPill" HorizontalAlignment="Center" CornerRadius="10" Background="#D8100604" BorderThickness="1" Padding="9,0,11,0">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#40E8B64E" Offset="0"/>
+                            <GradientStop Color="#C0E8B64E" Offset="0.5"/>
+                            <GradientStop Color="#40E8B64E" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Grid Width="10" Height="10" Margin="0,0,6,0" VerticalAlignment="Center">
+                            <Ellipse x:Name="FooterHalo" Width="10" Height="10" Opacity="0.35" Fill="Gray"/>
+                            <Ellipse x:Name="FooterDot" Width="6" Height="6" Fill="Gray"/>
+                        </Grid>
+                        <TextBlock x:Name="FooterStatus" Text="" Foreground="{DynamicResource SoftText}" FontSize="11.5" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="FooterMeta" Text="" Foreground="{DynamicResource DimText}" FontSize="10.5" VerticalAlignment="Center" Margin="7,0,0,0" FlowDirection="LeftToRight"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <TextBlock x:Name="FooterVersion" Canvas.Left="74" Canvas.Top="560" Text="" Foreground="{DynamicResource DimText}" FontSize="10" FlowDirection="LeftToRight" Opacity="0.8"/>
+
+            <Button x:Name="PlayButton" Canvas.Left="676" Canvas.Top="476" Width="190" Height="64" Style="{StaticResource PlayButton}" Click="Play_Click"
+                    Content="PLAY NOW!" Tag="" Uid=""/>
+
+            <!-- server list (parchment, opens upwards from the server box when there is more than one server) -->
+            <Grid x:Name="ServerPanel" Canvas.Left="660" Canvas.Top="296" Width="222" MaxHeight="220" Visibility="Collapsed">
+                <Grid.Background><ImageBrush x:Name="ServerPaper" Stretch="Fill"/></Grid.Background>
+                <Rectangle Margin="6,6" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="0.8" IsHitTestVisible="False"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="12,14">
+                    <StackPanel>
+                        <TextBlock x:Name="ServerPanelTitle" Text="اختار السيرفر" FontWeight="Bold" FontSize="12.5" Foreground="{DynamicResource PaperInk}" Margin="2,0,0,4"/>
+                        <ItemsControl x:Name="ServerList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="6,2" Margin="0,1" Cursor="Hand" Tag="{Binding Name}" ToolTip="{Binding Tip}"
+                                            MouseLeftButtonUp="ServerRow_Click" Background="{Binding RowBackground}"
+                                            BorderBrush="{Binding RowBorder}" BorderThickness="1">
+                                        <Grid>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Ellipse Width="8" Height="8" Fill="{Binding DotBrush}" Margin="0,0,7,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Name}" Foreground="{DynamicResource PaperInk}" FontSize="12" FontWeight="SemiBold" FlowDirection="LeftToRight"/>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding StateText}" Foreground="{DynamicResource PaperDim}" FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock x:Name="ServerNotice" Foreground="#FFB0601C" FontSize="11" TextWrapping="Wrap" Margin="4,4,4,0" Visibility="Collapsed"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <TextBlock x:Name="FooterText" Canvas.Left="130" Canvas.Top="560" FontSize="10" Foreground="#99F0C66A"/>
+
+            <!-- ================= top row: emblem + round buttons ================= -->
+            <Grid x:Name="EmblemHost" Canvas.Left="290" Canvas.Top="0" Width="360" Height="200" IsHitTestVisible="False"/>
+
+            <!-- left round buttons: social + events (plain round style, hidden social when no link) -->
+            <StackPanel x:Name="LeftCapsule" Canvas.Left="226" Canvas.Top="76" Orientation="Horizontal" FlowDirection="LeftToRight">
+                <Button x:Name="FacebookButton" Style="{StaticResource IconButton}" Margin="0,0,10,0" ToolTip="Facebook" Click="Link_Click" Tag="Facebook">
+                    <Path Width="14" Height="14" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                          Data="M13.5,21 L13.5,13.5 L16,13.5 L16.4,10.5 L13.5,10.5 L13.5,8.6 C13.5,7.7 13.8,7.1 15,7.1 L16.6,7.1 L16.6,4.4 C16.3,4.4 15.4,4.3 14.3,4.3 C12,4.3 10.4,5.7 10.4,8.3 L10.4,10.5 L7.9,10.5 L7.9,13.5 L10.4,13.5 L10.4,21 Z"/>
+                </Button>
+                <Button x:Name="DiscordButton" Style="{StaticResource IconButton}" Margin="0,0,10,0" ToolTip="Discord" Click="Link_Click" Tag="Discord">
+                    <Path Width="16" Height="13" Stretch="Uniform" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}"
+                          Data="F0 M19.3,5.3 C18,4.7 16.6,4.3 15.2,4 L14.7,5 C12.9,4.7 11.1,4.7 9.3,5 L8.8,4 C7.4,4.3 6,4.7 4.7,5.3 C2.1,9.2 1.4,13 1.8,16.8 C3.3,17.9 5,18.8 6.8,19.3 L7.9,17.6 C7.3,17.4 6.7,17.1 6.2,16.8 L6.6,16.5 C10,18.1 14,18.1 17.4,16.5 L17.8,16.8 C17.3,17.1 16.7,17.4 16.1,17.6 L17.2,19.3 C19,18.8 20.7,17.9 22.2,16.8 C22.7,12.4 21.4,8.6 19.3,5.3 Z M8.7,14.5 C7.7,14.5 6.9,13.6 6.9,12.5 C6.9,11.4 7.7,10.5 8.7,10.5 C9.7,10.5 10.5,11.4 10.5,12.5 C10.5,13.6 9.7,14.5 8.7,14.5 Z M15.3,14.5 C14.3,14.5 13.5,13.6 13.5,12.5 C13.5,11.4 14.3,10.5 15.3,10.5 C16.3,10.5 17.1,11.4 17.1,12.5 C17.1,13.6 16.3,14.5 15.3,14.5 Z"/>
+                </Button>
+                <Button x:Name="WebsiteButton" Style="{StaticResource IconButton}" Margin="0,0,10,0" ToolTip="Website" Click="Link_Click" Tag="Website" FontSize="13" Content="&#xE774;"/>
+                <Button x:Name="EventsBtn" Style="{StaticResource IconButton}" FontSize="13" Click="Events_Click" Content="&#xE787;"/>
+            </StackPanel>
+
+            <!-- right round buttons: sound (only when music available), settings, minimize, close -->
+            <StackPanel x:Name="RightCapsule" Canvas.Left="572" Canvas.Top="76" Orientation="Horizontal" FlowDirection="LeftToRight">
+                <Button x:Name="MuteBtn" Style="{StaticResource IconButton}" Margin="0,0,10,0" FontSize="13" Click="Mute_Click" Content="&#xE767;"/>
+                <Button x:Name="SettingsBtn" Style="{StaticResource IconButton}" Margin="0,0,10,0" FontSize="13" Click="Settings_Click" Content="&#xE713;"/>
+                <Button x:Name="MinBtn" Style="{StaticResource IconButton}" Margin="0,0,10,0" FontSize="11" Click="Minimize_Click" Content="&#xE921;"/>
+                <Button x:Name="CloseBtn" Style="{StaticResource IconButton}" FontSize="11" Click="Close_Click" Content="&#xE8BB;"/>
+            </StackPanel>
+
+            <!-- ================= settings (parchment card) ================= -->
+            <Grid x:Name="SettingsOverlay" Canvas.Left="30" Canvas.Top="92" Width="880" Height="488" Background="#A0000000" Visibility="Collapsed" Opacity="0">
+                <Grid x:Name="SettingsCard" Width="520" Height="492" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform><ScaleTransform x:Name="SettingsScale" ScaleX="1" ScaleY="1"/></Grid.RenderTransform>
+                    <Image x:Name="SettingsPaper" Stretch="UniformToFill" Margin="0,-4"/>
+                    <Grid Margin="14,16" IsHitTestVisible="False">
+                        <Rectangle Stroke="{DynamicResource OrnamentGold}" StrokeThickness="0.8" Opacity="0.6"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,-4,0,0"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-4,0" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1"/></Path.RenderTransform>
+                        </Path>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-4,0,0,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-4,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1" ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <Grid x:Name="SettingsPanel" Margin="34,30,34,28" FlowDirection="RightToLeft" TextElement.Foreground="{DynamicResource PaperInk}" TextElement.FontSize="12.5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- title + close -->
+                        <Grid Margin="0,0,0,10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Rectangle Width="8" Height="8" Fill="{DynamicResource PlayFace}" Stroke="#FF6A3E0C" StrokeThickness="0.8" Margin="0,0,9,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center">
+                                    <Rectangle.RenderTransform><RotateTransform Angle="45"/></Rectangle.RenderTransform>
+                                </Rectangle>
+                                <TextBlock x:Name="SettingsTitle" Text="الإعدادات" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <Button x:Name="SettingsCloseBtn" Style="{StaticResource IconButton}" Width="28" Height="28" FontSize="10" HorizontalAlignment="Right" Content="&#xE8BB;" Click="SettingsCancel_Click"/>
+                        </Grid>
+                        <Rectangle Height="1" VerticalAlignment="Bottom" Margin="0,0,0,2" Fill="#60B39A70"/>
+                        <!-- rows -->
+                        <Grid Grid.Row="1" Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="118"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="34"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="ScreenModeLabel" Grid.Row="0" Text="وضع الشاشة" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <RadioButton x:Name="ModeFull" Style="{StaticResource SegmentRadio}" Content="ملء الشاشة" GroupName="mode" Checked="Mode_Changed"/>
+                                <RadioButton x:Name="ModeWindow" Style="{StaticResource SegmentRadio}" Content="نافذة" GroupName="mode" Checked="Mode_Changed"/>
+                                <RadioButton x:Name="ModeCustom" Style="{StaticResource SegmentRadio}" Content="مقاس مخصص" GroupName="mode" Checked="Mode_Changed"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="ResolutionLabel" Grid.Row="1" Text="المقاس" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <ComboBox x:Name="ResolutionBox" Style="{StaticResource PaperCombo}" Width="150" Height="24" SelectionChanged="Resolution_Changed"/>
+                                <TextBox x:Name="WidthBox" Style="{StaticResource PaperBox}" Height="24" Margin="10,0,0,0"/>
+                                <TextBlock Text="×" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center" Margin="5,0"/>
+                                <TextBox x:Name="HeightBox" Style="{StaticResource PaperBox}" Height="24"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="FpsLabel" Grid.Row="2" Text="أقصى FPS" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+                                <Slider x:Name="FpsSlider" Style="{StaticResource GoldSlider}" Minimum="30" Maximum="240" SmallChange="10" LargeChange="10" TickFrequency="10" IsSnapToTickEnabled="True" Margin="0,0,56,0" ValueChanged="Fps_Changed"/>
+                                <TextBox x:Name="FpsBox" Style="{StaticResource PaperBox}" Width="48" Height="24" HorizontalAlignment="Right" TextAlignment="Center"/>
+                            </Grid>
+
+                            <TextBlock x:Name="DirectXLabel" Grid.Row="3" Text="نسخة الجرافيك" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <RadioButton x:Name="Dx9Box" Style="{StaticResource SegmentRadio}" Content="DirectX 9" GroupName="dx"/>
+                                <RadioButton x:Name="Dx8Box" Style="{StaticResource SegmentRadio}" Content="DirectX 8" GroupName="dx"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="LanguageLabel" Grid.Row="4" Text="اللغة" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <RadioButton x:Name="LangArBox" Style="{StaticResource SegmentRadio}" Content="العربية" GroupName="lang"/>
+                                <RadioButton x:Name="LangEnBox" Style="{StaticResource SegmentRadio}" Content="English" GroupName="lang"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="CloseOnPlayLabel" Grid.Row="5" Text="بعد التشغيل" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <CheckBox x:Name="CloseOnPlayBox" Grid.Row="5" Grid.Column="1" Style="{StaticResource ToggleSwitch}" Content="اقفل اللانشر لما اللعبة تشتغل" VerticalAlignment="Center"/>
+
+                            <TextBlock x:Name="RepairLabel" Grid.Row="6" Text="الملفات" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button x:Name="RepairBtn" Style="{StaticResource PaperButton}" Content="إصلاح ملفات اللعبة" Click="Repair_Click"/>
+                                <TextBlock x:Name="RepairHint" Text="" Foreground="{DynamicResource PaperDim}" FontSize="11" TextWrapping="Wrap" Width="190" Margin="10,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="SysCheckLabel" Grid.Row="7" Text="فحص النظام" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Button x:Name="SysCheckBtn" Style="{StaticResource PaperButton}" Content="عرض الفحص" Click="OpenSysCheck_Click"/>
+                                <CheckBox x:Name="PreCheckBox" Style="{StaticResource ToggleSwitch}" Content="افحص قبل اللعب" Margin="12,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <TextBlock x:Name="MusicLabel" Grid.Row="8" Text="الموسيقى" Foreground="{DynamicResource PaperDim}" VerticalAlignment="Center"/>
+                            <Grid x:Name="MusicRow" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center">
+                                <Slider x:Name="MusicSlider" Style="{StaticResource GoldSlider}" Minimum="0" Maximum="100" SmallChange="5" LargeChange="10" Margin="0,0,112,0" ValueChanged="MusicVolume_Changed"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <TextBlock x:Name="MusicValue" Text="30%" Foreground="{DynamicResource PaperInk}" FontSize="12" VerticalAlignment="Center" Width="38" TextAlignment="Center" FlowDirection="LeftToRight"/>
+                                    <CheckBox x:Name="MusicMuteBox" Style="{StaticResource ToggleSwitch}" Content="كتم" Margin="8,0,0,0" VerticalAlignment="Center" Checked="MusicMuteBox_Changed" Unchecked="MusicMuteBox_Changed"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <!-- buttons -->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,8,0,0">
+                            <Button x:Name="SaveBtn" Style="{StaticResource SmallButton}" Content="حفظ" MinWidth="96" Click="SettingsSave_Click"/>
+                            <Button x:Name="CancelBtn" Style="{StaticResource PaperButton}" Content="إلغاء" MinWidth="96" Click="SettingsCancel_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- ================= system check (parchment card) ================= -->
+            <Grid x:Name="SysCheckOverlay" Canvas.Left="30" Canvas.Top="92" Width="880" Height="488" Background="#A0000000" Visibility="Collapsed" Opacity="0">
+                <Grid x:Name="SysCheckCard" Width="560" Height="452" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform><ScaleTransform x:Name="SysCheckScale" ScaleX="1" ScaleY="1"/></Grid.RenderTransform>
+                    <Image x:Name="SysCheckPaper" Stretch="UniformToFill" Margin="0,-4"/>
+                    <Grid Margin="14,16" IsHitTestVisible="False">
+                        <Rectangle Stroke="{DynamicResource OrnamentGold}" StrokeThickness="0.8" Opacity="0.6"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,-4,0,0"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-4,0" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1"/></Path.RenderTransform>
+                        </Path>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-4,0,0,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-4,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1" ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <Grid x:Name="SysCheckPanel" Margin="34,28,34,26" FlowDirection="RightToLeft" TextElement.Foreground="{DynamicResource PaperInk}" TextElement.FontSize="12.5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- title + status + close -->
+                        <Grid Margin="0,0,0,8">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Rectangle Width="8" Height="8" Fill="{DynamicResource PlayFace}" Stroke="#FF6A3E0C" StrokeThickness="0.8" Margin="0,0,9,0" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center">
+                                    <Rectangle.RenderTransform><RotateTransform Angle="45"/></Rectangle.RenderTransform>
+                                </Rectangle>
+                                <TextBlock x:Name="SysCheckTitleText" Text="فحص النظام" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <TextBlock x:Name="SysCheckStatusText" Text="" Foreground="{DynamicResource PaperDim}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,36,0" FlowDirection="LeftToRight"/>
+                            <Button Style="{StaticResource IconButton}" Width="28" Height="28" FontSize="10" HorizontalAlignment="Right" Content="&#xE8BB;" Click="SysCheckClose_Click"/>
+                        </Grid>
+                        <Rectangle Height="1" VerticalAlignment="Bottom" Margin="0,0,0,2" Fill="#60B39A70"/>
+                        <ScrollViewer Grid.Row="1" Margin="0,8,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel x:Name="SysCheckList"/>
+                        </ScrollViewer>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,8,0,0">
+                            <Button x:Name="SysCheckRecheck" Style="{StaticResource SmallButton}" Content="إعادة الفحص" MinWidth="110" Click="SysCheckRecheck_Click"/>
+                            <Button x:Name="SysCheckClose" Style="{StaticResource PaperButton}" Content="تمام" MinWidth="96" Click="SysCheckClose_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- ================= events schedule (parchment table, opened by the calendar button) ================= -->
+            <Grid x:Name="EventsOverlay" Canvas.Left="30" Canvas.Top="92" Width="880" Height="488" Background="#A0000000" Visibility="Collapsed" Opacity="0">
+                <Grid x:Name="EventsCard" Width="580" Height="456" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform><ScaleTransform x:Name="EventsScale" ScaleX="1" ScaleY="1"/></Grid.RenderTransform>
+                    <Image x:Name="EventsPaper" Stretch="UniformToFill" Margin="0,-4"/>
+                    <Grid Margin="14,16" IsHitTestVisible="False">
+                        <Rectangle Stroke="{DynamicResource OrnamentGold}" StrokeThickness="0.8" Opacity="0.6"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,-4,0,0"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-4,-4,0" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1"/></Path.RenderTransform>
+                        </Path>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="-4,0,0,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-4,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1" ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <Grid x:Name="EventsContent" Margin="34,28,34,26" FlowDirection="RightToLeft" TextElement.Foreground="{DynamicResource PaperInk}" TextElement.FontSize="12.5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- title + close -->
+                        <Grid Margin="0,0,0,8">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="&#xE787;" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{DynamicResource PaperInk}" VerticalAlignment="Center" Margin="0,0,9,0"/>
+                                <TextBlock x:Name="EventsTitleText" Text="جدول الإيفنتات" FontSize="18" FontWeight="Bold"/>
+                            </StackPanel>
+                            <Button x:Name="EventsCloseBtn" Style="{StaticResource IconButton}" Width="28" Height="28" FontSize="10" HorizontalAlignment="Right" Content="&#xE8BB;" Click="EventsClose_Click"/>
+                        </Grid>
+                        <!-- column headers -->
+                        <Grid Grid.Row="1" Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="62"/>
+                                <ColumnDefinition Width="96"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Name="ColEventHdr" Grid.Column="0" Text="الحدث" FontWeight="Bold" FontSize="12.5" Foreground="{DynamicResource PaperDim}"/>
+                            <TextBlock x:Name="ColDayHdr" Grid.Column="1" Text="اليوم" FontWeight="Bold" FontSize="12.5" Foreground="{DynamicResource PaperDim}"/>
+                            <TextBlock x:Name="ColTimeHdr" Grid.Column="2" Text="الوقت" FontWeight="Bold" FontSize="12.5" Foreground="{DynamicResource PaperDim}"/>
+                            <TextBlock x:Name="ColCountHdr" Grid.Column="3" Text="المتبقي" FontWeight="Bold" FontSize="12.5" Foreground="{DynamicResource PaperDim}"/>
+                        </Grid>
+                        <Rectangle Grid.Row="1" Height="1" VerticalAlignment="Bottom" Margin="0,0,0,-2" Fill="#70B39A70"/>
+                        <!-- rows -->
+                        <ScrollViewer Grid.Row="2" Margin="0,6,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                            <Grid>
+                                <ItemsControl x:Name="EventsTable">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Padding="0,6" BorderThickness="0,0,0,1" BorderBrush="#28B39A70">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="120"/>
+                                                        <ColumnDefinition Width="62"/>
+                                                        <ColumnDefinition Width="96"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Name}" FlowDirection="{Binding NameFlow}" Foreground="{DynamicResource PaperInk}" FontWeight="SemiBold" FontSize="13" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Day}" Foreground="{DynamicResource PaperDim}" FontSize="12.5" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                                    <TextBlock Grid.Column="2" Text="{Binding Time}" Foreground="{DynamicResource PaperInk}" FontSize="12.5" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                                                    <TextBlock Grid.Column="3" Text="{Binding Countdown}" Foreground="#FFA85C12" FontWeight="Bold" FontSize="13.5" FlowDirection="LeftToRight" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <TextBlock x:Name="EventsEmptyText" Text="لا توجد إيفنتات حالياً" Foreground="{DynamicResource PaperDim}" FontSize="13" HorizontalAlignment="Center" Margin="0,24,0,0" Visibility="Collapsed"/>
+                            </Grid>
+                        </ScrollViewer>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,10,0,0">
+                            <Button x:Name="EventsCloseBtn2" Style="{StaticResource PaperButton}" Content="تمام" MinWidth="96" Click="EventsClose_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- ================= themed message / confirm dialog (replaces every Windows MessageBox) ================= -->
+            <Grid x:Name="DialogOverlay" Canvas.Left="0" Canvas.Top="0" Width="1060" Height="625" Visibility="Collapsed" Opacity="0">
+              <Grid Margin="30,92,150,45">
+                <Rectangle Fill="#A0000000"/>
+                <Grid x:Name="DialogCard" Width="430" MinHeight="180" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform><ScaleTransform x:Name="DialogScale" ScaleX="1" ScaleY="1"/></Grid.RenderTransform>
+                    <Grid.Background><ImageBrush x:Name="DialogPaper" Stretch="Fill"/></Grid.Background>
+                    <Grid Margin="12,14" IsHitTestVisible="False">
+                        <Rectangle Stroke="{DynamicResource OrnamentGold}" StrokeThickness="0.8" Opacity="0.6"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-4,-4,0,0"/>
+                        <Path Data="{StaticResource CornerGeo}" Stroke="{DynamicResource OrnamentGold}" StrokeThickness="1.2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-4,-4" RenderTransformOrigin="0.5,0.5">
+                            <Path.RenderTransform><ScaleTransform ScaleX="-1" ScaleY="-1"/></Path.RenderTransform>
+                        </Path>
+                    </Grid>
+                    <Grid x:Name="DialogPanel" Margin="30,26,30,24" FlowDirection="RightToLeft">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Grid Width="22" Height="22" Margin="0,0,9,0">
+                                    <Ellipse x:Name="DialogIconDisc" Fill="{DynamicResource PlayFace}" Stroke="#FF6A3E0C" StrokeThickness="0.8"/>
+                                    <TextBlock x:Name="DialogIcon" Text="&#xE946;" FontFamily="Segoe MDL2 Assets" FontSize="11" Foreground="#FF3E1C06" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                                <TextBlock x:Name="DialogTitle" Text="Hazem" FontSize="16" FontWeight="Bold" Foreground="{DynamicResource PaperInk}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <Button Style="{StaticResource IconButton}" Width="26" Height="26" FontSize="9" HorizontalAlignment="Right" Content="&#xE8BB;" Click="DialogCancel_Click"/>
+                        </Grid>
+                        <TextBlock x:Name="DialogText" Grid.Row="1" Margin="0,12,0,14" TextWrapping="Wrap" FontSize="13" LineHeight="20" Foreground="{DynamicResource CardText}" MaxWidth="370" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button x:Name="DialogOk" Style="{StaticResource SmallButton}" Content="تمام" MinWidth="90" Click="DialogOk_Click"/>
+                            <Button x:Name="DialogNo" Style="{StaticResource PaperButton}" Content="إلغاء" MinWidth="90" Click="DialogCancel_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+              </Grid>
+        </Canvas>
+    </Viewbox>
+</Window>

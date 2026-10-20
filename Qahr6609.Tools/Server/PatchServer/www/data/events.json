@@ -1,0 +1,12 @@
+{
+  "_comment": "Upcoming events for the launcher countdown. 'weekly' repeats every week (day = Sun..Sat / 0..6 / daily, time = HH:mm in the players' local time). 'events' are one-off dates (ISO-8601). Past entries are ignored. Empty file or [] = the countdown is hidden.",
+  "weekly": [
+    { "name_ar": "حرب النقابات", "name_en": "Guild War", "day": "Sat", "time": "20:00" },
+    { "name_ar": "معركة المملكة", "name_en": "Kingdom War", "day": "daily", "time": "20:30" },
+    { "name_ar": "مدينة الشياطين", "name_en": "Demon City", "day": ["Mon", "Wed", "Fri"], "time": "19:00" },
+    { "name_ar": "سباق الخيول", "name_en": "Horse Racing", "day": "daily", "time": "15:00" }
+  ],
+  "events": [
+    { "name_ar": "افتتاح موسم الهلال", "name_en": "Crescent Season opening", "time": "2026-10-15T20:00:00" }
+  ]
+}

@@ -1,0 +1,83 @@
+# build output / IDE
+bin/
+obj/
+.vs/
+*.user
+*.suo
+_buildcheck/
+# client / archives (too big for git)
+/Patch/
+/Patch.7z
+/Env_DX8/
+/Env_DX9/
+/MeGa/
+# temp
+*.done
+*.orig
+*.log
+_export/
+# client patch (ClientPatch\README_AR.md): the big binaries / the 900 KB GUI.ini stay out of git,
+# their size + md5 are in ClientPatch\manifest.txt (same files as GameServer bin\Debug\Files\Env_DX*)
+ClientPatch/files/Env_DX8/
+ClientPatch/files/Env_DX9/
+ClientPatch/files/ini/GUI.ini
+# patch server runtime data
+Qahr6609.Tools/Server/PatchServer/www/manifest.json
+Qahr6609.Tools/Server/PatchServer/www/files/*
+!Qahr6609.Tools/Server/PatchServer/www/files/README.txt
+_art_src/
+_release/
+_backup/
+Qahr6609.Tools/Content/Ramadan/ramadan_payload/client_patch/
+Qahr6609.Tools/Content/Ramadan/ramadan_payload/client_epic/
+obj/
+bin/
+# backups / archives
+*.bak
+*.rar
+
+# multi-server (docs/MULTI_SERVER.md): master settings hold secrets; server folders / pid files / generated files are local
+Qahr6609.Shared/HazemConfig.ini
+/_servers/
+server.pid
+Qahr6609.Tools/Server/Cluster/generated/
+
+# launcher crash reports uploaded by players at runtime (never commit player data)
+Qahr6609.Tools/Server/PatchServer/www/data/crashes/
+
+# released tools: binaries are published as zip (GitHub Releases), only the launch scripts and README are in git
+Qahr6609.Tools/Releases/*/
+
+# ---- public repo (README.md): things that are kept on disk but never published ----
+# DevExpress v21.2 (commercial, licensed per developer): the optional GM panel builds only when these are in libs\
+Qahr6609.GameServer/libs/DevExpress*.dll
+*.licx
+# build outputs of the tools whose sources are here (rebuild with their build.bat / csproj)
+*.exe
+*.pdb
+# closed tool without source (ServerIpTool drag-and-drop exe) is covered by *.exe
+# archives / old copies / caches
+*.zip
+*.7z
+*.old
+__pycache__/
+*.pyc
+Qahr6609.Tools/_Archive/
+# old NuGet packages folder (the server uses PackageReference, restored from nuget.org)
+Qahr6609.GameServer/packages/
+# database dumps with data (only Qahr6609.Shared/Database/cq.sql, schema + game seed rows, is published)
+/*.sql
+*dump*.sql
+cq_*.sql
+*.sql.gz
+# website API (Qahr6609.Tools\Web\QahrWebApi\README_AR.md): the real key never goes into git
+Qahr6609.Tools/Web/QahrWebApi/config.php
+webapi.ini
+webapi_refs.txt
+webapi_log.txt
+
+# internal work notes (local only)
+AGENTS.md
+docs/COORDINATION.md
+Qahr6609.Tools/Server/ServerCtl/*_msg.txt
+Qahr6609.Tools/Server/ServerCtl/commit_msg.txt

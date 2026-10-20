@@ -1,0 +1,10 @@
+# type,map,x,y,dir   type = mosque | lantern | set | date
+# Guardian of the Crescent (Twin City): small mosque behind him
+mosque,1002,229,243,0
+# Old Lamplighter (Market): his lanterns on both sides
+lantern,1036,211,199,0
+lantern,1036,215,195,0
+# Widow Salma (Desert): her husband's lantern by the door
+set,1000,476,638,0
+# Crescent Merchant (Twin City): iftar dates
+date,1002,229,251,0

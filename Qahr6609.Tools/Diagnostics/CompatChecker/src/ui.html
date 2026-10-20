@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فاحص توافق كونكر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#1A1F2B; --panel:#212837; --panel2:#283043; --line:#363F54; --text:#ECE6D6; --muted:#A39D8E; --faint:#6F7385;
+  --bronze:#C29A57; --bronze-ink:#1A1F2B;
+  --err:#E5654F; --warn:#EDBE45; --info:#74A9DA; --ok:#5DB99B;
+  --err-bg:rgba(229,101,79,.10); --warn-bg:rgba(237,190,69,.09); --info-bg:rgba(116,169,218,.09); --ok-bg:rgba(93,185,155,.08);
+  --radius:10px; --font:"IBM Plex Sans Arabic","Segoe UI",Tahoma,sans-serif; --display:"Reem Kufi","IBM Plex Sans Arabic","Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#EDF0F4; --panel:#FFFFFF; --panel2:#F5F7FA; --line:#D6DBE3; --text:#1E2533; --muted:#5B6274; --faint:#8A90A0;
+    --bronze:#9C7330; --bronze-ink:#FFFFFF;
+    --err:#C6402B; --warn:#A87A00; --info:#2F6FAE; --ok:#2E8B6C;
+    --err-bg:rgba(198,64,43,.08); --warn-bg:rgba(168,122,0,.09); --info-bg:rgba(47,111,174,.08); --ok-bg:rgba(46,139,108,.08);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+    --bg:#EDF0F4; --panel:#FFFFFF; --panel2:#F5F7FA; --line:#D6DBE3; --text:#1E2533; --muted:#5B6274; --faint:#8A90A0;
+    --bronze:#9C7330; --bronze-ink:#FFFFFF;
+    --err:#C6402B; --warn:#A87A00; --info:#2F6FAE; --ok:#2E8B6C;
+    --err-bg:rgba(198,64,43,.08); --warn-bg:rgba(168,122,0,.09); --info-bg:rgba(47,111,174,.08); --ok-bg:rgba(46,139,108,.08);
+    color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6;min-height:100vh}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+bdi{unicode-bidi:isolate}
+
+/* header */
+header.top{display:flex;align-items:center;gap:20px;padding:16px 28px;border-bottom:1px solid var(--line);background:var(--panel);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;margin-inline-end:auto}
+.brand svg{flex:none}
+.brand h1{font-family:var(--display);font-weight:700;font-size:22px;margin:0;letter-spacing:0}
+.brand p{margin:0;color:var(--muted);font-size:13px}
+.src{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:6px 8px 6px 14px;cursor:pointer;min-width:0;max-width:300px}
+.src:hover{border-color:var(--bronze)}
+.src .side{font-size:12px;color:var(--muted)}
+.src .name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:ltr;unicode-bidi:isolate}
+.src .dot{width:9px;height:9px;border-radius:50%;background:var(--faint);flex:none}
+.src.ready .dot{background:var(--ok)}
+.btn{background:var(--bronze);color:var(--bronze-ink);border:0;border-radius:999px;padding:9px 22px;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--bronze)}
+.iconbtn{background:transparent;border:1px solid var(--line);border-radius:8px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;color:var(--muted)}
+.iconbtn:hover{color:var(--text);border-color:var(--bronze)}
+
+/* progress */
+.progress{height:3px;background:transparent;position:relative;overflow:hidden}
+.progress i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--bronze);width:0;transition:width .2s}
+.status{padding:10px 28px;color:var(--muted);font-size:13px;min-height:20px}
+
+/* verdict */
+.verdict{padding:26px 28px 22px;display:grid;grid-template-columns:1fr auto;gap:18px 30px;align-items:end;border-bottom:1px solid var(--line)}
+.verdict h2{font-family:var(--display);font-weight:500;font-size:clamp(22px,2.6vw,32px);line-height:1.35;margin:0;max-width:30ch}
+.verdict .sub{color:var(--muted);margin:6px 0 0;font-size:14px}
+.tally{display:flex;gap:4px;align-items:stretch}
+.tally button{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px 14px;text-align:start;cursor:pointer;min-width:92px}
+.tally button[aria-pressed="true"]{border-color:currentColor}
+.tally b{display:block;font-size:24px;font-weight:600;line-height:1.1}
+.tally span{font-size:12px;color:var(--muted)}
+.t-err{color:var(--err)} .t-warn{color:var(--warn)} .t-info{color:var(--info)} .t-ok{color:var(--ok)}
+.bar{grid-column:1/-1;display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--panel2)}
+.bar i{display:block;height:100%}
+
+/* layout */
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:60vh}
+nav.cats{border-inline-end:1px solid var(--line);padding:18px 14px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto}
+nav.cats button{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px;width:100%;background:transparent;border:0;border-radius:8px;padding:10px 10px;cursor:pointer;text-align:start}
+nav.cats button:hover{background:var(--panel)}
+nav.cats button[aria-current="true"]{background:var(--panel2);box-shadow:inset -3px 0 0 var(--bronze)}
+nav.cats .ic{color:var(--bronze)}
+nav.cats .t{font-weight:500}
+nav.cats .c{display:flex;gap:6px;font-size:12px}
+nav.cats .c span{min-width:22px;text-align:center;border-radius:6px;padding:0 5px}
+.c .e{background:var(--err-bg);color:var(--err)} .c .w{background:var(--warn-bg);color:var(--warn)} .c .k{color:var(--ok)}
+nav.cats .note{margin:18px 10px 0;color:var(--faint);font-size:12px}
+
+main{padding:22px 28px 60px;min-width:0}
+.cat-head h3{font-family:var(--display);font-weight:500;font-size:24px;margin:0 0 4px}
+.cat-head p{color:var(--muted);margin:0 0 18px;max-width:75ch}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 14px;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--panel2);border-color:var(--bronze)}
+.search{flex:1;min-width:200px;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 16px;color:var(--text);font:inherit}
+
+/* ledger */
+.ledger-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 30px minmax(0,1fr);gap:0 14px;padding:0 16px 8px 16px;color:var(--faint);font-size:12px}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:8px;position:relative;overflow:hidden}
+.row::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:4px;background:var(--sev)}
+.row.error{--sev:var(--err)} .row.warn{--sev:var(--warn)} .row.info{--sev:var(--info)} .row.ok{--sev:var(--ok)}
+.row.ignored{opacity:.5}
+.row > button.sum{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 30px minmax(0,1fr);gap:0 14px;align-items:start;width:100%;background:transparent;border:0;padding:13px 16px 13px 16px;padding-inline-start:20px;text-align:start;cursor:pointer}
+.row .ttl{font-weight:600}
+.row .ttl small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+.cell{font-size:13.5px;color:var(--text);overflow-wrap:anywhere;min-width:0}
+.cell .lbl{display:none;color:var(--faint);font-size:11px}
+.seam{display:grid;place-items:center;height:100%;color:var(--sev);font-size:18px;font-weight:600}
+.row.ok .seam{color:var(--ok)}
+.detail{display:none;border-top:1px dashed var(--line);padding:14px 20px 16px;background:var(--panel2)}
+.row.open .detail{display:block}
+.detail h4{margin:0 0 4px;font-size:13px;color:var(--muted);font-weight:500}
+.detail p{margin:0 0 12px;max-width:80ch}
+.detail pre{margin:0 0 12px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;unicode-bidi:plaintext;text-align:start;font-family:Consolas,"Cascadia Mono",monospace;font-size:12.5px;white-space:pre-wrap;overflow:auto}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.ref{direction:ltr;font-family:Consolas,"Cascadia Mono",monospace;font-size:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 8px;cursor:pointer;color:var(--text)}
+.ref:hover{border-color:var(--bronze)}
+.ref.c{border-inline-start:3px solid var(--info)} .ref.s{border-inline-start:3px solid var(--bronze)}
+.list{max-height:280px;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:12.5px;margin:0 0 12px;list-style:none}
+.list li{padding:2px 0;border-bottom:1px solid var(--line)}
+.list li:last-child{border:0}
+.detail .act{display:flex;gap:8px}
+.more{display:block;margin:14px auto 0}
+.empty{padding:40px 0;color:var(--muted)}
+
+/* start screen */
+.start{max-width:880px;margin:0 auto;padding:46px 28px 80px}
+.start h2{font-family:var(--display);font-weight:500;font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:0 0 12px;max-width:22ch}
+.start > p{color:var(--muted);max-width:62ch;margin:0 0 30px}
+.pickers{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
+.pick{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;text-align:start;cursor:pointer;display:flex;flex-direction:column;gap:8px}
+.pick:hover{border-color:var(--bronze)}
+.pick .k{font-family:var(--display);font-size:19px}
+.pick .h{color:var(--muted);font-size:13.5px}
+.pick code{direction:ltr;unicode-bidi:isolate;background:var(--bg);border-radius:5px;padding:1px 6px;font-size:12.5px}
+.pick .st{font-size:13px;color:var(--faint)}
+.pick.ready{border-color:var(--ok)} .pick.ready .st{color:var(--ok)}
+.checks{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 26px;margin:36px 0 0;padding:22px 0 0;border-top:1px solid var(--line)}
+.checks div{font-size:13.5px;color:var(--muted)}
+.checks b{display:block;color:var(--text);font-weight:600;font-size:14px}
+.banner{margin:0 28px;margin-top:14px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:13px;display:flex;gap:10px;align-items:center}
+.toast{position:fixed;bottom:22px;inset-inline-start:50%;transform:translateX(50%);background:var(--text);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.err-box{margin:20px 28px;padding:16px 18px;border:1px solid var(--err);background:var(--err-bg);border-radius:10px}
+.err-box b{color:var(--err)}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  nav.cats{position:static;max-height:none;border-inline-end:0;border-bottom:1px solid var(--line);display:flex;overflow-x:auto;gap:4px;padding:10px 12px}
+  nav.cats button{width:auto;white-space:nowrap}
+  nav.cats .note{display:none}
+  .verdict{grid-template-columns:1fr}
+  .tally{flex-wrap:wrap}
+}
+@media (max-width:760px){
+  header.top,.verdict,main,.status{padding-inline:16px}
+  .pickers,.checks{grid-template-columns:1fr}
+  .ledger-head{display:none}
+  .row > button.sum{grid-template-columns:1fr}
+  .seam{display:none}
+  .cell{margin-top:6px}
+  .cell .lbl{display:block}
+  .src{max-width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  header.top .btn,header.top .iconbtn,.tools,nav.cats,.status,.progress,.banner,.more{display:none!important}
+  .layout{grid-template-columns:1fr}
+  .row .detail{display:block}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <svg width="38" height="38" viewBox="0 0 38 38" aria-hidden="true"><rect x="1" y="1" width="36" height="36" rx="9" fill="none" stroke="var(--bronze)" stroke-width="1.6"/><path d="M11 12h7v14h-7M27 12h-7v14h7" fill="none" stroke="var(--bronze)" stroke-width="2.2" stroke-linejoin="round"/><path d="M19 9v20" stroke="var(--text)" stroke-width="1.4" stroke-dasharray="2 2.4"/></svg>
+    <div><h1>فاحص توافق كونكر</h1><p>بيقارن الكلاينت بالسيرفر ويطلّع كل حاجة مش متطابقة</p></div>
+  </div>
+  <button class="src" id="srcClient" type="button" title="اختار فولدر الكلاينت"><span class="dot"></span><span><span class="side">الكلاينت</span><br><span class="name" id="nameClient">مش متحدد</span></span></button>
+  <button class="src" id="srcServer" type="button" title="اختار فولدر السيرفر"><span class="dot"></span><span><span class="side">السيرفر</span><br><span class="name" id="nameServer">مش متحدد</span></span></button>
+  <button class="btn" id="scan" type="button" disabled>افحص</button>
+  <button class="iconbtn" id="exportBtn" type="button" title="نزّل التقرير CSV" aria-label="نزّل التقرير CSV" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 19h16"/></svg></button>
+  <button class="iconbtn" id="themeBtn" type="button" title="غيّر الألوان" aria-label="غيّر الألوان"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button>
+</header>
+<div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+<div class="status" id="status" role="status"></div>
+<div id="app"></div>
+<div class="toast" id="toast" role="status"></div>
+<input type="file" id="fallbackClient" webkitdirectory multiple hidden>
+<input type="file" id="fallbackServer" webkitdirectory multiple hidden>
+
+<script type="application/json" id="preloaded">/*PRELOAD*/</script>
+<script>/*ENGINE*/</script>
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const app = $('#app');
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SEVL = { error: 'خطأ', warn: 'تحذير', info: 'معلومة', ok: 'سليم' };
+const ICONS = {
+  go: '<path d="M5 12h12m0 0l-5-5m5 5l-5 5" />',
+  clock: '<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',
+  npc: '<circle cx="12" cy="8" r="3.4"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4"/>',
+  map: '<path d="M4 6l5-2 6 2 5-2v14l-5 2-6-2-5 2z"/><path d="M9 4v14M15 6v14"/>',
+  item: '<path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><path d="M5 8l7 4 7-4M12 12v8"/>',
+  table: '<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16M10 10v9"/>'
+};
+const icon = k => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[k] || ''}</svg>`;
+const store = { get(k, d) { try { const v = localStorage.getItem('cqc:' + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('cqc:' + k, JSON.stringify(v)); } catch (e) {} } };
+function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 1800); }
+
+// theme
+const applyTheme = t => { if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; };
+applyTheme(store.get('theme', null));
+$('#themeBtn').onclick = () => { const cur = document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); const n = cur === 'light' ? 'dark' : 'light'; applyTheme(n); store.set('theme', n); };
+
+// ───────── folder sources ─────────
+const SKIP = new Set(['bin', 'obj', 'packages', '.vs', '.git', 'node_modules']);
+function handleSource(root) {
+  const dirCache = new Map();
+  async function entries(dirHandle, key) {
+    if (dirCache.has(key)) return dirCache.get(key);
+    const m = new Map(); for await (const [name, h] of dirHandle.entries()) m.set(name.toLowerCase(), h);
+    dirCache.set(key, m); return m;
+  }
+  async function resolve(path, kind) {
+    let h = root, key = '';
+    const parts = path.split('/').filter(Boolean);
+    for (let i = 0; i < parts.length; i++) {
+      const m = await entries(h, key); const nx = m.get(parts[i].toLowerCase());
+      if (!nx) return null;
+      if (i < parts.length - 1 && nx.kind !== 'directory') return null;
+      h = nx; key += '/' + parts[i].toLowerCase();
+    }
+    if (kind && h.kind !== kind) return null;
+    return { h, key };
+  }
+  return {
+    name: root.name,
+    async read(path) { try { const r = await resolve(path, 'file'); if (!r) return null; const f = await r.h.getFile(); return new Uint8Array(await f.arrayBuffer()); } catch (e) { return null; } },
+    async walk(dir, exts) {
+      const out = []; const r = dir ? await resolve(dir, 'directory') : { h: root, key: '' }; if (!r) return out;
+      async function w(h, key, rel) { const m = await entries(h, key); for (const [ln, c] of m) { if (c.kind === 'directory') { if (!SKIP.has(ln)) await w(c, key + '/' + ln, rel + c.name + '/'); } else if (exts.some(x => ln.endsWith(x))) out.push(rel + c.name); } }
+      await w(r.h, r.key, ''); return out;
+    }
+  };
+}
+function fileListSource(files) {
+  const map = new Map(); let name = '';
+  for (const f of files) { const parts = f.webkitRelativePath.split('/'); name = parts[0]; map.set(parts.slice(1).join('/').toLowerCase(), f); }
+  return {
+    name,
+    async read(path) { const f = map.get(path.toLowerCase()); return f ? new Uint8Array(await f.arrayBuffer()) : null; },
+    async walk(dir, exts) { const d = dir.toLowerCase(); const out = []; for (const [k, f] of map) { if (!k.startsWith(d)) continue; const rel = k.slice(d.length); if (rel.split('/').some(p => SKIP.has(p))) continue; if (exts.some(x => k.endsWith(x))) out.push(f.webkitRelativePath.split('/').slice(1).join('/').slice(dir.length)); } return out; }
+  };
+}
+
+// IndexedDB for directory handles
+const idb = {
+  db: null,
+  open() { return this.db || (this.db = new Promise((res, rej) => { const r = indexedDB.open('cq-compat', 1); r.onupgradeneeded = () => r.result.createObjectStore('h'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); })); },
+  async get(k) { try { const db = await this.open(); return await new Promise(res => { const r = db.transaction('h').objectStore('h').get(k); r.onsuccess = () => res(r.result); r.onerror = () => res(null); }); } catch (e) { return null; } },
+  async set(k, v) { try { const db = await this.open(); db.transaction('h', 'readwrite').objectStore('h').put(v, k); } catch (e) {} }
+};
+
+const state = { client: null, server: null, clientHandle: null, serverHandle: null, report: null, cat: null, sev: new Set(['error', 'warn']), q: '', shown: 60, ignored: new Set(store.get('ignored', [])), preloaded: false };
+const hasFSA = 'showDirectoryPicker' in window;
+
+function paintSources() {
+  for (const side of ['client', 'server']) {
+    const el = $(side === 'client' ? '#srcClient' : '#srcServer'); const nm = $(side === 'client' ? '#nameClient' : '#nameServer');
+    const h = state[side + 'Handle'] || state[side];
+    el.classList.toggle('ready', !!state[side]);
+    nm.textContent = h ? h.name : 'مش متحدد';
+    const p = document.querySelector(`.pick[data-side="${side}"]`);
+    if (p) { p.classList.toggle('ready', !!state[side]); p.querySelector('.st').textContent = state[side] ? '✓ ' + state[side].name : (h ? 'محتاج إذن تاني: دوس هنا' : 'لسه ما اخترتش'); }
+  }
+  $('#scan').disabled = !((state.client || state.clientHandle) && (state.server || state.serverHandle));
+}
+async function pick(side) {
+  if (!hasFSA) { $(side === 'client' ? '#fallbackClient' : '#fallbackServer').click(); return; }
+  try {
+    const h = await window.showDirectoryPicker({ id: 'cq-' + side, mode: 'read' });
+    state[side + 'Handle'] = h; state[side] = handleSource(h); await idb.set(side, h); paintSources();
+  } catch (e) { if (e.name !== 'AbortError') showError('مش قادر أفتح الفولدر: ' + e.message); }
+}
+for (const side of ['client', 'server']) {
+  $(side === 'client' ? '#srcClient' : '#srcServer').onclick = () => pick(side);
+  $(side === 'client' ? '#fallbackClient' : '#fallbackServer').onchange = e => { if (e.target.files.length) { state[side] = fileListSource(e.target.files); paintSources(); } };
+}
+async function ensurePermission(side) {
+  const h = state[side + 'Handle']; if (!h) return !!state[side];
+  if ((await h.queryPermission({ mode: 'read' })) === 'granted' || (await h.requestPermission({ mode: 'read' })) === 'granted') { state[side] = handleSource(h); return true; }
+  return false;
+}
+async function restore() {
+  if (!hasFSA) return;
+  for (const side of ['client', 'server']) {
+    const h = await idb.get(side); if (!h) continue; state[side + 'Handle'] = h;
+    try { if ((await h.queryPermission({ mode: 'read' })) === 'granted') state[side] = handleSource(h); } catch (e) {}
+  }
+  paintSources();
+}
+
+// ───────── scan ─────────
+function setProgress(p, msg) { $('#pbar').style.width = Math.round(p * 100) + '%'; $('#status').textContent = msg || ''; }
+function showError(msg) { const d = document.createElement('div'); d.className = 'err-box'; d.innerHTML = `<b>حصلت مشكلة.</b> ${esc(msg)}`; app.prepend(d); setTimeout(() => d.remove(), 12000); }
+const ERRS = {
+  CLIENT_NOT_FOUND: 'الفولدر اللي اخترته للكلاينت مفيهوش ini/npc.ini. اختار فولدر الكلاينت الرئيسي (اللي فيه Conquer.exe).',
+  SERVER_NOT_FOUND: 'الفولدر اللي اخترته للسيرفر مفيهوش Game/MsgNpc/NpcID.cs. اختار فولدر السورس (MeGa6609 أو Source).',
+  DB_NOT_FOUND: 'لقيت السورس بس مش لاقي ServerDataBase جوه bin/Debug. اتأكد إن السيرفر اتبنى مرة واحدة على الأقل.'
+};
+$('#scan').onclick = async () => {
+  $('#scan').disabled = true;
+  try {
+    if (!(await ensurePermission('client')) || !(await ensurePermission('server'))) { showError('محتاج إذن قراءة للفولدرين. دوس افحص تاني ووافق.'); return; }
+    setProgress(0.01, 'ببدأ…');
+    const rep = await CompatEngine.analyze({ client: state.client, server: state.server }, setProgress);
+    rep.meta.clientName = state.client.name; rep.meta.serverName = state.server.name;
+    state.report = rep; state.preloaded = false; state.shown = 60;
+    setProgress(0, `خلصت في ${(rep.meta.ms / 1000).toFixed(1)} ثانية — قريت ${rep.meta.csCount} ملف كود و${rep.meta.files.client.length + rep.meta.files.server.length} ملف داتا.`);
+    render();
+  } catch (e) { setProgress(0, ''); showError(ERRS[e.message] || e.message); console.error(e); }
+  finally { paintSources(); }
+};
+
+// ───────── render ─────────
+function verdictText(t) {
+  if (t.error) return `فيه ${t.error} حاجة هتبوظ عند اللاعبين، و${t.warn} حاجة محتاجة تتراجع.`;
+  if (t.warn) return `مفيش حاجة بايظة بشكل أكيد، بس فيه ${t.warn} حاجة محتاجة تتراجع.`;
+  return 'الكلاينت والسيرفر متطابقين في كل اللي اتفحص.';
+}
+function visible(f) {
+  if (!state.sev.has(f.sev)) return false;
+  if (state.q) { const q = state.q.toLowerCase(); if (![f.title, f.client, f.server, f.why, ...(f.list || [])].join(' ').toLowerCase().includes(q)) return false; }
+  return true;
+}
+function counts(c) { const r = { error: 0, warn: 0, info: 0, ok: 0 }; for (const f of c.findings) if (!state.ignored.has(f.key)) r[f.sev]++; return r; }
+function totals() { const r = { error: 0, warn: 0, info: 0, ok: 0 }; for (const c of state.report.categories) { const x = counts(c); for (const k in r) r[k] += x[k]; } return r; }
+
+function render() {
+  const rep = state.report;
+  if (!rep) return renderStart();
+  $('#exportBtn').hidden = false;
+  if (!state.cat || !rep.categories.find(c => c.id === state.cat)) state.cat = (rep.categories.find(c => counts(c).error) || rep.categories[0]).id;
+  const t = totals(); const sum = t.error + t.warn + t.info + t.ok || 1;
+  const c = rep.categories.find(x => x.id === state.cat);
+  const when = new Date(rep.meta.at);
+  app.innerHTML = `
+    ${state.preloaded ? `<div class="banner">${icon('clock')}<span>ده تقرير محفوظ من فحص يوم ${esc(when.toLocaleString('ar-EG'))} على <bdi>${esc(rep.meta.clientName || '')}</bdi> و<bdi>${esc(rep.meta.serverName || '')}</bdi>. اختار الفولدرين ودوس افحص عشان تجيب نتيجة جديدة.</span></div>` : ''}
+    <section class="verdict">
+      <div><h2>${esc(verdictText(t))}</h2><p class="sub">${rep.categories.length} أقسام · ${rep.meta.npcs ? rep.meta.npcs.server + ' NPC · ' : ''}${rep.meta.items ? rep.meta.items.server.toLocaleString('en') + ' أيتم · ' : ''}${rep.meta.maps ? rep.meta.maps.client + ' خريطة' : ''}</p></div>
+      <div class="tally" role="group" aria-label="فلتر حسب الخطورة">
+        ${['error', 'warn', 'info', 'ok'].map(k => `<button type="button" data-sev="${k}" aria-pressed="${state.sev.has(k)}" class="t-${k === 'error' ? 'err' : k}"><b class="num">${t[k]}</b><span>${SEVL[k]}</span></button>`).join('')}
+      </div>
+      <div class="bar" aria-hidden="true">${['error', 'warn', 'info', 'ok'].map(k => `<i style="width:${t[k] / sum * 100}%;background:var(--${k === 'error' ? 'err' : k})"></i>`).join('')}</div>
+    </section>
+    <div class="layout">
+      <nav class="cats" aria-label="الأقسام">
+        ${rep.categories.map(x => { const n = counts(x); return `<button type="button" data-cat="${x.id}" aria-current="${x.id === state.cat}"><span class="ic">${icon(x.icon)}</span><span class="t">${esc(x.title)}</span><span class="c num">${n.error ? `<span class="e">${n.error}</span>` : ''}${n.warn ? `<span class="w">${n.warn}</span>` : ''}${!n.error && !n.warn ? `<span class="k">✓</span>` : ''}</span></button>`; }).join('')}
+        <p class="note">الأحمر: حاجة أكيد بايظة. الأصفر: غالباً مشكلة، اتأكد منها. دوس على أي سطر عشان تشوف السبب والحل.</p>
+      </nav>
+      <main id="main"></main>
+    </div>`;
+  app.querySelectorAll('.tally button').forEach(b => b.onclick = () => { const k = b.dataset.sev; state.sev.has(k) ? state.sev.delete(k) : state.sev.add(k); state.shown = 60; render(); });
+  app.querySelectorAll('nav.cats button').forEach(b => b.onclick = () => { state.cat = b.dataset.cat; state.shown = 60; render(); window.scrollTo({ top: 0 }); });
+  renderMain(c);
+}
+function renderMain(c) {
+  const main = $('#main');
+  const fs = c.findings.filter(visible);
+  const shown = fs.slice(0, state.shown);
+  main.innerHTML = `
+    <div class="cat-head"><h3>${esc(c.title)}</h3><p>${esc(c.blurb)}</p></div>
+    <div class="tools">
+      <input class="search" id="q" type="search" placeholder="دوّر برقم أو اسم…" value="${esc(state.q)}" aria-label="بحث">
+      <button class="chip" type="button" id="showIgn" aria-pressed="${!!state.showIgnored}">اعرض اللي اتجاهل (${c.findings.filter(f => state.ignored.has(f.key)).length})</button>
+    </div>
+    ${fs.length ? `<div class="ledger-head"><span>المشكلة</span><span>الكلاينت بيقول</span><span></span><span>السيرفر بيقول</span></div>` : ''}
+    <div id="rows">${shown.filter(f => state.showIgnored || !state.ignored.has(f.key)).map(rowHtml).join('') || `<p class="empty">${c.findings.length ? 'مفيش نتايج بالفلتر ده. جرّب تشغّل «معلومة» أو «سليم» من فوق.' : 'مفيش حاجة اتفحصت هنا.'}</p>`}</div>
+    ${fs.length > state.shown ? `<button class="btn ghost more" id="more" type="button">اعرض ${Math.min(60, fs.length - state.shown)} كمان من ${fs.length - state.shown}</button>` : ''}`;
+  const q = $('#q'); q.oninput = () => { state.q = q.value; state.shown = 60; const pos = q.selectionStart; renderMain(c); const nq = $('#q'); nq.focus(); nq.setSelectionRange(pos, pos); };
+  $('#showIgn').onclick = () => { state.showIgnored = !state.showIgnored; renderMain(c); };
+  const more = $('#more'); if (more) more.onclick = () => { state.shown += 60; renderMain(c); };
+  main.querySelectorAll('.row > button.sum').forEach(b => b.onclick = () => { const r = b.parentElement; r.classList.toggle('open'); b.setAttribute('aria-expanded', r.classList.contains('open')); });
+  main.querySelectorAll('.ref').forEach(b => b.onclick = () => { copy(b.dataset.copy); });
+  main.querySelectorAll('[data-ign]').forEach(b => b.onclick = () => { const k = b.dataset.ign; state.ignored.has(k) ? state.ignored.delete(k) : state.ignored.add(k); store.set('ignored', [...state.ignored]); render(); });
+  main.querySelectorAll('[data-copyfix]').forEach(b => b.onclick = () => copy(b.dataset.copyfix));
+}
+function rowHtml(f) {
+  const seam = f.sev === 'ok' ? '=' : '≠';
+  const refs = (f.refs || []).filter(Boolean).map(r => { const label = r.file + (r.line ? ':' + r.line : ''); const full = (r.side === 'client' ? (state.report.meta.clientName || 'Client') + '/' : (state.report.meta.serverName || 'Server') + '/') + label; return `<button type="button" class="ref ${r.side === 'client' ? 'c' : 's'}" data-copy="${esc(full)}" title="انسخ المسار">${esc(label)}</button>`; }).join('');
+  const ign = state.ignored.has(f.key);
+  return `<article class="row ${f.sev}${ign ? ' ignored' : ''}">
+    <button class="sum" type="button" aria-expanded="false">
+      <span class="ttl">${esc(f.title)}<small>${SEVL[f.sev]}${ign ? ' · متجاهل' : ''}</small></span>
+      <span class="cell"><span class="lbl">الكلاينت</span><bdi>${esc(f.client || '—')}</bdi></span>
+      <span class="seam" aria-hidden="true">${seam}</span>
+      <span class="cell"><span class="lbl">السيرفر</span><bdi>${esc(f.server || '—')}</bdi></span>
+    </button>
+    <div class="detail">
+      ${f.why ? `<h4>ليه ده مهم</h4><p>${esc(f.why)}</p>` : ''}
+      ${f.fix ? `<h4>إزاي تصلحه</h4><pre>${esc(f.fix)}</pre>` : ''}
+      ${f.list && f.list.length ? `<h4>التفاصيل (${f.list.length})</h4><ul class="list">${f.list.slice(0, 1500).map(x => `<li><bdi>${esc(x)}</bdi></li>`).join('')}</ul>` : ''}
+      ${refs ? `<h4>الملفات (دوس عشان تنسخ المسار)</h4><div class="refs">${refs}</div>` : ''}
+      <div class="act">${f.sev !== 'ok' ? `<button class="btn ghost" type="button" data-ign="${esc(f.key)}">${ign ? 'رجّعها' : 'دي متعمّدة، تجاهلها'}</button>` : ''}${f.fix ? `<button class="btn ghost" type="button" data-copyfix="${esc(f.fix)}">انسخ الحل</button>` : ''}</div>
+    </div>
+  </article>`;
+}
+function copy(t) { (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => toast('اتنسخ'), () => { const a = document.createElement('textarea'); a.value = t; document.body.append(a); a.select(); try { document.execCommand('copy'); toast('اتنسخ'); } catch (e) {} a.remove(); }); }
+
+function renderStart() {
+  $('#exportBtn').hidden = true;
+  app.innerHTML = `<section class="start">
+    <h2>اختار فولدر الكلاينت وفولدر السيرفر، والأداة هتقارنهم سطر بسطر.</h2>
+    <p>الأداة بتقرا بس، ومش بتعدّل أي ملف. كل الشغل بيحصل جوه المتصفح على جهازك، ومفيش حاجة بتترفع لأي مكان.</p>
+    <div class="pickers">
+      <button class="pick" type="button" data-side="client"><span class="k">فولدر الكلاينت</span><span class="h">الفولدر اللي فيه <code>Conquer.exe</code> و <code>ini</code>. مثلاً <code>D:\\Conquer Online 3.0</code></span><span class="st"></span></button>
+      <button class="pick" type="button" data-side="server"><span class="k">فولدر السيرفر</span><span class="h">فولدر السورس اللي فيه <code>Source</code>. مثلاً <code>D:\\conquer\\MeGa6609</code></span><span class="st"></span></button>
+    </div>
+    <button class="btn" type="button" id="scan2">افحص</button>
+    <div class="checks">
+      <div><b>أزرار Go</b>كل حدث في شباك الأحداث ليه case في Bulletin ولا لأ.</div>
+      <div><b>مواعيد الأحداث</b>اليوم والساعة في Activity.ini قصاد MsgSchedules.</div>
+      <div><b>الـ NPCs</b>الشكل، الخريطة، الكود، ومكانه في المهام.</div>
+      <div><b>الخرايط</b>GameMap.dat في الناحيتين، والبوابات والـ Teleport.</div>
+      <div><b>الأيتمز والمحلات</b>itemtype و Shop.dat ومتجر الـ CP.</div>
+      <div><b>جداول الداتا</b>الألقاب والمهارات والمهام وباقي الملفات المشتركة.</div>
+    </div>
+    ${hasFSA ? '' : '<p class="sub" style="margin-top:20px;color:var(--warn)">المتصفح ده مش بيدعم حفظ الفولدرات، فهتختارهم كل مرة. استخدم Chrome أو Edge عشان تفتكرهم.</p>'}
+  </section>`;
+  app.querySelectorAll('.pick').forEach(b => b.onclick = () => pick(b.dataset.side));
+  $('#scan2').onclick = () => $('#scan').click();
+  paintSources();
+}
+
+// export CSV
+$('#exportBtn').onclick = () => {
+  const rows = [['القسم', 'الخطورة', 'المشكلة', 'الكلاينت', 'السيرفر', 'السبب', 'الحل', 'الملفات']];
+  for (const c of state.report.categories) for (const f of c.findings) if (f.sev !== 'ok') rows.push([c.title, SEVL[f.sev], f.title, f.client || '', f.server || '', f.why || '', f.fix || '', (f.refs || []).filter(Boolean).map(r => r.file + ':' + r.line).join(' ')]);
+  const csv = '\ufeff' + rows.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' })); a.download = 'compat-report-' + new Date().toISOString().slice(0, 10) + '.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+};
+
+// boot
+try { const pre = JSON.parse($('#preloaded').textContent); if (pre && pre.categories) { state.report = pre; state.preloaded = !document.documentElement.dataset.fresh; } } catch (e) {}
+render(); restore();
+})();
+</script>
+</body>
+</html>

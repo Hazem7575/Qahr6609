@@ -1,0 +1,6 @@
+GoldenTree cooldown query (sent when the tree opens) | 08 05 20 00 | 3282
+GoldenTree Pick | 08 01 20 00 | 3282
+GoldenTree Pick again (cooldown) | 08 01 20 00 | 3282
+GoldenTree Pick paying the cooldown (Auto-reset CD) | 08 01 20 01 | 3282
+GoldenTree prize list (ended tree) | 08 03 20 00 | 3282
+GoldenTree winners page 0 | 08 00 10 0A | 3283
