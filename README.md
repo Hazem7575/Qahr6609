@@ -5,6 +5,17 @@
 
 ---
 
+## 📸 من جوّه اللعبة
+
+| | |
+|---|---|
+| ![الشجرة الذهبية](docs/images/goldentree.jpg) **الشجرة الذهبية** — زي الرسمي: جوايز، تكلفة القطف، Reset CD والعداد | ![جزيرة التنين](docs/images/dragonisland.jpg) **جزيرة التنين** — البوس في ميعاده وترتيب الضرر لايف |
+| ![النرد](docs/images/dice.jpg) **النرد (Sic Bo)** — بشباك الكلاينت الأصلي | ![اللوتري](docs/images/lottery.jpg) **اللوتري** — الصناديق بأنواعها زي الرسمي |
+| ![Celestial Chest](docs/images/celestialchest.jpg) **مهرجان Celestial Chest** — الـ Celestial Elder وBliss Boy في تون سيتي | ![أيقونات الأحداث](docs/images/twincity_events.jpg) **أيقونات الأحداث** فوق — Golden Tree والنرد والبوكر… |
+| ![الشخصية](docs/images/character.jpg) **شخصية كاملة في أمر واحد** — `@maxme` + `@setclass ninja` | |
+
+---
+
 ## 🗂️ ترتيب فولدرات مالوش زي
 
 أي حد مسك سورسات كونكر عارف المأساة: آلاف الملفات مرمية في فولدر واحد، ومحدش عارف حاجة فين.
