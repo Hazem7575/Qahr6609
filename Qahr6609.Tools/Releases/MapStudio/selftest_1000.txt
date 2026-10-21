@@ -1,0 +1,38 @@
+MapStudio self-test  2026-10-19 13:54:57
+DB folder     : D:\conquer\Qahr6609\Qahr6609.GameServer\bin\Debug\ServerDataBase
+Source folder : D:\conquer\Qahr6609\Qahr6609.Tools\Releases\MapStudio\source
+Maps in GameMap.dat: 359, with DMap on disk: 359
+NpcID enum names: 677, scripted ids: 630, monster types: 1288, portals: 233
+Npcs.txt: 932 lines, md5 145E2C83C117692316DF400ED8CE6E06, newline LF, blank lines 0, unparsed 0
+
+Map id        : 1000
+Map name      : Desert
+DMap          : map\map\desert.dmap -> D:\conquer\Qahr6609\Qahr6609.GameServer\bin\Debug\ServerDataBase\map\map\desert.DMap
+Size          : 984x984
+Walkable      : 305593 cells (31.56%)
+Altitude      : -160 .. 1104 (walkable cells)
+Revive point  : 499,650 (reborn_map 1000) walkable=True
+NPCs          : 72
+   Script    : 43
+   NoScript  : 28
+   Warehouse : 1
+   Booth     : 0
+NPCs on unwalkable cells: 10
+   9  sort 1 at 511,630  [NoScript]
+   10  sort 1 at 486,621  [NoScript]
+   10011 WHDesert sort 3 at 471,629  [Warehouse]
+   10051 DesertCityConductress sort 29 at 478,631  [Script]
+   8429 WitheredTree1 sort 2 at 535,735  [Script]
+   8430 WitheredTree2 sort 2 at 534,724  [Script]
+   8431 WitheredTree3 sort 2 at 552,719  [Script]
+   8451 st1TreeSeed sort 2 at 968,662  [Script]
+   8452 nd2TreeSeed sort 2 at 963,684  [Script]
+   8453 rd3TreeSeed sort 2 at 943,663  [Script]
+SobNPCs       : 0
+Monster spawns: 1918 (33 areas, 1885 points), types: BladeGhost, BladeGhostAide, BladeGhostKing, BladeGhostL83, BladeGhostMsgr, BladeMonster, CrazySnake, DesertCondor, Ghost, Guard1, HillMonster, HillMonsterAide, HillMonsterKing, HillMonsterL73, HillMonsterMsgr
+Portals       : 3
+   77,319 -> map 1001 312,646  walkable=True
+   977,668 -> map 1002 70,347  walkable=True
+   163,471 -> map 1077 756,873  walkable=True
+Validation    : 0 errors, 10 warnings, 28 info
+Elapsed       : 138 ms

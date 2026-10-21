@@ -1,0 +1,40 @@
+UiExplorer selftest  2026-10-19 15:00:18  (offline: no packet is injected)
+exe      : D:\conquer\Qahr6609\Qahr6609.Tools\Releases\UiExplorer\
+data     : D:\conquer\Qahr6609\Qahr6609.Tools\Releases\UiExplorer\data  
+recipes  : D:\conquer\Qahr6609\Qahr6609.Tools\Releases\UiExplorer\recipes  
+
+[services]
+  ICapture         GameCapture
+  ICatalog         JsonCatalog
+  IInjector        PacketInjectClient
+  IPacketBuilder   ActionPacketCodec
+  IPacketStream    LivePacketStream
+  IRecipeStore     JsonRecipeStore
+
+[catalogs]
+  catalog_lua.json       missing
+  catalog_fgui.json      present
+  catalog_cpp.json       present
+  callbacks.json         present
+  previews\index.json    present
+  items total            3729
+    kind button     2551   with open:   2336   verified:  2336
+    kind cpp         573   with open:    510   verified:   510
+    kind fgui         51   with open:     51   verified:    19
+    kind lua         554   with open:    554   verified:   542
+  callbacks              253   served by server: 220   not served: 33
+
+[verified open methods -> PacketBuilder]
+  3424/3424 verified methods build + parse back correctly
+  (all methods incl. unverified: 3468/3468 buildable)
+
+[recipes]
+  1 recipes
+  ok   01_warehouse                             steps=1  C#=810 chars
+
+[previews]
+  items with a preview on disk: 3676/3729   declared: 3676   declared but missing: 0
+
+[injector] not used by the selftest (no packet sent).
+
+RESULT: PASS  (0 warnings)

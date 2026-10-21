@@ -1,0 +1,2282 @@
+{
+ "generated": "2026-10-19T14:43:45",
+ "items": [
+  {
+   "msgId": 1001,
+   "func": "NewClient",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1004,
+   "func": "Chat",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1012,
+   "func": "MsgTick",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1015,
+   "func": "String_",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1019,
+   "func": "KnowPersons",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1022,
+   "func": "Attack",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1023,
+   "func": "Team",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1024,
+   "func": "AtributeSet",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1027,
+   "func": "EmbedSocket",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1036,
+   "func": "ClainInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1038,
+   "func": "Stabilization",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1040,
+   "func": "MsgStauts",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1044,
+   "func": "MapLoading",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1045,
+   "func": "MsgMailOperation",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1046,
+   "func": "MsgMailList",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1056,
+   "func": "Trade",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1058,
+   "func": "GuildInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1063,
+   "func": "CaptureTheFlagRankings",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1064,
+   "func": "ElitePKWager",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1066,
+   "func": "Reincarnation",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1067,
+   "func": "MsgLoginNotice",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1070,
+   "func": "AutoHunt",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1100,
+   "func": "MsgPCNum",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1101,
+   "func": "FloorMap",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1102,
+   "func": "Warehause",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1103,
+   "func": "Spell",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1107,
+   "func": "ProcesGuild",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1126,
+   "func": "MsgStaticMessage",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1127,
+   "func": "Enlight",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1128,
+   "func": "MsgVipHandler",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1130,
+   "func": "Title",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1134,
+   "func": "QuestList",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1135,
+   "func": "QuestData",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1136,
+   "func": "Achievement",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1150,
+   "func": "FlowerPacket",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1151,
+   "func": "GenericRanking",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1312,
+   "func": "Clan",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1313,
+   "func": "MsgFamilyOccupy",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1314,
+   "func": "MsgLottery",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1315,
+   "func": "MsgOperatingAct",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1351,
+   "func": "MsgMachine",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2030,
+   "func": "NpcSpawn",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2031,
+   "func": "NpcServerReplay",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2032,
+   "func": "NpcServerRequest",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2036,
+   "func": "Compose",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2044,
+   "func": "OfflineTG",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2045,
+   "func": "LeaderSchip",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2046,
+   "func": "TradePartner",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2048,
+   "func": "ItemLock",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2050,
+   "func": "MsgBroadcast",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2064,
+   "func": "Nobility",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2065,
+   "func": "MentorAndApprentice",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2067,
+   "func": "MentorPrize",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2068,
+   "func": "QuizShow",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2070,
+   "func": "Fairy",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2072,
+   "func": "RacePotion",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2076,
+   "func": "AddExtra",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2080,
+   "func": "NameChange",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2090,
+   "func": "PokerPlayerInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2093,
+   "func": "PokerHand",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2096,
+   "func": "PokerLeaveTable",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2099,
+   "func": "MsgShowHandTrusteeship",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2101,
+   "func": "GuildRanks",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2102,
+   "func": "GuildMembers",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2110,
+   "func": "MsgSuperFlag",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2171,
+   "func": "PokerUpdateTableLocation",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2202,
+   "func": "PageArsenal",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2203,
+   "func": "GetArsenal",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2204,
+   "func": "FastArsenal",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2205,
+   "func": "MsgArenaSignup",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2206,
+   "func": "MsgArenaMatches",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2207,
+   "func": "MsgArenaRanking",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2208,
+   "func": "MsgArenaRank10",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2209,
+   "func": "MsgArenaInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2211,
+   "func": "MsgElitePkWatch",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2219,
+   "func": "MsgElitePk",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2220,
+   "func": "PkExploit",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2223,
+   "func": "EliteRanks",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2224,
+   "func": "MsgCaptureTheFlagUpdate",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2225,
+   "func": "AdvertiseGui",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2226,
+   "func": "Advertise",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2227,
+   "func": "ReceiveRecruit",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2232,
+   "func": "TeamElitePkBrackets",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2233,
+   "func": "TeamElitePkTop",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2240,
+   "func": "TeamEliteSetTeamName",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2241,
+   "func": "MsgTeamArenaSignup",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2242,
+   "func": "MsgTeamArenaMatches",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2243,
+   "func": "MsgTeamArenaRanking",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2244,
+   "func": "MsgTeamArenaRank10",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2245,
+   "func": "MsgTeamArenaInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2247,
+   "func": "MsgTeamArenaInfoPlayers",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2252,
+   "func": "SkillElitePkBrackets",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2253,
+   "func": "SkillElitePkTop",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2260,
+   "func": "SkillEliteSetTeamName",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2261,
+   "func": "SecondaryPassword",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2320,
+   "func": "SubClass",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2400,
+   "func": "MapTraps",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2410,
+   "func": "FlagIcon",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2430,
+   "func": "CountryFlag",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2443,
+   "func": "BuyFromExchangeShop",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2507,
+   "func": "ArenaCrossServer",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2533,
+   "func": "HandleChi",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2536,
+   "func": "MsgTrainingVitalityProtect",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2600,
+   "func": "MsgGoldLeaguePoint",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2610,
+   "func": "InnerPowerHandler",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2621,
+   "func": "MsgCountryOpt",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2622,
+   "func": "LeagueOpt",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2633,
+   "func": "LeagueToken",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2642,
+   "func": "LeagueRobOpt",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2700,
+   "func": "JiangHu",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2702,
+   "func": "JiangHuUpdates",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2703,
+   "func": "JiangHuRank",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2704,
+   "func": "JiangHuPkMode",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2800,
+   "func": "MsgRouletteCheck",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2804,
+   "func": "MsgRouletteAction",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2805,
+   "func": "MsgRouletteSignUp",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2811,
+   "func": "MsgTaskReward",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2812,
+   "func": "MsgPetAttack",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2822,
+   "func": "MsgActivityClaims",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 2830,
+   "func": "MsgHeroReward",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3001,
+   "func": "MsgHandBrickInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3002,
+   "func": "MsgOsShop",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3200,
+   "func": "MsgSignIn",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3251,
+   "func": "MsgItemRefineOpt",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3253,
+   "func": "MsgUserAbilityScore",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3255,
+   "func": "MsgItemRefineRecord",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3256,
+   "func": "MsgEquipRefineRank",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3257,
+   "func": "MsgBestOfTheWorld",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3282,
+   "func": "MsgGlobalLottery",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3283,
+   "func": "MsgGlobalLotteryRankList",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3300,
+   "func": "MsgCoatStorage",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3301,
+   "func": "MsgTitleStorage",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 3400,
+   "func": "MsgTexasExInteractive",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10005,
+   "func": "Movement",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10050,
+   "func": "CMsgShield",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10053,
+   "func": "CMsgMemoryCheck",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10055,
+   "func": "CMsgRequestLogin",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10056,
+   "func": "CMsgOpenedProcesses",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10057,
+   "func": "MsgSendPCInfo",
+   "args": "",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.SetLocation",
+   "args": "type 74",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Hotkeys",
+   "args": "type 75",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ConfirmAssociates",
+   "args": "type 76",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ConfirmProficiencies",
+   "args": "type 77",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ConfirmSpells",
+   "args": "type 78",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ChangeDirection",
+   "args": "type 79",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ChangeStance",
+   "args": "type 81",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ChangeMap",
+   "args": "type 85",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Teleport",
+   "args": "type 86",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Leveled",
+   "args": "type 92",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Revive",
+   "args": "type 94",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.DeleteCharacter",
+   "args": "type 95",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.SetPkMode",
+   "args": "type 96",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ConfirmGuild",
+   "args": "type 97",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Mining",
+   "args": "type 99",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.LocationTeamLieder",
+   "args": "type 101",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.RequestEntity",
+   "args": "type 102",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.SetMapColor",
+   "args": "type 104",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.TeamSearchForMember",
+   "args": "type 106",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.RemoveSpell",
+   "args": "type 109",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.StartVendor",
+   "args": "type 111",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.StopVending",
+   "args": "type 114",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.OpenCustom",
+   "args": "type 116",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ViewEquipment",
+   "args": "type 117",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.EndTransformation",
+   "args": "type 118",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.EndFly",
+   "args": "type 120",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ViewEnemyInfo",
+   "args": "type 123",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.OpenDialog",
+   "args": "type 126",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.CompleteLogin",
+   "args": "type 132",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ReviveMonster",
+   "args": "type 134",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.RemoveEntity",
+   "args": "type 135",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Jump",
+   "args": "type 137",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Ghost",
+   "args": "type 145",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ViewFriendInfo",
+   "args": "type 148",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ChangeLookface",
+   "args": "type 151",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.TradePartnerInfo",
+   "args": "type 152",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.FlashStep",
+   "args": "type 156",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.HideGui",
+   "args": "type 158",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.CountDown",
+   "args": "type 159",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.OpenGuiNpc",
+   "args": "type 160",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Away",
+   "args": "type 161",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.AutoPatcher",
+   "args": "type 162",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.AbortMagic",
+   "args": "type 163",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Pick",
+   "args": "type 164",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.DragonBall",
+   "args": "type 165",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.Bulletin",
+   "args": "type 166",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.PokerTeleporter",
+   "args": "type 167",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ClikerON",
+   "args": "type 171",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.ClikerEntry",
+   "args": "type 172",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.SetAppearanceType",
+   "args": "type 178",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.PoketTableBet",
+   "args": "type 234",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.AllowAnimation",
+   "args": "type 251",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.UpdateSpell",
+   "args": "type 252",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.UpdateProf",
+   "args": "type 253",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.CreditGifts",
+   "args": "type 255",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.UpdateInventorySash",
+   "args": "type 256",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.QuerySpawn",
+   "args": "type 310",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.BeginSteedRace",
+   "args": "type 401",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.FinishSteedRace",
+   "args": "type 402",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.QueryEquipment",
+   "args": "type 408",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.RemoveTrap",
+   "args": "type 434",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.SubmitGoldBrick",
+   "args": "type 436",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.AddBlackList",
+   "args": "type 440",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.RemoveBlackList",
+   "args": "type 441",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.DrawStory",
+   "args": "type 443",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 10010,
+   "func": "MsgAction.PetAttack",
+   "args": "type 447",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.BuyItem",
+   "args": "sub 1",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.SellItem",
+   "args": "sub 2",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.RemoveInventory",
+   "args": "sub 3",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.Equip",
+   "args": "sub 4",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.SetEquipPosition",
+   "args": "sub 5",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.Unequip",
+   "args": "sub 6",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpgradeEnchant",
+   "args": "sub 7",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ShowWarehouseMoney",
+   "args": "sub 9",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.DepositWarehouse",
+   "args": "sub 10",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.WarehouseWithdraw",
+   "args": "sub 11",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.RepairItem",
+   "args": "sub 14",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.VIPRepairItem",
+   "args": "sub 15",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpdateDurability",
+   "args": "sub 17",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.RemoveEquipment",
+   "args": "sub 18",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpgradeDragonball",
+   "args": "sub 19",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpgradeMeteor",
+   "args": "sub 20",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ShowVendingList",
+   "args": "sub 21",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.AddVendingItemGold",
+   "args": "sub 22",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.RemoveVendingItem",
+   "args": "sub 23",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.BuyVendingItem",
+   "args": "sub 24",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpdateArrowCount",
+   "args": "sub 25",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ParticleEffect",
+   "args": "sub 26",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.Ping",
+   "args": "sub 27",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpdateEnchant",
+   "args": "sub 28",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.AddVendingItemConquerPts",
+   "args": "sub 29",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.RedeemGear",
+   "args": "sub 32",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ClaimGear",
+   "args": "sub 33",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UpdatePurity",
+   "args": "sub 35",
+   "fromWindow": "",
+   "serverHandled": false,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.SocketTalismanWithCPs",
+   "args": "sub 36",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.DropItem",
+   "args": "sub 37",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.DropGold",
+   "args": "sub 38",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.GemCompose",
+   "args": "sub 39",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.AddBless",
+   "args": "sub 40",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ActiveItems",
+   "args": "sub 41",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.CreateSocketItem",
+   "args": "sub 43",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.UnAlternante",
+   "args": "sub 44",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.Alternante",
+   "args": "sub 45",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.MergeStackableItems",
+   "args": "sub 48",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.SplitStack",
+   "args": "sub 49",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ReturnedItems",
+   "args": "sub 50",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ToristSuper",
+   "args": "sub 51",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.ShowItem",
+   "args": "sub 52",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.GarmentShop",
+   "args": "sub 53",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.DegradeEquipment",
+   "args": "sub 54",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.BuyItemFromForging",
+   "args": "sub 55",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  },
+  {
+   "msgId": 1009,
+   "func": "MsgItemUsage.OpenInventorySash",
+   "args": "sub 56",
+   "fromWindow": "",
+   "serverHandled": true,
+   "serverFile": "",
+   "serverLine": 0
+  }
+ ]
+}

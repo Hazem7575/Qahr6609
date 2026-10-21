@@ -1,0 +1,278 @@
+PacketStudio + PacketBridge  -  integration guide (English)
+by ScriptHazem
+=====================================================================================
+
+PacketStudio shows every packet that travels between YOUR Conquer Online game server and its
+clients, in plaintext, both directions, live, decoded with names. It can also ask your server to
+send a test packet to one of your own test characters ("Packet test" page).
+
+It works by adding a small connector, PacketBridge.dll, to your server source. The server reports
+each packet to the bridge at two points (after the receive decryption, and before the send
+encryption), and the bridge streams them to PacketStudio over 127.0.0.1.
+
+  FOR YOUR OWN SERVER ONLY. This tool is for private-server owners debugging their own source on
+  their own machine. It does not connect to, capture, or touch official Conquer Online servers, and
+  must not be used against them or against servers you do not own.
+
+
+-------------------------------------------------------------------------------------
+1) What is in the package
+-------------------------------------------------------------------------------------
+  PacketStudio.exe           the tool (Windows 10/11 x64, single file, nothing to install)
+  PacketBridge.dll           the server connector (netstandard2.0, add it to your server project)
+  packetbridge.sample.ini    sample config for the bridge
+  شرح_PacketStudio.txt       Arabic guide
+  INTEGRATION_EN.txt         this file
+  screenshots\               what it looks like
+  Licenses\                  third-party licenses (fonts, .NET runtime)
+
+Requirements
+  * PacketStudio.exe: Windows 10 or 11, 64-bit. The .NET runtime is inside the exe.
+  * PacketBridge.dll: any server built for .NET Framework 4.7.2 / 4.8, or .NET Core 3.1 /
+    .NET 5, 6, 7, 8, 9, 10. (Tested on .NET Framework 4.8 and .NET 10.)
+  * PacketStudio must run on the SAME machine as the server (the bridge only listens on
+    127.0.0.1). For a VPS: run PacketStudio on the VPS through Remote Desktop, or use an SSH
+    tunnel (see section 7). Never open the bridge ports in the firewall.
+  * The packet dictionary (names and fields) is pre-generated for the 7957-era protocol
+    (470 packet ids, protobuf + binary). On other versions the live stream, recording and
+    injection still work for every packet; packets whose ids differ just show as raw hex.
+  * Game server only. The account/login server is not covered.
+
+
+-------------------------------------------------------------------------------------
+2) Add PacketBridge.dll to your server project
+-------------------------------------------------------------------------------------
+Copy PacketBridge.dll into your source, for example  <source>\Libs\PacketBridge.dll
+
+Visual Studio:  project > References > Add Reference > Browse > PacketBridge.dll
+
+Or by hand in the .csproj (both old-style and SDK-style projects):
+
+    <ItemGroup>
+      <Reference Include="PacketBridge">
+        <HintPath>Libs\PacketBridge.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+Make sure PacketBridge.dll ends up next to your server exe after the build (Copy Local = true is
+the default). Then add at the top of each file where you call it:
+
+    using PacketStudio.Bridge;
+
+
+-------------------------------------------------------------------------------------
+3) The API
+-------------------------------------------------------------------------------------
+    PacketBridge.Start(string configPath)                  start once (relative = server exe folder)
+    PacketBridge.Stop()                                    optional, on shutdown
+
+    PacketBridge.OnClientToServer(uint uid, string name, byte[] buf, int len)
+    PacketBridge.OnClientToServer(uint uid, string name, byte[] buf, int offset, int len)
+    PacketBridge.OnClientToServer(uint uid, string name, byte* data, int len)
+    PacketBridge.OnServerToClient(... same three overloads ...)
+
+    PacketBridge.SetInjector(Func<uint, byte[], bool, bool> sink)
+    PacketBridge.SetPlayerListProvider(Func<IEnumerable<KeyValuePair<uint, string>>> provider)
+    PacketBridge.SetDevModeCheck(Func<bool> isDevelopment)  optional extra gate
+    PacketBridge.SetLogger(Action<string> log)              default: Console.WriteLine
+
+    PacketBridge.IsActive        cheap bool: true only while something listens (use it to skip work)
+    PacketBridge.StreamClients, StreamListening, InjectListening, LastSequence, ConfigPath, Version
+
+  * buf/data must start at the packet header (u16 length, u16 id) of ONE plaintext packet.
+    The length may include the 8-byte "TQServer"/"TQClient" seal; the bridge cuts at the header
+    length.
+  * The hooks never throw and never block the game. When the config is off or no tool is
+    connected they return immediately. A slow tool only loses its own oldest frames.
+  * uid / name may be 0 / null (for example before login).
+
+
+-------------------------------------------------------------------------------------
+4) The hook lines
+-------------------------------------------------------------------------------------
+HOW TO FIND THE TWO POINTS IN ANY SOURCE
+  Search your socket / client classes for the cipher calls:
+      Decrypt(        e.g. Cryptography.Decrypt, Crypto.Decrypt, Cipher.Decrypt, Blowfish.Decrypt
+      Encrypt(        e.g. Cryptography.Encrypt, GameCryptography.Encrypt, Cipher.Encrypt
+  * RECEIVE: go forward from Decrypt to the place where ONE packet is handed to the packet
+    handler (usually where the u16 packet id is read and a big switch(packetId) starts). Hook
+    there. Do not hook the raw socket buffer: it can hold several packets or half of one.
+  * SEND: the one Send method every outgoing packet goes through. Hook BEFORE Encrypt is called
+    on the buffer (afterwards it is encrypted garbage).
+  * Both points must see the player: use the client object you already have there.
+
+Start the bridge once, at server start (for example in Main after the config is loaded):
+
+    PacketBridge.Start("packetbridge.ini");
+
+---- Example A: "ServerSockets.Packet" style sources (byte* Memory, many 6xxx-7xxx sources) ----
+
+  Receive - Program.Game_Receive(SecuritySocket obj, ServerSockets.Packet stream), right after
+  the packet id is read (the stream is already decrypted there):
+
+        ushort PacketID = stream.ReadUInt16();
+        if (PacketBridge.IsActive && obj.Game != null && obj.Game.Player != null)
+            PacketBridge.OnClientToServer(obj.Game.Player.UID, obj.Game.Player.Name, stream.Memory, stream.Size);
+
+  Send - SecuritySocket.Send(Packet msg), first line inside "if (Alive)", BEFORE the cipher's
+  Encrypt is called on the buffer:
+
+        if (PacketBridge.IsActive)
+        {
+            uint uid = 0; string name = null;
+            if (Game != null && Game.Player != null) { uid = Game.Player.UID; name = Game.Player.Name; }
+            PacketBridge.OnServerToClient(uid, name, msg.Memory, msg.Size);
+        }
+
+  (byte* overloads need an unsafe context; these methods are usually already "unsafe".)
+
+---- Example B: byte[] style sources (many 5xxx sources: Client.GameState / ClientWrapper) ----
+
+  Receive - the method that handles ONE decrypted packet, e.g. PacketHandler.HandlePacket(byte[]
+  packet, GameState client), first line:
+
+        PacketBridge.OnClientToServer(client.Entity != null ? client.Entity.UID : 0,
+                                      client.Entity != null ? client.Entity.Name : null,
+                                      packet, packet.Length);
+
+  Send - GameState.Send(byte[] buffer), before Cryptography.Encrypt(...):
+
+        PacketBridge.OnServerToClient(Entity != null ? Entity.UID : 0,
+                                      Entity != null ? Entity.Name : null,
+                                      buffer, buffer.Length);
+
+---- Example C: packets as an object with a buffer + offset ----
+
+        PacketBridge.OnClientToServer(uid, name, packet.Buffer, packet.Offset, packet.Length);
+
+Names differ between sources (Player / Entity / Hero / Character, UID / Identifier / UniqueID);
+use whatever your source calls them.
+
+
+-------------------------------------------------------------------------------------
+5) Injection: wire the sink to YOUR client.Send
+-------------------------------------------------------------------------------------
+PacketStudio never talks to a game client. On the "Packet test" page it asks the bridge, the
+bridge checks devmode + allowlist, and then calls your sink. Your sink sends the packet through
+your normal Send (so it is encrypted and also appears in the live stream as S->C).
+
+    PacketBridge.SetPlayerListProvider(() =>
+        Kernel.GamePool.Values                       // your online-clients dictionary
+            .Where(c => c != null && c.Player != null)
+            .Select(c => new KeyValuePair<uint, string>(c.Player.UID, c.Player.Name))
+            .ToList());
+
+    PacketBridge.SetInjector((uid, packet, sealAppended) =>
+    {
+        GameClient client;
+        if (!Kernel.GamePool.TryGetValue(uid, out client) || client == null)
+            return false;                            // offline
+        client.Send(packet);                         // your normal (encrypting) send
+        return true;
+    });
+
+  * sealAppended = true (config inject_seal=TQServer, the default): the array is the packet
+    followed by the 8 bytes "TQServer", and the u16 header holds the length WITHOUT the seal.
+    That is what most 5xxx-7xxx Send methods expect. If your Send adds the seal itself, it simply
+    overwrites it. For old sources without a seal use inject_seal=none.
+  * The sink runs on a background thread. If your Send is not thread-safe, lock as your source
+    does elsewhere (most sources already lock inside Send).
+  * Optional: tie injection to your own test mode as well:
+        PacketBridge.SetDevModeCheck(() => Program.TestMode);
+
+
+-------------------------------------------------------------------------------------
+6) Config (packetbridge.ini) and connecting from the tool
+-------------------------------------------------------------------------------------
+Copy packetbridge.sample.ini next to the server exe as packetbridge.ini and edit it:
+
+    enabled=1
+    secret=<a long random secret, 8+ characters>
+    port=17957
+    devmode=0            (1 only on a development server)
+    inject_port=17958
+    allow=TestHero,1000001
+
+The file is re-read every 3 seconds: change it while the server runs, no restart. Delete it (or
+enabled=0) to turn everything off. All keys are explained inside the sample file (filters ids=,
+skip=, player=, dir=, queue size, max_clients, the optional text log, inject_max, ...).
+
+The server console prints:
+    [PacketBridge] stream listening on 127.0.0.1:17957
+    [PacketBridge] injector listening on 127.0.0.1:17958 (allow: 2 targets)
+
+In PacketStudio:
+  1. Sources page > "Server config and data folders" > Browse... > pick the server's
+     packetbridge.ini. Port and secret are filled in from it.
+  2. Optional: the game client folder (item names, map art) and the server data folder.
+     Restart PacketStudio after changing them.
+  3. "Your server (live)" > Connect. Packets appear in the Live stream page.
+  4. Packet test page > Connect > pick a player (allowed ones have a check mark) > paste the
+     packet hex (or select a packet in Live stream and press "send to test") > Send.
+
+Command line:  PacketStudio.exe --bridge D:\Server\packetbridge.ini --live
+               PacketStudio.exe --open capture.cocap      --lang ar|en      --demo
+
+
+-------------------------------------------------------------------------------------
+7) Security
+-------------------------------------------------------------------------------------
+  * 127.0.0.1 only. The bridge never binds to a LAN or public address, and it rejects any
+    connection that is not from loopback. Do NOT forward or open ports 17957/17958.
+  * Secret: required, 8+ characters, compared in constant time. A wrong secret is refused.
+    Use a long random value and do not reuse a real password. Do not post your ini.
+  * Injection is off unless devmode=1 AND the target character is listed in allow=. With an empty
+    allow= nothing can ever be injected. List TEST characters only: a malformed packet can
+    freeze or disconnect that client.
+  * Production: set devmode=0 (the injection port closes within 3 seconds) or delete
+    packetbridge.ini / enabled=0 (everything closes). With the file gone the hooks cost one
+    boolean check per packet.
+  * Remote VPS: prefer Remote Desktop to the VPS. If you use an SSH tunnel, forward only to
+    127.0.0.1:  ssh -L 17957:127.0.0.1:17957 user@your-vps   and then connect PacketStudio to
+    127.0.0.1:17957 on your PC.
+  * The live stream shows plaintext chat, names and everything else your players send. Treat
+    captures (.cocap) as private data.
+
+
+-------------------------------------------------------------------------------------
+8) Troubleshooting
+-------------------------------------------------------------------------------------
+  "connect timeout" in PacketStudio
+      - The server is not running the bridge: is PacketBridge.Start called? Is packetbridge.ini
+        next to the server exe (or the path you passed)? Does the console show
+        "[PacketBridge] stream listening"? enabled=1?
+      - secret= shorter than 8 characters: the console says so and the bridge stays off.
+      - Port already used by another program: the console prints "cannot listen on ...".
+        Change port= (and the tool reads it from the ini).
+  "server refused the secret"
+      - The secret in PacketStudio differs from the ini, or max_clients tools are already
+        connected.
+  Connected but no packets
+      - The hooks are not reached: put a breakpoint / Console.WriteLine at your hook lines.
+      - Filters in the ini (ids=, player=, dir=) or in the Live page (Hide noise, id box).
+  Packets look like garbage / "decode failed"
+      - The receive hook is BEFORE Decrypt, or the send hook is AFTER Encrypt. Move them.
+      - The hook gets the whole socket buffer (several packets glued together) instead of one
+        packet: hook where a single packet is dispatched.
+      - Different client version: ids do not match the 7957 dictionary. Raw bytes are still
+        correct.
+  Packet test: "not in allow=" / "devmode is off"
+      - Add the character name or UID to allow= and set devmode=1 (re-read within 3 s).
+  Packet test: "the server did not register an injector"
+      - Call PacketBridge.SetInjector(...) at server start.
+  Packet test: "player is not online"
+      - SetPlayerListProvider is missing or returns another dictionary. Without a provider the
+        bridge only knows players it has seen in the hooks in the last 10 minutes.
+  Injected packet reaches the client but the client disconnects / ignores it
+      - Seal mismatch: try inject_seal=none (or TQServer). Check the u16 length in your hex.
+  The game lags while PacketStudio is connected
+      - It should not: the hooks only copy the packet into a bounded queue. Lower queue= or use
+        filters if memory matters; drops are reported in the tool.
+  PacketStudio crashes
+      - A crash.log is written next to PacketStudio.exe. Send it with your report.
+
+
+-------------------------------------------------------------------------------------
+ScriptHazem  -  facebook.com/ScriptHazem
+PacketStudio and PacketBridge are closed-source freeware. Redistribution of the original package
+is allowed; reverse engineering, modification and resale are not. Keep the credits.

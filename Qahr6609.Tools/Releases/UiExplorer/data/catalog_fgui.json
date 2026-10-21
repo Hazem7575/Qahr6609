@@ -1,0 +1,1139 @@
+{
+ "generated": "2026-10-19T14:59:48",
+ "items": [
+  {
+   "id": "pkt:golden_tree",
+   "kind": "fgui",
+   "name": "3282 Golden Tree (Global Lottery)",
+   "title_en": "Golden Tree (Global Lottery)",
+   "title_ar": "الشجرة الذهبية",
+   "source": "server packet 3282",
+   "msgId": 3282,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1100d20c08051001180220901c28643064",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_golden_tree.png",
+   "notes": "no window by itself (tested live)\n\n2nd test on a clear screen (event active, 'Golden Tree is blooming' in chat): no window opens. The window is opened by the client (Golden Tree icon / MsgAction 126); while it is open this packet updates it live (chest timers). GUI=0 does not close it.\n\nGUI 2 = blooming tree window with pick button and timer; GUI 3 = ended (winners list), GUI 0 = nothing. Type 0 (None) is the login/end push that only refreshes the icon; Type 5 is the answer to the client's Show request. A pick from this window is only accepted by the server while the real event is active.\n\nModules\\GoldenTree\\code\\MsgGlobalLottery.cs CreateGlobalLottery(MsgGlobalLottery) as in MsgGoldenTree.BlossomEvaluation: {1 Type=5 (BlossomAction.Show), 2 PrizesType=1 (condition id), 3 GUI=2 (Opened), 4 Time=3600 s, 5 Remain=100, 6 TotalCount=100}",
+   "official2024": null
+  },
+  {
+   "id": "pkt:golden_tree_ended",
+   "kind": "fgui",
+   "name": "3282 Golden Tree - ended (winners view)",
+   "title_en": "Golden Tree - ended (winners view)",
+   "title_ar": "الشجرة الذهبية - انتهت (قائمة الفائزين)",
+   "source": "server packet 3282",
+   "msgId": 3282,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1000d20c080510011803200028003000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nThe client then asks 3283 for the winners pages (server answers only if there are winners).\n\nsame builder, GUI=3 (Ranking)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:golden_tree_ranklist",
+   "kind": "fgui",
+   "name": "3283 Golden Tree winners list (page)",
+   "title_en": "Golden Tree winners list (page)",
+   "title_ar": "قائمة الفائزين في الشجرة الذهبية",
+   "source": "server packet 3283",
+   "msgId": 3283,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1900d30c080010011801220d0880b44212076d6f68616d6564",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nFills the winners page of the Golden Tree window (window must be open with GUI 3); not an opener by itself.\n\nMsgGlobalLotteryRankList {1 Page=0, 2 TotalPages=1, 3 RegistedCount=1, 4 Pickers[]={1 PickItem=1088000, 2 Name}}",
+   "official2024": null
+  },
+  {
+   "id": "pkt:operating_acts_list",
+   "kind": "fgui",
+   "name": "1316 Welfare window - Events tab list (OperateActivity)",
+   "title_en": "Welfare window - Events tab list (OperateActivity)",
+   "title_ar": "نافذة الرفاهية - تبويب الفعاليات",
+   "source": "server packet 1316",
+   "msgId": 1316,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "86002405000009001101000001009097919ba734969b1201000001009097919ba734969b1301000001009097919ba734969b1401000001009097919ba734969b1501000001009097919ba734969b1601000001009097919ba734969b1701000001009097919ba734969b1801000001009097919ba734969b1901000001009097919ba734969b",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nFills the Events tab of the welfare window (client CDlgOperateActivity). The window itself is opened from the client UI (or MsgAction 126); after a list the client queries 1315 action 0 and the server answers with progress (1316 action 1).\n\nModules\\Custom\\OperatingActs\\OperatingActs.cs SendList: u16 action 0, u16 count 9, {u32 id 273..281, u16 status 1=on, u32 begin, u32 end (yymmddhhmm)}",
+   "official2024": null
+  },
+  {
+   "id": "pkt:operating_acts_progress",
+   "kind": "fgui",
+   "name": "1316 Welfare window - Events tab progress",
+   "title_en": "Welfare window - Events tab progress",
+   "title_ar": "تقدم تبويب الفعاليات",
+   "source": "server packet 1316",
+   "msgId": 1316,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "7400240501000900110100000000000000000000120100000000000000000000130100000000000000000000140100000000000000000000150100000000000000000000160100000000000000000000170100000000000000000000180100000000000000000000190100000000000000000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nProgress refresh only.\n\nOperatingActs.SendProgress: u16 action 1, u16 count, {u32 id, u16 claimed tiers, u16 0, u32 points}",
+   "official2024": null
+  },
+  {
+   "id": "pkt:activity_tasks",
+   "kind": "fgui",
+   "name": "2820 Activity (Vitality) tasks panel data",
+   "title_en": "Activity (Vitality) tasks panel data",
+   "title_ar": "لوحة مهام النشاط (الحيوية)",
+   "source": "server packet 2820",
+   "msgId": 2820,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "0600040b0300",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nData of the daily activity panel; the panel is opened from the client UI.\n\nNetworking\\Handlers\\MsgActivityTasks\\MsgActivityTasks.cs ActivityTasksCreate(InitializeList=3, no items): u8 mode, u8 count",
+   "official2024": null
+  },
+  {
+   "id": "pkt:activity_rewards",
+   "kind": "fgui",
+   "name": "2823 Activity (Vitality) chest/points info",
+   "title_en": "Activity (Vitality) chest/points info",
+   "title_ar": "نقاط وصناديق النشاط",
+   "source": "server packet 2823",
+   "msgId": 2823,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1900070b010200000001000000320000000200000002000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nData only (activity points bar).\n\nMsgActivityRewardsInfo.ActivityRewardsInfoCreate(InitializeList=1, points=50): u8 mode, u32 2, u32 1, u32 points, u32 2, u32 2",
+   "official2024": null
+  },
+  {
+   "id": "pkt:sign_in",
+   "kind": "fgui",
+   "name": "3200 Daily Sign-In window data",
+   "title_en": "Daily Sign-In window data",
+   "title_ar": "نافذة تسجيل الحضور اليومي",
+   "source": "server packet 3200",
+   "msgId": 3200,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1000800c030000000500000000000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_sign_in.png",
+   "notes": "no window by itself (tested live)\n\nNo window; only a green '!' badge appears on the Reward icon (top right). Data for the sign-in window opened from that icon.\n\nAnswer to the client's Show request; fills the sign-in calendar.\n\nNetworking\\Handlers\\MsgServer\\MsgSignIn.cs MsgSignInCreate(Show=3, rewards given=0, late sign-ins left=0, day flags=days 1+3)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:quiz_show_question",
+   "kind": "fgui",
+   "name": "2068 Quiz Show - question panel",
+   "title_en": "Quiz Show - question panel",
+   "title_ar": "مسابقة الأسئلة - نافذة السؤال",
+   "source": "server packet 2068",
+   "msgId": 2068,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "6d001408010001001d000a0000000000000000000000000005255768696368206369747920697320746865206361706974616c206f6620436f6e717565723f095477696e20436974790e50686f656e697820436173746c650841706520436974790b4465736572742043697479",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_quiz_show_question.png",
+   "notes": "opens a window (tested live)\n\nQuiz panel at top of screen with question, 4 answers and timer.\n\nOpens the quiz panel with the question. Answering sends 2068 action 2; the server ignores it when no quiz is running.\n\nNetworking\\Handlers\\MsgServer\\MsgQuizShow.cs QuizShowCreate(Question=1, p1 question no=1, p2 seconds-1=29, p3 question count=10, p4 time spent=0, p5 points=0, texts=[question, 4 answers]); body padded to >= 44 bytes",
+   "official2024": null
+  },
+  {
+   "id": "pkt:quiz_show_result",
+   "kind": "fgui",
+   "name": "2068 Quiz Show - final result",
+   "title_en": "Quiz Show - final result",
+   "title_ar": "مسابقة الأسئلة - النتيجة النهائية",
+   "source": "server packet 2068",
+   "msgId": 2068,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "2c0014080300010001007800f401e80300000000000000000000000000000000000000000000000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_quiz_show_result.png",
+   "notes": "opens a window (tested live)\n\nQuiz result panel 'Quiz show is over. You scored 500 points in 2 mins 0 secs ...' + History Ranking.\n\nResult panel.\n\nQuizShowCreate(Result=3, rank 1, rank 1, time 120, points 500, exp 1000, no texts), padded to 44 bytes",
+   "official2024": null
+  },
+  {
+   "id": "pkt:roulette_gui",
+   "kind": "fgui",
+   "name": "2808 Roulette table window",
+   "title_en": "Roulette table window",
+   "title_ar": "نافذة طاولة الروليت",
+   "source": "server packet 2808",
+   "msgId": 2808,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "2400f80a01000000001e01<uid>eb030000006d6f68616d6564000000000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    },
+    {
+     "method": "raw",
+     "hex": "0900f50a07<uid>",
+     "verified": true,
+     "note": "closes the window again"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_roulette_gui.png",
+   "notes": "opens a window (tested live)\n\nFull roulette table opened (seat with mohamed). Closed again with the 'close' packet (2805 Quit) - verified.\n\nOpens the roulette betting board. Bets are checked by the server against a real table registration (none -> ignored). Watch mode uses color 99 and no members. CLOSE: 2805 MsgRouletteSignUp Quit (see 'close', verified).\n\nFeatures\\Roulette\\MsgRouletteOpenGui.cs RouletteOpenGuiCreate(TableType Money=1, color Blue=0, timer 30, members=[{uid, mesh 1003, color 0, name}])",
+   "official2024": null
+  },
+  {
+   "id": "pkt:arena_match_found",
+   "kind": "fgui",
+   "name": "2205 Arena - opponent found (Accept / Give up)",
+   "title_en": "Arena - opponent found (Accept / Give up)",
+   "title_ar": "الحلبة - تم العثور على خصم",
+   "source": "server packet 2205",
+   "msgId": 2205,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "38009d080600000005000000<uid>000000006d6f68616d6564000000000000000000010000000f00000000000000a00f00008c000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_arena_match_found.png",
+   "notes": "no window by itself (tested live)\n\nNo visible window after sending (new windows appear on top, so probably not shown without arena state).\n\nThe uid/name are the opponent's. Accept/Give up answers are only acted on by the server during a real match.\n\nFeatures\\Arena\\MsgArenaSignup.cs ArenaSignupCreate(Match=6, MatchOn=5, user): u32 dialog, u32 button, u32 uid, u32 server, name[16], u32 rank, u32 class, u32 0, u32 arena points, u32 level",
+   "official2024": null
+  },
+  {
+   "id": "pkt:arena_countdown",
+   "kind": "fgui",
+   "name": "2205 Arena - match countdown",
+   "title_en": "Arena - match countdown",
+   "title_ar": "الحلبة - العد التنازلي",
+   "source": "server packet 2205",
+   "msgId": 2205,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "38009d080200000000000000<uid>000000006d6f68616d6564000000000000000000010000000f00000000000000a00f00008c000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_arena_countdown.png",
+   "notes": "opens a window (tested live)\n\n'Qualifier Count Down 58 sec' window with Accept / Give Up (center). This is the window that appears when a match is found; Give Up goes to the server's arena DoQuit (harmless when not signed up).\n\nArenaSignupCreate(StartCountDown=2, SignUp=0)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:arena_result_win",
+   "kind": "fgui",
+   "name": "2205 Arena - match result (win)",
+   "title_en": "Arena - match result (win)",
+   "title_ar": "الحلبة - نتيجة المباراة",
+   "source": "server packet 2205",
+   "msgId": 2205,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "38009d080900000001000000<uid>000000006d6f68616d6564000000000000000000010000000f00000000000000a00f00008c000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_arena_result_win.png",
+   "notes": "not tested\n\nNothing visible, but the screen center was covered by the Texas TOURNAMENTS window at that moment - inconclusive.\n\nLose = button 3.\n\nArenaSignupCreate(Dialog=9, Win=1)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:arena_continue",
+   "kind": "fgui",
+   "name": "2205 Arena - continue / quit dialog",
+   "title_en": "Arena - continue / quit dialog",
+   "title_ar": "الحلبة - متابعة أو انسحاب",
+   "source": "server packet 2205",
+   "msgId": 2205,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "38009d080a00000000000000<uid>000000006d6f68616d6564000000000000000000010000000f00000000000000a00f00008c000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nArenaSignupCreate(Dialog2=10, SignUp=0)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:arena_info",
+   "kind": "fgui",
+   "name": "2209 Arena (Qualifier) info panel data",
+   "title_en": "Arena (Qualifier) info panel data",
+   "title_ar": "بيانات نافذة الحلبة",
+   "source": "server packet 2209",
+   "msgId": 2209,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3400a1080100000000000000000000000a000000020000000300000005000000e8030000f4010000a00f00000000000000000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nFills the arena window (opened from the client UI); not an opener.\n\nFeatures\\Arena\\MsgArenaInfo.cs ArenaInfoCreate: rank, 0, status 0, total win/lose, today win, today battles, history honor, honor, points, 8 zero",
+   "official2024": null
+  },
+  {
+   "id": "pkt:arena_score",
+   "kind": "fgui",
+   "name": "2210 Arena - live match score board",
+   "title_en": "Arena - live match score board",
+   "title_ar": "الحلبة - لوحة نقاط المباراة",
+   "source": "server packet 2210",
+   "msgId": 2210,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "4000a20800000000<uid>6d6f68616d6564000000000000000000b004000000000000<uid>4f70706f6e656e7400000000000000002003000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_arena_score.png",
+   "notes": "opens a window (tested live)\n\nArena VS score board 'mohamed VS Opponent, Arena Points 1200/800, Watchers' at top center.\n\nHUD of a running arena match.\n\nFeatures\\Arena\\MsgArenaMatchScore.cs ArenaMatchScoreCreate(uid1, name1, dmg1, uid2, name2, dmg2)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:team_arena_match_found",
+   "kind": "fgui",
+   "name": "2241 Team Arena - opponent found",
+   "title_en": "Team Arena - opponent found",
+   "title_ar": "حلبة الفرق - تم العثور على خصم",
+   "source": "server packet 2241",
+   "msgId": 2241,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3400c1080600000005000000<uid>6d6f68616d6564000000000000000000010000000f00000000000000a00f00008c000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nNetworking\\Handlers\\MsgServer\\MsgTeamArenaSignup.cs TeamArenaSignupCreate(Match=6, MatchOn=5) (no server-id field)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:team_arena_result",
+   "kind": "fgui",
+   "name": "2241 Team Arena - match result",
+   "title_en": "Team Arena - match result",
+   "title_ar": "حلبة الفرق - النتيجة",
+   "source": "server packet 2241",
+   "msgId": 2241,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3400c1080900000001000000<uid>6d6f68616d6564000000000000000000010000000f00000000000000a00f00008c000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nTeamArenaSignupCreate(Dialog=9, Win=1)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:team_arena_score",
+   "kind": "fgui",
+   "name": "2246 Team Arena - live score board",
+   "title_en": "Team Arena - live score board",
+   "title_ar": "حلبة الفرق - لوحة النقاط",
+   "source": "server packet 2246",
+   "msgId": 2246,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "4000c608<uid>010000006d6f68616d65640000000000000000000300000000000000020000004f70706f6e656e7400000000000000000100000001000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_team_arena_score.png",
+   "notes": "opens a window (tested live)\n\nTeam arena VS board 'mohamed VS Opponent, Arena Points 3/1, Watcher...' at top center.\n\nHUD of a running team arena match.\n\nNetworking\\Handlers\\MsgServer\\MsgTeamArenaMatchScore.cs TeamArenaMatchScoreCreate",
+   "official2024": null
+  },
+  {
+   "id": "pkt:elite_pk_match",
+   "kind": "fgui",
+   "name": "2218 Elite PK - match panel (opponent + timer)",
+   "title_en": "Elite PK - match panel (opponent + timer)",
+   "title_ar": "بطولة النخبة - نافذة المباراة",
+   "source": "server packet 2218",
+   "msgId": 2218,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3800aa080200000000000000<uid>000000004f70706f6e656e740000000000000000000000000000000000000000b400000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_elite_pk_match.png",
+   "notes": "opens a window (tested live)\n\nElite PK match panel 'Time Left 2:58 / Watchers: 0, 0 support you, 0 support your opponent' at top center.\n\nState 3 = win/lose effect, 4 = end match (closes), 1 = information.\n\nFeatures\\ElitePK\\MsgElitePKMatchUI.cs ElitePKMatchUICreate(BeginMatch=2, Effect_Lose, opponent uid, name, time left 180)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:elite_pk_win_effect",
+   "kind": "fgui",
+   "name": "2218 Elite PK - win effect",
+   "title_en": "Elite PK - win effect",
+   "title_ar": "بطولة النخبة - تأثير الفوز",
+   "source": "server packet 2218",
+   "msgId": 2218,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3800aa0803000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_elite_pk_win_effect.png",
+   "notes": "opens a window (tested live)\n\nBig 'You win' effect text in the middle of the screen.\n\nElitePKMatchUICreate(Effect=3, Effect_Win=1)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:team_pk_match",
+   "kind": "fgui",
+   "name": "2230 Team PK Tournament - match panel",
+   "title_en": "Team PK Tournament - match panel",
+   "title_ar": "بطولة الفرق - نافذة المباراة",
+   "source": "server packet 2230",
+   "msgId": 2230,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3800b608020000000000000000000000<uid>4f70706f6e656e745465616d00000000000000000000000000000000b400000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_team_pk_match.png",
+   "notes": "opens a window (tested live)\n\nTeam PK match panel 'Count down 02:58 / Watchers ...' at top right.\n\nFeatures\\TeamSkillPk\\MsgTeamElitePKMatchUI.cs TeamElitePKMatchUICreate(ID 2230, BeginMatch=2, ...): extra u32 0 only for 2230",
+   "official2024": null
+  },
+  {
+   "id": "pkt:skill_team_pk_match",
+   "kind": "fgui",
+   "name": "2250 Skill Team PK Tournament - match panel",
+   "title_en": "Skill Team PK Tournament - match panel",
+   "title_ar": "بطولة فرق المهارات - نافذة المباراة",
+   "source": "server packet 2250",
+   "msgId": 2250,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3400ca080200000000000000<uid>4f70706f6e656e745465616d00000000000000000000000000000000b400000000000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_skill_team_pk_match.png",
+   "notes": "not tested\n\nSent right after team_pk_match: the same-looking count-down panel stayed (02:58); cannot tell whether 2250 drew its own panel.\n\nTeamElitePKMatchUICreate(ID 2250, BeginMatch=2, ...)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:elite_pk_brackets_state",
+   "kind": "fgui",
+   "name": "2219 Elite PK brackets - tournament state",
+   "title_en": "Elite PK brackets - tournament state",
+   "title_ar": "شجرة بطولة النخبة - الحالة",
+   "source": "server packet 2219",
+   "msgId": 2219,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1800ab080600000000000000000003000000000001000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nState/icon of the brackets; the brackets window is opened from the client and filled by mode 0/1 answers.\n\nFeatures\\ElitePK\\MsgElitePKBrackets.cs ElitePKBracketsCreate(EPK_State=6, page 0, matches 0, group 3 (Lvl130+), GUI_Top8Ranking, 0, active=1) as MsgEliteTournament line ~1895",
+   "official2024": null
+  },
+  {
+   "id": "pkt:ctf_hud",
+   "kind": "fgui",
+   "name": "2224 Capture the Flag - score panel",
+   "title_en": "Capture the Flag - score panel",
+   "title_ar": "التقاط العلم - لوحة النقاط",
+   "source": "server packet 2224",
+   "msgId": 2224,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "2000b00800000000000000000000000000000000000000000000000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_ctf_hud.png",
+   "notes": "opens a window (tested live)\n\nCTF ranking panel header 'Rank / Guild / Point' appeared at the top of the screen (empty list).\n\nShows the CTF side panel (score/flags). Stays until map change / relog.\n\nFeatures\\CaptureTheFlag\\MsgCaptureTheFlagUpdate.cs CaptureTheFlagUpdateCreate(InitializeCTF=0, 0, 0) as in MsgCaptureTheFlag.Join",
+   "official2024": null
+  },
+  {
+   "id": "pkt:clan_war_city_info",
+   "kind": "fgui",
+   "name": "1313 Clan War - city information window",
+   "title_en": "Clan War - city information window",
+   "title_ar": "حرب العشائر - معلومات المدينة",
+   "source": "server packet 1313",
+   "msgId": 1313,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "7c00210506000000000000000f8e0100050000000000000000000000000000000000000000000000000000000000000000000000000000005477696e00000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000064000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_clan_war_city_info.png",
+   "notes": "no window by itself (tested live)\n\nNo window visible (it is the answer to the client's own 1313 request when clicking the clan-war NPC; probably needs that NPC as active dialog).\n\n'Join' (type 8) from this window is checked by the server (needs a clan and a running war).\n\nFeatures\\Clans\\Packets\\MsgFamilyOccupy.cs CreateFamilyOccupy(ShowInformation=6, npc 101903 (Twin City clan war NPC), no winner)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:kingdom_title_dialog",
+   "kind": "fgui",
+   "name": "2622 Kingdom title dialog (Emperor)",
+   "title_en": "Kingdom title dialog (Emperor)",
+   "title_ar": "نافذة لقب المملكة (الإمبراطور)",
+   "source": "server packet 2622",
+   "msgId": 2622,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "14003e0a11000000000000000000000000000100",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_kingdom_title_dialog.png",
+   "notes": "no window by itself (tested live)\n\nNo dialog appeared (character has no union; client probably needs union/emperor state).\n\nThe entered title is only accepted from the real Emperor of a kingdom (NewUnionTitle checks IsUnionEmperror).\n\nFeatures\\Union\\MsgLeagueOpt.cs LeagueOptCreate(KingdomTitleGui=17, union id 0, 0, 0, \"\") as Union.PromptKingdomTitle",
+   "official2024": null
+  },
+  {
+   "id": "pkt:gold_brick_submit",
+   "kind": "fgui",
+   "name": "3001 Union treasury - submit Gold Bricks dialog",
+   "title_en": "Union treasury - submit Gold Bricks dialog",
+   "title_ar": "خزينة الاتحاد - تسليم سبائك الذهب",
+   "source": "server packet 3001",
+   "msgId": 3001,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1100b90b02000000000000000000020000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_gold_brick_submit.png",
+   "notes": "opens a window (tested live)\n\nSmall dialog 'My Union's Gold Bricks: 0' with Gold Bricks / Cancel.\n\nConfirm sends MsgAction 436 (SubmitGoldBrick); the server needs a union and bricks in the bag. Type 0 = kingdom treasury view.\n\nNetworking\\Handlers\\MsgServer\\MsgHandBrickInfo.cs HandBrickInfoCreate(ShowSubmitDialog=2, own 0, other 0, \"\", \"\")",
+   "official2024": null
+  },
+  {
+   "id": "pkt:lottery_result",
+   "kind": "fgui",
+   "name": "1314 Lottery result window",
+   "title_en": "Lottery result window",
+   "title_ar": "نافذة نتيجة اليانصيب",
+   "source": "server packet 1314",
+   "msgId": 1314,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "100022050302020000000300009a1000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_lottery_result.png",
+   "notes": "opens a window (tested live)\n\nLOTTERY window 'You are so lucky! You received: DragonBall' with +Ticket / Accept.\n\nAccept / Add Jade / Continue are only acted on when the player has a real pending lottery item (Player.LotteryItem).\n\nFeatures\\LotterySystem\\MsgLottery.cs LotteryCreate(Show=515, sockets none, plus 0, color 3, jades added 0, item 1088000)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:fortune_wheel",
+   "kind": "fgui",
+   "name": "2811 Fortune Wheel (task reward wheel)",
+   "title_en": "Fortune Wheel (task reward wheel)",
+   "title_ar": "عجلة الحظ",
+   "source": "server packet 2811",
+   "msgId": 2811,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "0900fb0a00540e0000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_fortune_wheel.png",
+   "notes": "opens a window (tested live)\n\nFortune wheel with Draw / 10 Times Spinning.\n\nSpins are refused by the server unless the wheel was opened by a ticket (OpenedWheel).\n\nFeatures\\Quests\\Rewards\\MsgTaskReward.cs MsgTaskRewardCreate(Open=0, table 3668) as OpenWheel",
+   "official2024": null
+  },
+  {
+   "id": "pkt:horse_race_record",
+   "kind": "fgui",
+   "name": "1071 Horse Racing - results board row",
+   "title_en": "Horse Racing - results board row",
+   "title_ar": "سباق الخيل - لوحة النتائج",
+   "source": "server packet 1071",
+   "msgId": 1071,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "24002f0402000000010000006d6f68616d656400000000000000000018730100e8030000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_horse_race_record.png",
+   "notes": "no window by itself (tested live)\n\nNo window: the client only prints a top-left line '[System] mohamed won the championship in Horse Racing' (rank 1). Not a panel.\n\nType 3 closes the records.\n\nFeatures\\RacePotion\\MsgRaceRecord.cs RaceRecordCreate(AddRecord=2, rank 1, name, time ms, prize)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:horse_race_finish",
+   "kind": "fgui",
+   "name": "1071 Horse Racing - finish window",
+   "title_en": "Horse Racing - finish window",
+   "title_ar": "سباق الخيل - نافذة الوصول",
+   "source": "server packet 1071",
+   "msgId": 1071,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "24002f04010000000100000018730100e8030000000000000000000018730100e8030000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_horse_race_finish.png",
+   "notes": "opens a window (tested live)\n\nPopup 'You ranked No. 1 in this Horse Racing. Time: 1:35:000. Prize: 1000 Pts.' with OK.\n\nRaceRecordCreate(EndTime=1, rank, time, prize, time, prize)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:achievement_view",
+   "kind": "fgui",
+   "name": "1136 Achievement window (view player)",
+   "title_en": "Achievement window (view player)",
+   "title_ar": "نافذة الإنجازات",
+   "source": "server packet 1136",
+   "msgId": 1136,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "4400700401000000<uid>0d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_achievement_view.png",
+   "notes": "opens a window (tested live)\n\nAchievement window (Ach. Pts, categories) opened.\n\nOpens the achievement view of <uid> (here: yourself, no achievement bits).\n\nNetworking\\Handlers\\MsgServer\\MsgAchievement.cs AchievementCreate(CheakView=1, uid, flags[13]) as the answer to a 'view achievements' request",
+   "official2024": null
+  },
+  {
+   "id": "pkt:achievement_popup",
+   "kind": "fgui",
+   "name": "1136 Achievement unlocked popup",
+   "title_en": "Achievement unlocked popup",
+   "title_ar": "إشعار إنجاز جديد",
+   "source": "server packet 1136",
+   "msgId": 1136,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1400700402000000<uid>7527000000000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_achievement_popup.png",
+   "notes": "opens a window (tested live)\n\n'Completed - Good taste!' achievement toast at bottom center.\n\nDisplay only, nothing is stored on the server.\n\nAchievementCreate(SendQueue=2, uid, FLAG_ID 10101, 0) as ClientAchievement.ShowScreen",
+   "official2024": null
+  },
+  {
+   "id": "pkt:boss_damage_ranking",
+   "kind": "fgui",
+   "name": "1044 Boss damage ranking panel",
+   "title_en": "Boss damage ranking panel",
+   "title_ar": "ترتيب الضرر على الزعيم",
+   "source": "server packet 1044",
+   "msgId": 1044,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "22001404080210dc9c011a160801100018c1a7ef0422076d6f68616d656428c0c407",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_boss_damage_ranking.png",
+   "notes": "no window by itself (tested live)\n\nNothing visible on TC (probably needs the boss/monster 20060 near or a boss map; Type 2 = update rows only).\n\nHunterUID is a protobuf varint: the bytes contain mohamed's UID 10212289 (c1a6ef04) directly; change it for another character. MonsterID should be a boss family id from the monster table (20060 used as a test value).\n\nNetworking\\Handlers\\MsgServer\\MsgBossHarmRankingHandler.cs CreateBossHarmRankList (protobuf, id 1044): {1 Type=2, 2 MonsterID=20060, 3 Hunters[]={1 Rank 1, 2 ServerID 0, 3 HunterUID, 4 Name, 5 Score}}",
+   "official2024": null
+  },
+  {
+   "id": "pkt:best_of_world",
+   "kind": "fgui",
+   "name": "3257 Best of the World (prestige) window data",
+   "title_en": "Best of the World (prestige) window data",
+   "title_ar": "أفضل لاعبي العالم",
+   "source": "server packet 3257",
+   "msgId": 3257,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "3c00b90c080012340801100118c1a7ef0422076d6f68616d65642a003000380040004800500058006000680070007800800100880100900100980100",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nAnswer to the client request; EntityUID varint = mohamed's UID.\n\nFeatures\\PrestigeRank\\Thebestworld.cs CreateBestOfTheWorld {1 Type=0 Show, 2 Items[]={1 Type,2 Rank,3 EntityUID,4 Name,5 GuildName,6..19 looks 0}}",
+   "official2024": null
+  },
+  {
+   "id": "pkt:static_message_guildwar",
+   "kind": "fgui",
+   "name": "1126 Event invitation popup (Guild War: join?)",
+   "title_en": "Event invitation popup (Guild War: join?)",
+   "title_ar": "دعوة حدث - حرب النقابات",
+   "source": "server packet 1126",
+   "msgId": 1126,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "140066040000000013290000060000003c000000",
+     "verified": true,
+     "note": "opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_static_message_guildwar.png",
+   "notes": "opens a window (tested live)\n\nYes/No popup 'Guild War is about to begin! Will you join it?'\n\nOther ids: 10519 Class PK, 10521 Weekly PK, 10525 Horse Race, 10531 Power Arena, 10535 CTF, 10537 Guild Contest, 10545 Cash Rain, 10547 Flame Lit. OK is ignored by the server unless it opened the box itself (StartMessageBox/MessageOK).\n\nNetworking\\Handlers\\MsgServer\\MsgStaticMessage.cs StaticMessageCreate(GuildWar=10515, Append=6, 60 s) as Player.MessageBox",
+   "official2024": null
+  },
+  {
+   "id": "pkt:login_notice",
+   "kind": "fgui",
+   "name": "1067 Login notice board (announcement)",
+   "title_en": "Login notice board (announcement)",
+   "title_ar": "لوحة إعلانات الدخول",
+   "source": "server packet 1067",
+   "msgId": 1067,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "88012b040100000057656c636f6d6520746f204d654761000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000057656c636f6d6520746f204d65476120436f6e71756572204f6e6c696e6520363630392e20486176652066756e20616e6420706c617920666169722100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_login_notice.png",
+   "notes": "no window by itself (tested live)\n\nNo visible change (version 1 was already seen by this client, so it does not glow; the board opens only on click).\n\nVersion 1 = the notice already in ServerDataBase\\Modules\\OfficialExtras\\notices.txt. The client stores the version it has seen (GameSetUp.ini [LoginNotice]); do not send a version higher than the real notices or real ones will stop glowing. It makes the board button (next to the minimap, dialog 597) glow / adds the notice; the board opens on click.\n\nModules\\Custom\\OfficialExtras\\OfficialExtras.cs: u32 version, char[128] title, char[256] content (392 bytes)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:npc_dialog",
+   "kind": "fgui",
+   "name": "2032 NPC dialog window (text + option + avatar)",
+   "title_en": "NPC dialog window (text + option + avatar)",
+   "title_ar": "نافذة حوار NPC",
+   "source": "server packet 2032",
+   "msgId": 2032,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "4700f00705ba9a000000000000000001013548656c6c6f206d6f68616d65642c207468697320697320612074657374206469616c6f672066726f6d20746865207365727665722e|1800f00705ba9a00000000000000ff020106436c6f73652e|1200f00705ba9a0000000000060000040100|1200f00705ba9a0000000000000000640100",
+     "verified": true,
+     "note": "4 packets in order. opens a window (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_npc_dialog.png",
+   "notes": "opens a window (tested live)\n\nNPC dialog with avatar, text and 'Close.' option at top of screen.\n\nOption 255 = the usual 'close' id; any option click goes to the player's ActiveNpc script, so do not click options other than 255. | Send the packets of 'sequence' in order ('hex' = the first one).\n\nNetworking\\Handlers\\MsgNpc\\NpcReply.cs NpcReplyCreate: u32 10140165, u32 0, u16 input max / avatar, u8 option id, u8 type (1 Dialog, 2 Option, 4 Avatar, 100 Finish), string list",
+   "official2024": null
+  },
+  {
+   "id": "pkt:message_box",
+   "kind": "fgui",
+   "name": "1004 Message box (MsgTalk Dialog 2101)",
+   "title_en": "Message box (MsgTalk Dialog 2101)",
+   "title_ar": "صندوق رسالة",
+   "source": "server packet 1004",
+   "msgId": 1004,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "6200ec0300000000ffffff0035080000000000000000000000000000000000000000070653595354454d076d6f68616d6564002b5468697320697320612074657374206d65737361676520626f782066726f6d20746865207365727665722e000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_message_box.png",
+   "notes": "no window by itself (tested live)\n\nFormat OK (a 2005 line with the same layout appears in chat) but ChatMode 2101 shows nothing in this client.\n\nOK closes it; nothing is sent to the server.\n\nNetworking\\Handlers\\MsgServer\\MsgMessage.cs GetArray with ChatMode.Dialog=2101: u32 time, u32 color, u32 mode, u32 uid1, u32 uid2, u32 mesh, u32 rank, 2 bytes, strings[7] (from,to,'',msg,'','',server)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:popup_message",
+   "kind": "fgui",
+   "name": "1004 Popup message (MsgTalk PopUP 2100)",
+   "title_en": "Popup message (MsgTalk PopUP 2100)",
+   "title_ar": "رسالة منبثقة",
+   "source": "server packet 1004",
+   "msgId": 1004,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "5400ec0300000000ffffff0034080000000000000000000000000000000000000000070653595354454d076d6f68616d6564001d546869732069732061207465737420706f707570206d6573736167652e000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_popup_message.png",
+   "notes": "no window by itself (tested live)\n\nChatMode 2100 shows nothing in this client.\n\nMsgMessage GetArray with ChatMode.PopUP=2100",
+   "official2024": null
+  },
+  {
+   "id": "pkt:trade_window",
+   "kind": "fgui",
+   "name": "1056 Trade window",
+   "title_en": "Trade window",
+   "title_ar": "نافذة التبادل",
+   "source": "server packet 1056",
+   "msgId": 1056,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "0e002004<uid>000000000300",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_trade_window.png",
+   "notes": "no window by itself (tested live)\n\nNothing shown with partner = own UID (client needs another role on screen as partner).\n\nPartner = yourself here (client may refuse). The server ignores trade actions without a real trade (targetTrade). Close = type 5.\n\nFeatures\\Trading\\Trade\\MsgTrade.cs TradeCreate(dwParam=partner uid (u64), ShowTradeWindow=3)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:trade_request",
+   "kind": "fgui",
+   "name": "1056 Trade request popup",
+   "title_en": "Trade request popup",
+   "title_ar": "طلب تبادل",
+   "source": "server packet 1056",
+   "msgId": 1056,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "0e002004<uid>000000000100",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nAccepting is checked against a real pending request.\n\nTradeCreate(requester uid, RequestNewTrade=1)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:team_invite",
+   "kind": "fgui",
+   "name": "1023 Team invitation popup",
+   "title_en": "Team invitation popup",
+   "title_ar": "دعوة للانضمام إلى فريق",
+   "source": "server packet 1023",
+   "msgId": 1023,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "20001708<uid><uid>8c00000090010000000000000000000000000000|0c00ff0304000000<uid>",
+     "verified": false,
+     "note": "2 packets in order. no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_team_invite.png",
+   "notes": "no window by itself (tested live)\n\nNothing shown with requester = own UID (needs another player known to the client).\n\nThe requester must normally be a role the client knows (here: yourself). Accept is checked by the server (pending invitation). | Send the packets of 'sequence' in order ('hex' = the first one).\n\nNetworking\\Handlers\\MsgServer\\MsgPopupInfo.cs PopupInfoCreate(requester, target, level, BP) then MsgTeam.TeamCreate(InviteRequest=4, requester uid)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:friend_request",
+   "kind": "fgui",
+   "name": "1019 Friend request popup",
+   "title_en": "Friend request popup",
+   "title_ar": "طلب صداقة",
+   "source": "server packet 1019",
+   "msgId": 1019,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "20001708<uid><uid>8c00000090010000000000000000000000000000|4800fb03<uid>0a01000000000000020000006d6f68616d6564000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "verified": false,
+     "note": "2 packets in order. no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_friend_request.png",
+   "notes": "no window by itself (tested live)\n\nNothing shown with requester = own UID (needs another player).\n\nAccept is checked by the server (TargetFriend of the requester). | Send the packets of 'sequence' in order ('hex' = the first one).\n\nPopupInfoCreate then Features\\Social\\Relations\\MsgKnowPersons.cs KnowPersonsCreate(RequestFriendship=10, uid, online, name, nobility 0, body)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:mentor_request",
+   "kind": "fgui",
+   "name": "2065 Mentor / apprentice request popup",
+   "title_en": "Mentor / apprentice request popup",
+   "title_ar": "طلب معلم / تلميذ",
+   "source": "server packet 2065",
+   "msgId": 2065,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "20001708<uid><uid>8c00000090010000000000000000000000000000|2700110809000000<uid><uid>9001000001076d6f68616d656400000000000000000000",
+     "verified": false,
+     "note": "2 packets in order. not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nAcceptRequestApprentice = 8 for the other direction. Accept is checked against a real pending request (5 min). | Send the packets of 'sequence' in order ('hex' = the first one).\n\nPopupInfoCreate then Features\\Social\\Relations\\MsgMentorApprentice.cs MentorApprenticeCreate(AcceptRequestMentor=9, requester, target, shared BP, online, name)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:trade_partner_request",
+   "kind": "fgui",
+   "name": "2046 Trade partner request popup",
+   "title_en": "Trade partner request popup",
+   "title_ar": "طلب شريك تجاري",
+   "source": "server packet 2046",
+   "msgId": 2046,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "2400fe07<uid>00010000000000006d6f68616d656400000000000000000000000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nFeatures\\Social\\Relations\\MsgTradePartner.cs TradePartnerCreate(uid, RequestPartnership=0, online, hours 0, name)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:inner_power_transfer",
+   "kind": "fgui",
+   "name": "2610 Inner Power transfer request popup",
+   "title_en": "Inner Power transfer request popup",
+   "title_ar": "طلب تبادل القوة الداخلية",
+   "source": "server packet 2610",
+   "msgId": 2610,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "0d00320a07<uid>00000000",
+     "verified": false,
+     "note": "no window by itself (tested live)"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_inner_power_transfer.png",
+   "notes": "no window by itself (tested live)\n\nNo popup with requester = own UID (the Horse Racing invitation visible in the follow-up shot came from the real server event, not from this packet).\n\nAccept is ignored by the server without a real TransferRequests entry.\n\nFeatures\\Progression\\InnerPower\\MsgInnerPower.cs InnerPowerOptCreate(TransferAccept=7, requester uid, 0)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:name_change_info",
+   "kind": "fgui",
+   "name": "2080 Name change window info",
+   "title_en": "Name change window info",
+   "title_ar": "معلومات نافذة تغيير الاسم",
+   "source": "server packet 2080",
+   "msgId": 2080,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1a0020080300000005006d6f68616d6564000000000000000000",
+     "verified": false,
+     "note": "not tested"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": null,
+   "notes": "not tested\n\nnot tested live\n\nAnswer to the client when its name-change dialog opens; the server charges/renames only on a real Request (0).\n\nNetworking\\Handlers\\MsgServer\\MsgNameChange.cs NameChangeCreate(DialogInfo=3, edits 0, allowed 5, name)",
+   "official2024": null
+  },
+  {
+   "id": "pkt:texas_board",
+   "kind": "fgui",
+   "name": "3400 Texas Hold'em championship board",
+   "title_en": "Texas Hold'em championship board",
+   "title_ar": "طاولة بطولة تكساس هولدم",
+   "source": "server packet 3400",
+   "msgId": 3400,
+   "open": [
+    {
+     "method": "raw",
+     "hex": "1800c50900000000<uid><uid>0000000000000000|0e00480d0804108f4e10b617101e|1100480d081010e8071000100110011001|0a00480d080f18a08d06|1d002a080001000000b60b0000<uid>a08601000000000001000000|0f004e0d0a0908c1a7ef0410a08d06",
+     "verified": true,
+     "note": "6 packets in order. opens a window (tested live)"
+    },
+    {
+     "method": "raw",
+     "hex": "1000300801000000b60b0000<uid>|1800c50901000000<uid><uid>0000000000000000",
+     "verified": true,
+     "note": "closes the window again"
+    }
+   ],
+   "dataFields": [],
+   "callbacks": [],
+   "preview": "previews/pkt_texas_board.png",
+   "notes": "opens a window (tested live)\n\nFull-screen Texas Hold'em board (CONQUER POKER table, seat [MeGa]mohamed, 100,000 chips, Rebuy/Addon/Leave; the game window switched to 1024x768). 'close' packets verified: board left, client back to the world and shows its TOURNAMENTS (Today's Tournaments) list window.\n\n3406 contains mohamed's UID as a protobuf varint (c1a6ef04). 2501 mode 0 switches the client into board mode: ALWAYS send the 'close' packets afterwards (2096 Exit + 2501 mode 1, same as '@texasboard off'). No hand is played, the buttons do nothing on the server. | Send the packets of 'sequence' in order ('hex' = the first one).\n\nModules\\Custom\\TexasEntrance\\TexasCommands.cs '@texasboard on' probe: 2501 MsgInterServerIdentifier mode 0 (uid, uid) -> client routes 2090-2099 to CDlgTexasBoard; 3400 {1 act 4, 2 [room 9999, champ 2998, wait 30]}; 3400 act 16 [bb 1000, ante 0, 1,1,1]; 3400 {1 15, 3 chips}; 2090 Enter(seat 0, table 2998, uid, chips, mode 1); 3406 {1 {1 uid, 2 chips}}",
+   "official2024": null
+  }
+ ]
+}

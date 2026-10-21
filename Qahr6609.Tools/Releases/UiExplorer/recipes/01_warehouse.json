@@ -1,0 +1,5 @@
+﻿{
+  "name": "Warehouse (6609)",
+  "item": "open:4",
+  "steps": [ { "method": "action", "type": 126, "dwParam": 4, "waitMs": 300, "note": "MsgAction 10010 OpenDialog 4 = Warehouse" } ]
+}

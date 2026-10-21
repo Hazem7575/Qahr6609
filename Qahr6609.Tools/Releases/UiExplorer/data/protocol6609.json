@@ -1,0 +1,1790 @@
+{
+ "generated": "2026-10-19T14:43:45",
+ "source": "D:\\conquer\\Qahr6609\\Qahr6609.GameServer",
+ "packets": [
+  {
+   "id": 1001,
+   "name": "NewClient",
+   "handled": true
+  },
+  {
+   "id": 1004,
+   "name": "Chat",
+   "handled": true
+  },
+  {
+   "id": 1006,
+   "name": "HeroInfo",
+   "handled": false
+  },
+  {
+   "id": 1008,
+   "name": "Item",
+   "handled": false
+  },
+  {
+   "id": 1009,
+   "name": "MsgItemUsage",
+   "handled": true
+  },
+  {
+   "id": 1012,
+   "name": "MsgTick",
+   "handled": true
+  },
+  {
+   "id": 1015,
+   "name": "String_",
+   "handled": true
+  },
+  {
+   "id": 1016,
+   "name": "Weather",
+   "handled": false
+  },
+  {
+   "id": 1019,
+   "name": "KnowPersons",
+   "handled": true
+  },
+  {
+   "id": 1022,
+   "name": "Attack",
+   "handled": true
+  },
+  {
+   "id": 1023,
+   "name": "Team",
+   "handled": true
+  },
+  {
+   "id": 1024,
+   "name": "AtributeSet",
+   "handled": true
+  },
+  {
+   "id": 1025,
+   "name": "Proficiency",
+   "handled": false
+  },
+  {
+   "id": 1026,
+   "name": "TeamMemberInfo",
+   "handled": false
+  },
+  {
+   "id": 1027,
+   "name": "EmbedSocket",
+   "handled": true
+  },
+  {
+   "id": 1033,
+   "name": "ServerInfo",
+   "handled": false
+  },
+  {
+   "id": 1034,
+   "name": "DetainedItem",
+   "handled": false
+  },
+  {
+   "id": 1036,
+   "name": "ClainInfo",
+   "handled": true
+  },
+  {
+   "id": 1038,
+   "name": "Stabilization",
+   "handled": true
+  },
+  {
+   "id": 1040,
+   "name": "MsgStauts",
+   "handled": true
+  },
+  {
+   "id": 1044,
+   "name": "MapLoading",
+   "handled": true
+  },
+  {
+   "id": 1045,
+   "name": "MsgMailOperation",
+   "handled": true
+  },
+  {
+   "id": 1046,
+   "name": "MsgMailList",
+   "handled": true
+  },
+  {
+   "id": 1047,
+   "name": "MsgMailNotify",
+   "handled": false
+  },
+  {
+   "id": 1048,
+   "name": "MsgMailContent",
+   "handled": false
+  },
+  {
+   "id": 1049,
+   "name": "CMsgPCServerConfig",
+   "handled": false
+  },
+  {
+   "id": 1052,
+   "name": "LoginGame",
+   "handled": false
+  },
+  {
+   "id": 1056,
+   "name": "Trade",
+   "handled": true
+  },
+  {
+   "id": 1058,
+   "name": "GuildInfo",
+   "handled": true
+  },
+  {
+   "id": 1061,
+   "name": "GuildMinDonations",
+   "handled": false
+  },
+  {
+   "id": 1063,
+   "name": "CaptureTheFlagRankings",
+   "handled": true
+  },
+  {
+   "id": 1064,
+   "name": "ElitePKWager",
+   "handled": true
+  },
+  {
+   "id": 1065,
+   "name": "ElitePKWagersList",
+   "handled": false
+  },
+  {
+   "id": 1066,
+   "name": "Reincarnation",
+   "handled": true
+  },
+  {
+   "id": 1067,
+   "name": "MsgLoginNotice",
+   "handled": true
+  },
+  {
+   "id": 1070,
+   "name": "AutoHunt",
+   "handled": true
+  },
+  {
+   "id": 1071,
+   "name": "RaceRecord",
+   "handled": false
+  },
+  {
+   "id": 1100,
+   "name": "MsgPCNum",
+   "handled": true
+  },
+  {
+   "id": 1101,
+   "name": "FloorMap",
+   "handled": true
+  },
+  {
+   "id": 1102,
+   "name": "Warehause",
+   "handled": true
+  },
+  {
+   "id": 1103,
+   "name": "Spell",
+   "handled": true
+  },
+  {
+   "id": 1104,
+   "name": "UpgradeSpellExperience",
+   "handled": false
+  },
+  {
+   "id": 1105,
+   "name": "SpellUse",
+   "handled": false
+  },
+  {
+   "id": 1106,
+   "name": "Guild",
+   "handled": false
+  },
+  {
+   "id": 1107,
+   "name": "ProcesGuild",
+   "handled": true
+  },
+  {
+   "id": 1108,
+   "name": "ItemView",
+   "handled": false
+  },
+  {
+   "id": 1109,
+   "name": "SobNpcs",
+   "handled": false
+  },
+  {
+   "id": 1110,
+   "name": "MapStaus",
+   "handled": false
+  },
+  {
+   "id": 1114,
+   "name": "InterAction",
+   "handled": false
+  },
+  {
+   "id": 1124,
+   "name": "Authentificaton",
+   "handled": false
+  },
+  {
+   "id": 1126,
+   "name": "MsgStaticMessage",
+   "handled": true
+  },
+  {
+   "id": 1127,
+   "name": "Enlight",
+   "handled": true
+  },
+  {
+   "id": 1128,
+   "name": "MsgVipHandler",
+   "handled": true
+  },
+  {
+   "id": 1129,
+   "name": "MsgVip",
+   "handled": false
+  },
+  {
+   "id": 1130,
+   "name": "Title",
+   "handled": true
+  },
+  {
+   "id": 1134,
+   "name": "QuestList",
+   "handled": true
+  },
+  {
+   "id": 1135,
+   "name": "QuestData",
+   "handled": true
+  },
+  {
+   "id": 1136,
+   "name": "Achievement",
+   "handled": true
+  },
+  {
+   "id": 1150,
+   "name": "FlowerPacket",
+   "handled": true
+  },
+  {
+   "id": 1151,
+   "name": "GenericRanking",
+   "handled": true
+  },
+  {
+   "id": 1152,
+   "name": "CMsgMagicEffectTime",
+   "handled": false
+  },
+  {
+   "id": 1153,
+   "name": "MsgMagicColdTime",
+   "handled": false
+  },
+  {
+   "id": 1312,
+   "name": "Clan",
+   "handled": true
+  },
+  {
+   "id": 1313,
+   "name": "MsgFamilyOccupy",
+   "handled": true
+  },
+  {
+   "id": 1314,
+   "name": "MsgLottery",
+   "handled": true
+  },
+  {
+   "id": 1315,
+   "name": "MsgOperatingAct",
+   "handled": true
+  },
+  {
+   "id": 1316,
+   "name": "MsgOperatingActInfo",
+   "handled": false
+  },
+  {
+   "id": 1351,
+   "name": "MsgMachine",
+   "handled": true
+  },
+  {
+   "id": 1352,
+   "name": "MsgMachineResponse",
+   "handled": false
+  },
+  {
+   "id": 2030,
+   "name": "NpcSpawn",
+   "handled": true
+  },
+  {
+   "id": 2031,
+   "name": "NpcServerReplay",
+   "handled": true
+  },
+  {
+   "id": 2032,
+   "name": "NpcServerRequest",
+   "handled": true
+  },
+  {
+   "id": 2033,
+   "name": "KnowPersInfo",
+   "handled": false
+  },
+  {
+   "id": 2035,
+   "name": "MsgPetInfo",
+   "handled": false
+  },
+  {
+   "id": 2036,
+   "name": "Compose",
+   "handled": true
+  },
+  {
+   "id": 2043,
+   "name": "OfflineTGStats",
+   "handled": false
+  },
+  {
+   "id": 2044,
+   "name": "OfflineTG",
+   "handled": true
+  },
+  {
+   "id": 2045,
+   "name": "LeaderSchip",
+   "handled": true
+  },
+  {
+   "id": 2046,
+   "name": "TradePartner",
+   "handled": true
+  },
+  {
+   "id": 2047,
+   "name": "TratePartnerInfo",
+   "handled": false
+  },
+  {
+   "id": 2048,
+   "name": "ItemLock",
+   "handled": true
+  },
+  {
+   "id": 2050,
+   "name": "MsgBroadcast",
+   "handled": true
+  },
+  {
+   "id": 2051,
+   "name": "MsgBroadcastliest",
+   "handled": false
+  },
+  {
+   "id": 2064,
+   "name": "Nobility",
+   "handled": true
+  },
+  {
+   "id": 2065,
+   "name": "MentorAndApprentice",
+   "handled": true
+  },
+  {
+   "id": 2066,
+   "name": "MentorInfomation",
+   "handled": false
+  },
+  {
+   "id": 2067,
+   "name": "MentorPrize",
+   "handled": true
+  },
+  {
+   "id": 2068,
+   "name": "QuizShow",
+   "handled": true
+  },
+  {
+   "id": 2070,
+   "name": "Fairy",
+   "handled": true
+  },
+  {
+   "id": 2071,
+   "name": "PopupInfo",
+   "handled": false
+  },
+  {
+   "id": 2072,
+   "name": "RacePotion",
+   "handled": true
+  },
+  {
+   "id": 2075,
+   "name": "GameUpdate",
+   "handled": false
+  },
+  {
+   "id": 2076,
+   "name": "AddExtra",
+   "handled": true
+  },
+  {
+   "id": 2077,
+   "name": "ExtraItem",
+   "handled": false
+  },
+  {
+   "id": 2080,
+   "name": "NameChange",
+   "handled": true
+  },
+  {
+   "id": 2081,
+   "name": "Blackspot",
+   "handled": false
+  },
+  {
+   "id": 2088,
+   "name": "MsgShowHandKick",
+   "handled": false
+  },
+  {
+   "id": 2089,
+   "name": "MsgShowHandRaceInteractive",
+   "handled": false
+  },
+  {
+   "id": 2090,
+   "name": "PokerPlayerInfo",
+   "handled": true
+  },
+  {
+   "id": 2091,
+   "name": "PokerDrawCards",
+   "handled": false
+  },
+  {
+   "id": 2092,
+   "name": "PokerPlayerTurn",
+   "handled": false
+  },
+  {
+   "id": 2093,
+   "name": "PokerHand",
+   "handled": true
+  },
+  {
+   "id": 2094,
+   "name": "PokerShowAllCards",
+   "handled": false
+  },
+  {
+   "id": 2095,
+   "name": "PokerRoundResult",
+   "handled": false
+  },
+  {
+   "id": 2096,
+   "name": "PokerLeaveTable",
+   "handled": true
+  },
+  {
+   "id": 2097,
+   "name": "MsgShowHandOnlineStatus",
+   "handled": false
+  },
+  {
+   "id": 2098,
+   "name": "MsgShowHandLostInfo",
+   "handled": false
+  },
+  {
+   "id": 2099,
+   "name": "MsgShowHandTrusteeship",
+   "handled": true
+  },
+  {
+   "id": 2101,
+   "name": "GuildRanks",
+   "handled": true
+  },
+  {
+   "id": 2102,
+   "name": "GuildMembers",
+   "handled": true
+  },
+  {
+   "id": 2110,
+   "name": "MsgSuperFlag",
+   "handled": true
+  },
+  {
+   "id": 2171,
+   "name": "PokerUpdateTableLocation",
+   "handled": true
+  },
+  {
+   "id": 2172,
+   "name": "PokerTable",
+   "handled": false
+  },
+  {
+   "id": 2201,
+   "name": "ArsenalInfo",
+   "handled": false
+  },
+  {
+   "id": 2202,
+   "name": "PageArsenal",
+   "handled": true
+  },
+  {
+   "id": 2203,
+   "name": "GetArsenal",
+   "handled": true
+  },
+  {
+   "id": 2204,
+   "name": "FastArsenal",
+   "handled": true
+  },
+  {
+   "id": 2205,
+   "name": "MsgArenaSignup",
+   "handled": true
+  },
+  {
+   "id": 2206,
+   "name": "MsgArenaMatches",
+   "handled": true
+  },
+  {
+   "id": 2207,
+   "name": "MsgArenaRanking",
+   "handled": true
+  },
+  {
+   "id": 2208,
+   "name": "MsgArenaRank10",
+   "handled": true
+  },
+  {
+   "id": 2209,
+   "name": "MsgArenaInfo",
+   "handled": true
+  },
+  {
+   "id": 2210,
+   "name": "MsgArenaMatchScore",
+   "handled": false
+  },
+  {
+   "id": 2211,
+   "name": "MsgElitePkWatch",
+   "handled": true
+  },
+  {
+   "id": 2218,
+   "name": "ElitePKMatchUI",
+   "handled": false
+  },
+  {
+   "id": 2219,
+   "name": "MsgElitePk",
+   "handled": true
+  },
+  {
+   "id": 2220,
+   "name": "PkExploit",
+   "handled": true
+  },
+  {
+   "id": 2222,
+   "name": "MsgElitePKMatchStats",
+   "handled": false
+  },
+  {
+   "id": 2223,
+   "name": "EliteRanks",
+   "handled": true
+  },
+  {
+   "id": 2224,
+   "name": "MsgCaptureTheFlagUpdate",
+   "handled": true
+  },
+  {
+   "id": 2225,
+   "name": "AdvertiseGui",
+   "handled": true
+  },
+  {
+   "id": 2226,
+   "name": "Advertise",
+   "handled": true
+  },
+  {
+   "id": 2227,
+   "name": "ReceiveRecruit",
+   "handled": true
+  },
+  {
+   "id": 2230,
+   "name": "TeamElitePKMatchUI",
+   "handled": false
+  },
+  {
+   "id": 2231,
+   "name": "TeamElitePKMatchStats",
+   "handled": false
+  },
+  {
+   "id": 2232,
+   "name": "TeamElitePkBrackets",
+   "handled": true
+  },
+  {
+   "id": 2233,
+   "name": "TeamElitePkTop",
+   "handled": true
+  },
+  {
+   "id": 2240,
+   "name": "TeamEliteSetTeamName",
+   "handled": true
+  },
+  {
+   "id": 2241,
+   "name": "MsgTeamArenaSignup",
+   "handled": true
+  },
+  {
+   "id": 2242,
+   "name": "MsgTeamArenaMatches",
+   "handled": true
+  },
+  {
+   "id": 2243,
+   "name": "MsgTeamArenaRanking",
+   "handled": true
+  },
+  {
+   "id": 2244,
+   "name": "MsgTeamArenaRank10",
+   "handled": true
+  },
+  {
+   "id": 2245,
+   "name": "MsgTeamArenaInfo",
+   "handled": true
+  },
+  {
+   "id": 2246,
+   "name": "MsgTeamArenaMatchScore",
+   "handled": false
+  },
+  {
+   "id": 2247,
+   "name": "MsgTeamArenaInfoPlayers",
+   "handled": true
+  },
+  {
+   "id": 2250,
+   "name": "SkillElitePKMatchUI",
+   "handled": false
+  },
+  {
+   "id": 2251,
+   "name": "SkillElitePKMatchStats",
+   "handled": false
+  },
+  {
+   "id": 2252,
+   "name": "SkillElitePkBrackets",
+   "handled": true
+  },
+  {
+   "id": 2253,
+   "name": "SkillElitePkTop",
+   "handled": true
+  },
+  {
+   "id": 2260,
+   "name": "SkillEliteSetTeamName",
+   "handled": true
+  },
+  {
+   "id": 2261,
+   "name": "SecondaryPassword",
+   "handled": true
+  },
+  {
+   "id": 2320,
+   "name": "SubClass",
+   "handled": true
+  },
+  {
+   "id": 2400,
+   "name": "MapTraps",
+   "handled": true
+  },
+  {
+   "id": 2410,
+   "name": "FlagIcon",
+   "handled": true
+  },
+  {
+   "id": 2430,
+   "name": "CountryFlag",
+   "handled": true
+  },
+  {
+   "id": 2441,
+   "name": "ExchangeShop",
+   "handled": false
+  },
+  {
+   "id": 2443,
+   "name": "BuyFromExchangeShop",
+   "handled": true
+  },
+  {
+   "id": 2500,
+   "name": "MsgSameGroupServerList",
+   "handled": false
+  },
+  {
+   "id": 2501,
+   "name": "MsgInterServerIdentifier",
+   "handled": false
+  },
+  {
+   "id": 2507,
+   "name": "ArenaCrossServer",
+   "handled": true
+  },
+  {
+   "id": 2533,
+   "name": "HandleChi",
+   "handled": true
+  },
+  {
+   "id": 2534,
+   "name": "ChiInfo",
+   "handled": false
+  },
+  {
+   "id": 2535,
+   "name": "ChiMessage",
+   "handled": false
+  },
+  {
+   "id": 2536,
+   "name": "MsgTrainingVitalityProtect",
+   "handled": true
+  },
+  {
+   "id": 2537,
+   "name": "MsgTrainingVitalityProtectInfo",
+   "handled": false
+  },
+  {
+   "id": 2538,
+   "name": "MsgTrainingVitalityExpiryNotify",
+   "handled": false
+  },
+  {
+   "id": 2600,
+   "name": "MsgGoldLeaguePoint",
+   "handled": true
+  },
+  {
+   "id": 2610,
+   "name": "InnerPowerHandler",
+   "handled": true
+  },
+  {
+   "id": 2611,
+   "name": "InnerPowerStageInfo",
+   "handled": false
+  },
+  {
+   "id": 2612,
+   "name": "InnerPowerGui",
+   "handled": false
+  },
+  {
+   "id": 2621,
+   "name": "MsgCountryOpt",
+   "handled": true
+  },
+  {
+   "id": 2622,
+   "name": "LeagueOpt",
+   "handled": true
+  },
+  {
+   "id": 2623,
+   "name": "LeagueInfo",
+   "handled": false
+  },
+  {
+   "id": 2624,
+   "name": "LeagueAllegianceList",
+   "handled": false
+  },
+  {
+   "id": 2625,
+   "name": "LeagueSynList",
+   "handled": false
+  },
+  {
+   "id": 2626,
+   "name": "LeagueMemList",
+   "handled": false
+  },
+  {
+   "id": 2627,
+   "name": "LeagueRank",
+   "handled": false
+  },
+  {
+   "id": 2628,
+   "name": "LeaguePalaceGuardsList",
+   "handled": false
+  },
+  {
+   "id": 2629,
+   "name": "LeagueImperialCourtList",
+   "handled": false
+  },
+  {
+   "id": 2630,
+   "name": "LeagueGroupTokens",
+   "handled": false
+  },
+  {
+   "id": 2631,
+   "name": "MsgOverheadLeagueInfo",
+   "handled": false
+  },
+  {
+   "id": 2632,
+   "name": "LeagueMainRank",
+   "handled": false
+  },
+  {
+   "id": 2633,
+   "name": "LeagueToken",
+   "handled": true
+  },
+  {
+   "id": 2634,
+   "name": "LeagueConcubines",
+   "handled": false
+  },
+  {
+   "id": 2640,
+   "name": "LeagueRobList",
+   "handled": false
+  },
+  {
+   "id": 2641,
+   "name": "LeagueBeRob",
+   "handled": false
+  },
+  {
+   "id": 2642,
+   "name": "LeagueRobOpt",
+   "handled": true
+  },
+  {
+   "id": 2643,
+   "name": "TokenUpdate",
+   "handled": false
+  },
+  {
+   "id": 2700,
+   "name": "JiangHu",
+   "handled": true
+  },
+  {
+   "id": 2701,
+   "name": "JiangHuStatus",
+   "handled": false
+  },
+  {
+   "id": 2702,
+   "name": "JiangHuUpdates",
+   "handled": true
+  },
+  {
+   "id": 2703,
+   "name": "JiangHuRank",
+   "handled": true
+  },
+  {
+   "id": 2704,
+   "name": "JiangHuPkMode",
+   "handled": true
+  },
+  {
+   "id": 2710,
+   "name": "MsgJiangMessage",
+   "handled": false
+  },
+  {
+   "id": 2711,
+   "name": "UnKnowwPP",
+   "handled": false
+  },
+  {
+   "id": 2800,
+   "name": "MsgRouletteCheck",
+   "handled": true
+  },
+  {
+   "id": 2801,
+   "name": "MsgRouletteNoWinner",
+   "handled": false
+  },
+  {
+   "id": 2802,
+   "name": "MsgRouletteRecord",
+   "handled": false
+  },
+  {
+   "id": 2803,
+   "name": "MsgRouletteScreen",
+   "handled": false
+  },
+  {
+   "id": 2804,
+   "name": "MsgRouletteAction",
+   "handled": true
+  },
+  {
+   "id": 2805,
+   "name": "MsgRouletteSignUp",
+   "handled": true
+  },
+  {
+   "id": 2807,
+   "name": "MsgRouletteTable",
+   "handled": false
+  },
+  {
+   "id": 2808,
+   "name": "MsgRouletteOpenGui",
+   "handled": false
+  },
+  {
+   "id": 2809,
+   "name": "MsgRoulettedAddNewPlayer",
+   "handled": false
+  },
+  {
+   "id": 2810,
+   "name": "MsgRouletteShareBetting",
+   "handled": false
+  },
+  {
+   "id": 2811,
+   "name": "MsgTaskReward",
+   "handled": true
+  },
+  {
+   "id": 2812,
+   "name": "MsgPetAttack",
+   "handled": true
+  },
+  {
+   "id": 2820,
+   "name": "MsgActivityTasks",
+   "handled": false
+  },
+  {
+   "id": 2822,
+   "name": "MsgActivityClaims",
+   "handled": true
+  },
+  {
+   "id": 2823,
+   "name": "MsgActivityRewardsInfo",
+   "handled": false
+  },
+  {
+   "id": 2830,
+   "name": "MsgHeroReward",
+   "handled": true
+  },
+  {
+   "id": 2831,
+   "name": "MsgHeroRewardsInfo",
+   "handled": false
+  },
+  {
+   "id": 2832,
+   "name": "MsgHeroRewardsInfoDone",
+   "handled": false
+  },
+  {
+   "id": 3001,
+   "name": "MsgHandBrickInfo",
+   "handled": true
+  },
+  {
+   "id": 3002,
+   "name": "MsgOsShop",
+   "handled": true
+  },
+  {
+   "id": 3200,
+   "name": "MsgSignIn",
+   "handled": true
+  },
+  {
+   "id": 3251,
+   "name": "MsgItemRefineOpt",
+   "handled": true
+  },
+  {
+   "id": 3252,
+   "name": "MsgUserTotalRefineLev",
+   "handled": false
+  },
+  {
+   "id": 3253,
+   "name": "MsgUserAbilityScore",
+   "handled": true
+  },
+  {
+   "id": 3254,
+   "name": "MsgRefineEffect",
+   "handled": false
+  },
+  {
+   "id": 3255,
+   "name": "MsgItemRefineRecord",
+   "handled": true
+  },
+  {
+   "id": 3256,
+   "name": "MsgEquipRefineRank",
+   "handled": true
+  },
+  {
+   "id": 3257,
+   "name": "MsgBestOfTheWorld",
+   "handled": true
+  },
+  {
+   "id": 3282,
+   "name": "MsgGlobalLottery",
+   "handled": true
+  },
+  {
+   "id": 3283,
+   "name": "MsgGlobalLotteryRankList",
+   "handled": true
+  },
+  {
+   "id": 3300,
+   "name": "MsgCoatStorage",
+   "handled": true
+  },
+  {
+   "id": 3301,
+   "name": "MsgTitleStorage",
+   "handled": true
+  },
+  {
+   "id": 3400,
+   "name": "MsgTexasExInteractive",
+   "handled": true
+  },
+  {
+   "id": 3402,
+   "name": "MsgTexasExChampionshipList",
+   "handled": false
+  },
+  {
+   "id": 3403,
+   "name": "MsgTexasPersonalInfo",
+   "handled": false
+  },
+  {
+   "id": 3404,
+   "name": "MsgTexasExChampionshipRank",
+   "handled": false
+  },
+  {
+   "id": 3405,
+   "name": "MsgTexasExMyChampionshipRank",
+   "handled": false
+  },
+  {
+   "id": 3406,
+   "name": "MsgTexasChampionshipTableChip",
+   "handled": false
+  },
+  {
+   "id": 10005,
+   "name": "Movement",
+   "handled": true
+  },
+  {
+   "id": 10010,
+   "name": "MsgAction",
+   "handled": true
+  },
+  {
+   "id": 10014,
+   "name": "SpawnPlayer",
+   "handled": false
+  },
+  {
+   "id": 10017,
+   "name": "Update",
+   "handled": false
+  },
+  {
+   "id": 10050,
+   "name": "CMsgShield",
+   "handled": true
+  },
+  {
+   "id": 10053,
+   "name": "CMsgMemoryCheck",
+   "handled": true
+  },
+  {
+   "id": 10054,
+   "name": "CMsgCloseClient",
+   "handled": false
+  },
+  {
+   "id": 10055,
+   "name": "CMsgRequestLogin",
+   "handled": true
+  },
+  {
+   "id": 10056,
+   "name": "CMsgOpenedProcesses",
+   "handled": true
+  },
+  {
+   "id": 10057,
+   "name": "MsgSendPCInfo",
+   "handled": true
+  },
+  {
+   "id": 10058,
+   "name": "CMsgHotKey",
+   "handled": false
+  }
+ ],
+ "actions": [
+  {
+   "type": 74,
+   "name": "SetLocation",
+   "handled": true
+  },
+  {
+   "type": 75,
+   "name": "Hotkeys",
+   "handled": true
+  },
+  {
+   "type": 76,
+   "name": "ConfirmAssociates",
+   "handled": true
+  },
+  {
+   "type": 77,
+   "name": "ConfirmProficiencies",
+   "handled": true
+  },
+  {
+   "type": 78,
+   "name": "ConfirmSpells",
+   "handled": true
+  },
+  {
+   "type": 79,
+   "name": "ChangeDirection",
+   "handled": true
+  },
+  {
+   "type": 81,
+   "name": "ChangeStance",
+   "handled": true
+  },
+  {
+   "type": 85,
+   "name": "ChangeMap",
+   "handled": true
+  },
+  {
+   "type": 86,
+   "name": "Teleport",
+   "handled": false
+  },
+  {
+   "type": 92,
+   "name": "Leveled",
+   "handled": false
+  },
+  {
+   "type": 94,
+   "name": "Revive",
+   "handled": true
+  },
+  {
+   "type": 95,
+   "name": "DeleteCharacter",
+   "handled": true
+  },
+  {
+   "type": 96,
+   "name": "SetPkMode",
+   "handled": true
+  },
+  {
+   "type": 97,
+   "name": "ConfirmGuild",
+   "handled": true
+  },
+  {
+   "type": 99,
+   "name": "Mining",
+   "handled": true
+  },
+  {
+   "type": 101,
+   "name": "LocationTeamLieder",
+   "handled": false
+  },
+  {
+   "type": 102,
+   "name": "RequestEntity",
+   "handled": true
+  },
+  {
+   "type": 104,
+   "name": "SetMapColor",
+   "handled": false
+  },
+  {
+   "type": 106,
+   "name": "TeamSearchForMember",
+   "handled": true
+  },
+  {
+   "type": 109,
+   "name": "RemoveSpell",
+   "handled": false
+  },
+  {
+   "type": 111,
+   "name": "StartVendor",
+   "handled": true
+  },
+  {
+   "type": 114,
+   "name": "StopVending",
+   "handled": true
+  },
+  {
+   "type": 116,
+   "name": "OpenCustom",
+   "handled": false
+  },
+  {
+   "type": 117,
+   "name": "ViewEquipment",
+   "handled": true
+  },
+  {
+   "type": 118,
+   "name": "EndTransformation",
+   "handled": true
+  },
+  {
+   "type": 120,
+   "name": "EndFly",
+   "handled": true
+  },
+  {
+   "type": 123,
+   "name": "ViewEnemyInfo",
+   "handled": true
+  },
+  {
+   "type": 126,
+   "name": "OpenDialog",
+   "handled": false
+  },
+  {
+   "type": 132,
+   "name": "CompleteLogin",
+   "handled": true
+  },
+  {
+   "type": 134,
+   "name": "ReviveMonster",
+   "handled": false
+  },
+  {
+   "type": 135,
+   "name": "RemoveEntity",
+   "handled": false
+  },
+  {
+   "type": 137,
+   "name": "Jump",
+   "handled": true
+  },
+  {
+   "type": 145,
+   "name": "Ghost",
+   "handled": true
+  },
+  {
+   "type": 148,
+   "name": "ViewFriendInfo",
+   "handled": true
+  },
+  {
+   "type": 151,
+   "name": "ChangeLookface",
+   "handled": true
+  },
+  {
+   "type": 152,
+   "name": "TradePartnerInfo",
+   "handled": true
+  },
+  {
+   "type": 156,
+   "name": "FlashStep",
+   "handled": false
+  },
+  {
+   "type": 158,
+   "name": "HideGui",
+   "handled": false
+  },
+  {
+   "type": 159,
+   "name": "CountDown",
+   "handled": false
+  },
+  {
+   "type": 160,
+   "name": "OpenGuiNpc",
+   "handled": false
+  },
+  {
+   "type": 161,
+   "name": "Away",
+   "handled": true
+  },
+  {
+   "type": 162,
+   "name": "AutoPatcher",
+   "handled": false
+  },
+  {
+   "type": 163,
+   "name": "AbortMagic",
+   "handled": false
+  },
+  {
+   "type": 164,
+   "name": "Pick",
+   "handled": false
+  },
+  {
+   "type": 165,
+   "name": "DragonBall",
+   "handled": false
+  },
+  {
+   "type": 166,
+   "name": "Bulletin",
+   "handled": true
+  },
+  {
+   "type": 167,
+   "name": "PokerTeleporter",
+   "handled": true
+  },
+  {
+   "type": 171,
+   "name": "ClikerON",
+   "handled": false
+  },
+  {
+   "type": 172,
+   "name": "ClikerEntry",
+   "handled": true
+  },
+  {
+   "type": 178,
+   "name": "SetAppearanceType",
+   "handled": true
+  },
+  {
+   "type": 234,
+   "name": "PoketTableBet",
+   "handled": false
+  },
+  {
+   "type": 251,
+   "name": "AllowAnimation",
+   "handled": true
+  },
+  {
+   "type": 252,
+   "name": "UpdateSpell",
+   "handled": true
+  },
+  {
+   "type": 253,
+   "name": "UpdateProf",
+   "handled": true
+  },
+  {
+   "type": 255,
+   "name": "CreditGifts",
+   "handled": true
+  },
+  {
+   "type": 256,
+   "name": "UpdateInventorySash",
+   "handled": true
+  },
+  {
+   "type": 310,
+   "name": "QuerySpawn",
+   "handled": true
+  },
+  {
+   "type": 401,
+   "name": "BeginSteedRace",
+   "handled": false
+  },
+  {
+   "type": 402,
+   "name": "FinishSteedRace",
+   "handled": true
+  },
+  {
+   "type": 408,
+   "name": "QueryEquipment",
+   "handled": false
+  },
+  {
+   "type": 434,
+   "name": "RemoveTrap",
+   "handled": false
+  },
+  {
+   "type": 436,
+   "name": "SubmitGoldBrick",
+   "handled": true
+  },
+  {
+   "type": 440,
+   "name": "AddBlackList",
+   "handled": true
+  },
+  {
+   "type": 441,
+   "name": "RemoveBlackList",
+   "handled": true
+  },
+  {
+   "type": 443,
+   "name": "DrawStory",
+   "handled": false
+  },
+  {
+   "type": 447,
+   "name": "PetAttack",
+   "handled": true
+  }
+ ],
+ "usage": [
+  {
+   "sub": 1,
+   "name": "BuyItem",
+   "handled": true
+  },
+  {
+   "sub": 2,
+   "name": "SellItem",
+   "handled": true
+  },
+  {
+   "sub": 3,
+   "name": "RemoveInventory",
+   "handled": false
+  },
+  {
+   "sub": 4,
+   "name": "Equip",
+   "handled": true
+  },
+  {
+   "sub": 5,
+   "name": "SetEquipPosition",
+   "handled": false
+  },
+  {
+   "sub": 6,
+   "name": "Unequip",
+   "handled": true
+  },
+  {
+   "sub": 7,
+   "name": "UpgradeEnchant",
+   "handled": false
+  },
+  {
+   "sub": 9,
+   "name": "ShowWarehouseMoney",
+   "handled": true
+  },
+  {
+   "sub": 10,
+   "name": "DepositWarehouse",
+   "handled": true
+  },
+  {
+   "sub": 11,
+   "name": "WarehouseWithdraw",
+   "handled": true
+  },
+  {
+   "sub": 14,
+   "name": "RepairItem",
+   "handled": true
+  },
+  {
+   "sub": 15,
+   "name": "VIPRepairItem",
+   "handled": true
+  },
+  {
+   "sub": 17,
+   "name": "UpdateDurability",
+   "handled": false
+  },
+  {
+   "sub": 18,
+   "name": "RemoveEquipment",
+   "handled": false
+  },
+  {
+   "sub": 19,
+   "name": "UpgradeDragonball",
+   "handled": false
+  },
+  {
+   "sub": 20,
+   "name": "UpgradeMeteor",
+   "handled": false
+  },
+  {
+   "sub": 21,
+   "name": "ShowVendingList",
+   "handled": true
+  },
+  {
+   "sub": 22,
+   "name": "AddVendingItemGold",
+   "handled": true
+  },
+  {
+   "sub": 23,
+   "name": "RemoveVendingItem",
+   "handled": true
+  },
+  {
+   "sub": 24,
+   "name": "BuyVendingItem",
+   "handled": true
+  },
+  {
+   "sub": 25,
+   "name": "UpdateArrowCount",
+   "handled": false
+  },
+  {
+   "sub": 26,
+   "name": "ParticleEffect",
+   "handled": false
+  },
+  {
+   "sub": 27,
+   "name": "Ping",
+   "handled": true
+  },
+  {
+   "sub": 28,
+   "name": "UpdateEnchant",
+   "handled": true
+  },
+  {
+   "sub": 29,
+   "name": "AddVendingItemConquerPts",
+   "handled": true
+  },
+  {
+   "sub": 32,
+   "name": "RedeemGear",
+   "handled": true
+  },
+  {
+   "sub": 33,
+   "name": "ClaimGear",
+   "handled": true
+  },
+  {
+   "sub": 35,
+   "name": "UpdatePurity",
+   "handled": false
+  },
+  {
+   "sub": 36,
+   "name": "SocketTalismanWithCPs",
+   "handled": true
+  },
+  {
+   "sub": 37,
+   "name": "DropItem",
+   "handled": true
+  },
+  {
+   "sub": 38,
+   "name": "DropGold",
+   "handled": true
+  },
+  {
+   "sub": 39,
+   "name": "GemCompose",
+   "handled": true
+  },
+  {
+   "sub": 40,
+   "name": "AddBless",
+   "handled": true
+  },
+  {
+   "sub": 41,
+   "name": "ActiveItems",
+   "handled": true
+  },
+  {
+   "sub": 43,
+   "name": "CreateSocketItem",
+   "handled": true
+  },
+  {
+   "sub": 44,
+   "name": "UnAlternante",
+   "handled": true
+  },
+  {
+   "sub": 45,
+   "name": "Alternante",
+   "handled": true
+  },
+  {
+   "sub": 48,
+   "name": "MergeStackableItems",
+   "handled": true
+  },
+  {
+   "sub": 49,
+   "name": "SplitStack",
+   "handled": true
+  },
+  {
+   "sub": 50,
+   "name": "ReturnedItems",
+   "handled": true
+  },
+  {
+   "sub": 51,
+   "name": "ToristSuper",
+   "handled": true
+  },
+  {
+   "sub": 52,
+   "name": "ShowItem",
+   "handled": true
+  },
+  {
+   "sub": 53,
+   "name": "GarmentShop",
+   "handled": true
+  },
+  {
+   "sub": 54,
+   "name": "DegradeEquipment",
+   "handled": true
+  },
+  {
+   "sub": 55,
+   "name": "BuyItemFromForging",
+   "handled": true
+  },
+  {
+   "sub": 56,
+   "name": "OpenInventorySash",
+   "handled": true
+  }
+ ]
+}
