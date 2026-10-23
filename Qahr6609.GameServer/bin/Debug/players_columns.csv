@@ -1,0 +1,195 @@
+# MeGa6609 players table columns (generated from Qahr's players_columns.csv + the keys MeGa writes to Users\<uid>.ini [Character]).
+# Each line: OldKey|CleanColumn|Type   (OldKey = the ini key the server writes; CleanColumn = column in `players`).
+# Keys unknown to Qahr keep their own name: DECIMAL(20,0) for numbers (fits negative and full ulong), TEXT otherwise.
+UID|UID|INT UNSIGNED
+Achivement|Achievements|TEXT
+Activeness|Activeness|TEXT
+Agility|Agility|SMALLINT UNSIGNED
+AnswerdToday|AnswerdToday|DECIMAL(20,0)
+AparenceType|AppearanceType|INT UNSIGNED
+ArenaDeads|ArenaDeaths|INT UNSIGNED
+ArenaKills|ArenaKills|INT UNSIGNED
+ArenaSBDeads|ArenaSBDeads|DECIMAL(20,0)
+ArenaSBKills|ArenaSBKills|DECIMAL(20,0)
+Atributes|AttributePoints|SMALLINT UNSIGNED
+Avatar|Avatar|SMALLINT UNSIGNED
+BanCount|BanCount|INT UNSIGNED
+BankCps|BankCps|DECIMAL(20,0)
+BannedChatStamp|BannedChatStamp|BIGINT
+Battlefieldpoints|Battlefieldpoints|DECIMAL(20,0)
+BDExp|BonusDoubleExp|TINYINT UNSIGNED
+BlessTime|BlessTime|INT UNSIGNED
+Body|BodyType|SMALLINT UNSIGNED
+BoundConquerPoints|BoundConquerPoints|INT
+BuyKingdomDeeds|BuyKingdomDeeds|TINYINT UNSIGNED
+CanChangeWindWalkerFree|CanChangeWindWalkerFree|BIGINT
+ChampionPoints|ChampionPoints|INT UNSIGNED
+ChargeChi|ChargeChi|DECIMAL(20,0)
+ChargeJaing|ChargeJaing|DECIMAL(20,0)
+ChiPoints|ChiPoints|INT
+ClaimStateGift|ClaimStateGift|INT UNSIGNED
+ClaimTowerAmulets|ClaimTowerAmulets|TINYINT UNSIGNED
+ClanDonation|ClanDonation|INT UNSIGNED
+ClanID|ClanID|INT UNSIGNED
+ClanRank|ClanRank|SMALLINT UNSIGNED
+Class|Class|INT UNSIGNED
+ConquerPointDropLimitLayer|ConquerPointDropLimitLayer|DECIMAL(20,0)
+ConquerPoints|ConquerPoints|INT UNSIGNED
+ConquerPointsDropStamp|ConquerPointsDropStamp|DECIMAL(20,0)
+ConquerPointsLimitaion|ConquerPointsLimitaion|DECIMAL(20,0)
+Count|Count|TEXT
+CountryID|CountryID|SMALLINT UNSIGNED
+CPBoundPack|CPBoundPack|DECIMAL(20,0)
+CPBoundPackToday|CPBoundPackToday|DECIMAL(20,0)
+CpsDonate|ConquerPointsDonate|INT UNSIGNED
+CTF_Exploits|CtfExploits|INT UNSIGNED
+CTF_R|CtfRedeemFlag|TINYINT UNSIGNED
+CTF_RCPS|CtfRedeemedCps|INT UNSIGNED
+CTF_RM|CtfRedeemedMoney|INT UNSIGNED
+Cursed|Cursed|INT
+DailyMonth|DailyMonth|TINYINT UNSIGNED
+DailySignUpDays|DailySignUpDays|BIGINT UNSIGNED
+DailySignUpRewards|DailySignUpRewards|TINYINT UNSIGNED
+DailySpiritBeadCount|DailySpiritBeadCount|DECIMAL(20,0)
+DailySpiritBeadItem|DailySpiritBeadItem|INT UNSIGNED
+Day|Day|INT
+DbTry|DbTry|TINYINT(1)
+DemonEx|DemonExterminator|TEXT
+DExpTime|DoubleExpTime|INT UNSIGNED
+DonationNobility|NobilityDonation|BIGINT UNSIGNED
+Dragon|ChiDragon|TEXT
+DragonTime|ChiDragonTime|BIGINT
+enervant|Enervant|INT UNSIGNED
+Enilghten|EnlightenPoints|SMALLINT UNSIGNED
+EnlightenReceive|EnlightenReceive|SMALLINT UNSIGNED
+EpicQuestChance|EpicQuestChance|INT UNSIGNED
+EpicTrojan|EpicTrojan|TEXT
+ExchangehighAvaliability|ExchangeHighAvailability|INT UNSIGNED
+ExchangeNormalAvaliability|ExchangeNormalAvaliability|DECIMAL(20,0)
+ExchangeShop|ExchangeShop|TEXT
+ExpBallUsed|ExpBallUsed|TINYINT UNSIGNED
+Experience|Experience|BIGINT UNSIGNED
+ExpFruitUsed|ExpFruitUsed|DECIMAL(20,0)
+ExpProtection|ExpProtection|INT UNSIGNED
+ExtraAtributes|ExtraAttributePoints|SMALLINT UNSIGNED
+Face|FaceType|SMALLINT UNSIGNED
+FateFruitUsed|FateFruitUsed|DECIMAL(20,0)
+FirstClass|FirstClass|INT UNSIGNED
+Flowers|Flowers|TEXT
+FRL|FirstRebornLevel|TINYINT UNSIGNED
+GiantGhasomKill|GiantGhasomKill|DECIMAL(20,0)
+GiantGhasomKillClaimed|GiantGhasomKillClaimed|DECIMAL(20,0)
+GiveFlowersToPerformer|GiveFlowersToPerformer|INT
+GuildID|GuildID|INT UNSIGNED
+GuildRank|GuildRank|SMALLINT UNSIGNED
+Haire|Hair|INT UNSIGNED
+HeavenBlessing|HeavenBlessing|INT
+HelpLady|HelpLady|DECIMAL(20,0)
+HeroRewards|HeroRewards|TEXT
+HistoryChampionPoints|HistoryChampionPoints|INT UNSIGNED
+HitSBShoot|HitSBShoot|DECIMAL(20,0)
+HitShoot|HitShots|INT UNSIGNED
+HuntingBlessing|HuntingBlessing|INT UNSIGNED
+InventorySashCount|InventorySashCount|SMALLINT UNSIGNED
+IsBannedChat|IsBannedChat|TINYINT(1)
+JoinOnflineTG|OfflineTrainingJoinTime|BIGINT
+JPAStamp|JpaStamp|BIGINT
+KingDomDeeds|KingdomDeeds|INT UNSIGNED
+KingDomExploits|KingdomExploits|INT UNSIGNED
+KingDomGold|KingDomGold|TEXT
+LastLogin|LastLogin|BIGINT
+LateSignIn|LateSignIn|DECIMAL(20,0)
+Level|Level|SMALLINT UNSIGNED
+LostTimeBlessing|LostTimeBlessing|BIGINT
+LotteryEntries|LotteryEntries|TINYINT UNSIGNED
+MacAddress|MacAddress|TEXT
+Map|MapID|INT UNSIGNED
+Merchant|Merchant|DECIMAL(20,0)
+MerchantApplicationEnd|MerchantApplicationEnd|DECIMAL(20,0)
+MinHitPoints|HitPoints|INT
+MiningAttempts|MiningAttempts|DECIMAL(20,0)
+MinMana|Mana|SMALLINT UNSIGNED
+MisSBShoot|MisSBShoot|DECIMAL(20,0)
+MisShoot|MissShots|INT UNSIGNED
+Money|Money|BIGINT UNSIGNED
+MoneyDonate|MoneyDonate|BIGINT
+MRConquer|MRConquer|DECIMAL(20,0)
+MSConquer|MSConquer|DECIMAL(20,0)
+MyFootBallPoints|FootballPoints|INT UNSIGNED
+MyTowerOfMysteryLayer|TowerOfMysteryLayer|TINYINT UNSIGNED
+MyTowerOfMysteryLayerElite|TowerOfMysteryLayerElite|TINYINT UNSIGNED
+Name|Name|VARCHAR(255)
+NameEditCount|NameEditCount|SMALLINT UNSIGNED
+OnlineMinutes|OnlineMinutes|INT UNSIGNED
+OnlineTrainingPoints|OnlineTrainingPoints|INT UNSIGNED
+OpenHousePack|OpenHousePack|TINYINT UNSIGNED
+PermenantBannedChat|PermanentBannedChat|TINYINT(1)
+Pheonix|ChiPhoenix|TEXT
+PhoenixTime|ChiPhoenixTime|BIGINT
+PkDonation|PkDonation|INT UNSIGNED
+PkName|PkName|VARCHAR(255)
+PkPoints|PkPoints|SMALLINT UNSIGNED
+PkUID|PkUID|INT UNSIGNED
+PMap|PrevMapID|INT UNSIGNED
+PMapX|PrevMapX|SMALLINT UNSIGNED
+PMapY|PrevMapY|SMALLINT UNSIGNED
+PrestigePoints|PrestigePoints|INT UNSIGNED
+PurbleBanshee|PurbleBanshee|DECIMAL(20,0)
+QuizPoints|QuizPoints|INT UNSIGNED
+RacePoints|RacePoints|INT UNSIGNED
+RateExp|ExpRate|INT UNSIGNED
+Reborn|RebornCount|TINYINT UNSIGNED
+RechargeProgress|RechargeProgress|DECIMAL(20,0)
+Reincanation|Reincarnation|TINYINT(1)
+RetreatedDragon|ChiRetreatedDragon|TEXT
+RetreatKeysV2|RetreatKeysV2|DECIMAL(20,0)
+SecoundeClass|SecondClass|INT UNSIGNED
+SecurityPass|SecurityPass|VARCHAR(255)
+SpecialTitles|SpecialTitles|TEXT
+SpecialWingID|SpecialWingID|INT UNSIGNED
+Spirit|Spirit|SMALLINT UNSIGNED
+Spouse|SpouseName|VARCHAR(255)
+SpouseUID|SpouseUID|INT UNSIGNED
+SRL|SecondRebornLevel|TINYINT UNSIGNED
+Strength|Strength|SMALLINT UNSIGNED
+SubProfInfo|SubProfessionInfo|TEXT
+SwordMaster|SwordMaster|DECIMAL(20,0)
+TCT|TCT|TINYINT UNSIGNED
+Teampk|Teampk|DECIMAL(20,0)
+TeratoDragon|TeratoDragon|DECIMAL(20,0)
+Tiger|ChiTiger|TEXT
+TigerTime|ChiTigerTime|BIGINT
+TKills|TournamentKills|INT UNSIGNED
+TodayChampionPoints|TodayChampionPoints|INT UNSIGNED
+TOMChallengeToday|TowerOfMysteryChallengeToday|TINYINT UNSIGNED
+TOMClaimTeamReward|TowerOfMysteryClaimTeamReward|TINYINT UNSIGNED
+TOMRefreshReward|TowerOfMysteryRefreshReward|INT UNSIGNED
+TOMSelectChallengeToday|TowerOfMysterySelectChallengeToday|TINYINT UNSIGNED
+TOM_Reward|TowerOfMysteryReward|TINYINT UNSIGNED
+TowerOfMysterychallenge|TowerOfMysteryChallenge|TINYINT UNSIGNED
+TowerOfMysteryChallengeFlag|TowerOfMysteryChallengeFlag|INT UNSIGNED
+Treasury|UnionTreasury|INT UNSIGNED
+Turtle|ChiTurtle|TEXT
+TurtleTime|ChiTurtleTime|BIGINT
+UnionAllowanceDay|UnionAllowanceDay|TEXT
+UnionExploits|UnionExploits|INT UNSIGNED
+UnionGoldBrick|UnionGoldBrick|INT UNSIGNED
+UnionRank|UnionRank|INT UNSIGNED
+UnionStipend|UnionStipend|TEXT
+UnionUID|UnionUID|INT UNSIGNED
+UseChiToken|UseChiToken|TINYINT UNSIGNED
+VipLevel|VipLevel|TINYINT UNSIGNED
+VipTime|VipTime|BIGINT
+VirtutePoints|VirtuePoints|INT UNSIGNED
+Vitaliti|Vitality|SMALLINT UNSIGNED
+VotePoints|VotePoints|TINYINT UNSIGNED
+WHMoney|WarehouseMoney|BIGINT UNSIGNED
+WingId|WingId|DECIMAL(20,0)
+WrongAnswers|WrongAnswers|TEXT
+WrongAnswers0|WrongAnswers0|DECIMAL(20,0)
+WrongAnswers1|WrongAnswers1|DECIMAL(20,0)
+WrongAnswers2|WrongAnswers2|DECIMAL(20,0)
+WrongAnswers3|WrongAnswers3|DECIMAL(20,0)
+WrongAnswers4|WrongAnswers4|DECIMAL(20,0)
+X|PosX|SMALLINT UNSIGNED
+Y|PosY|SMALLINT UNSIGNED
