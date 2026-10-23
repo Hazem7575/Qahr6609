@@ -1,0 +1,15 @@
+# Extra monster drops (module MonsterDrops). Edit, then type @drops reload in game (no rebuild).
+# Every rule is an extra, independent roll when the monster dies; the drops written in Death.cs still happen.
+#
+# Columns (spaces or tabs):  Monster  Map  Chance  Item  Count  Where  [Message]
+#   Monster  monster type id (Monsters\*.ini [cq_monstertype] id), or * for any monster
+#   Map      map id where the monster dies, or * for any map
+#   Chance   5%  (5 in 100)   or   1/1000  (1 in 1000)
+#   Item     item type id (must exist in itemtype.txt)
+#   Count    1..40
+#   Where    floor (dropped on the ground, owned by the killer) or bag (inventory; floor when the bag is full)
+#   Message  optional system message to the killer; {name} = killer, {monster} = monster name
+#
+# Examples (remove the # to use):
+# 15      *     1/100   1088001  1  floor
+# *       1015  1/5000  1088000  1  bag    {name}, the {monster} dropped a DragonBall into your bag!

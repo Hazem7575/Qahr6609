@@ -1,0 +1,27 @@
+# Website API (Qahr6609.Tools\Web\QahrWebApi). It is OFF until this file is copied to webapi.ini with enabled=1.
+# Read Qahr6609.Tools\Web\QahrWebApi\README_AR.md first.
+#
+# enabled=1 turns it on (0 or no webapi.ini = off). Restart the server after a change.
+enabled=0
+# Listen address. Keep 127.0.0.1 (the website on the same machine). Another address only on a trusted private
+# network, NEVER open this port to the internet (firewall).
+bind=127.0.0.1
+port=5900
+# Shared secret: base64 of 32 random bytes. Make one with the server console command:  webapi genkey
+# (or php gen_key.php). The same key goes into the website's config.php. Never share it, change it if it leaks.
+key=
+# Only these IPs may connect (comma list). The website server's IP.
+allow_ips=127.0.0.1
+# Which ops the website may use (cps, giveitem, inventory).
+ops=cps,giveitem,inventory
+# CPs: biggest amount in one request, allowed modes (add / sub / set), and whether an OFFLINE player can get CPs
+# (written to Users\<uid>.ini with a backup; 0 = the player must be online).
+max_cps_per_request=100000
+cps_modes=add
+cps_offline=0
+# Items: allowed item ids, single ids or ranges (empty = any item). Example: allowed_items=720027,1088000-1088002
+allowed_items=
+max_item_count=10
+max_plus=12
+# Requests per minute (all clients together). More are refused.
+rate_per_minute=30

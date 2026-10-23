@@ -40,6 +40,23 @@ namespace AccServer.Database
             string mySqlDatabase = file.ReadString("MySql", "Database", "");
             string mySqlUser = file.ReadString("MySql", "User", "root");
             uint mySqlPort = file.ReadUInt16("MySql", "Port", 3306);
+            // The database settings live in one place: HazemConfig.ini [Global] MySql* (the same values the game servers
+            // use). AuthConfig.ini [MySql] is only the fallback when no HazemConfig.ini is found.
+            string master = FindRegistry("");
+            var g = master != null ? ReadSection(master, "Global") : null;
+            if (g != null && g.ContainsKey("mysqldatabase") && g["mysqldatabase"].Length > 0)
+            {
+                string v;
+                mySqlHost = g.TryGetValue("mysqlhost", out v) && v.Length > 0 ? v : "localhost";
+                mySqlUser = g.TryGetValue("mysqluser", out v) && v.Length > 0 ? v : "root";
+                mySqlPassword = g.TryGetValue("mysqlpassword", out v) ? v : "";
+                mySqlDatabase = g["mysqldatabase"];
+                ushort port;
+                mySqlPort = g.TryGetValue("mysqlport", out v) && ushort.TryParse(v, out port) ? port : (uint)3306;
+                Console.WriteLine("MySQL settings from " + master + " (" + mySqlUser + "@" + mySqlHost + ":" + mySqlPort + "/" + mySqlDatabase + ").");
+            }
+            else if (mySqlHost.Length == 0 || mySqlDatabase.Length == 0)
+                Console.WriteLine("No MySQL settings: fill [Global] MySqlUser/MySqlPassword/MySqlDatabase in Qahr6609.Shared\\HazemConfig.ini.");
             DataHolder.CreateConnection(mySqlDatabase, mySqlPassword, mySqlHost, mySqlUser, mySqlPort);
             Network.AuthPackets.LoginGuard.Load(file);
 
@@ -138,6 +155,35 @@ namespace AccServer.Database
             }
             catch { }
             return null;
+        }
+
+        /// <summary>key (lower case) -> value of one section of HazemConfig.ini. ';' starts a comment anywhere.</summary>
+        static Dictionary<string, string> ReadSection(string path, string section)
+        {
+            var d = new Dictionary<string, string>();
+            bool inside = false;
+            try
+            {
+                foreach (var raw in File.ReadAllLines(path))
+                {
+                    string line = raw;
+                    int sc = line.IndexOf(';');
+                    if (sc >= 0) line = line.Substring(0, sc);
+                    line = line.Trim();
+                    if (line.Length == 0)
+                        continue;
+                    if (line[0] == '[')
+                    {
+                        inside = string.Equals(line.Trim('[', ']').Trim(), section, StringComparison.OrdinalIgnoreCase);
+                        continue;
+                    }
+                    int eq = line.IndexOf('=');
+                    if (inside && eq > 0)
+                        d[line.Substring(0, eq).Trim().ToLowerInvariant()] = line.Substring(eq + 1).Trim();
+                }
+            }
+            catch (Exception e) { Console.WriteLine(path + " could not be read: " + e.Message); }
+            return d;
         }
 
         /// <summary>[ServerN] sections with Published=1 (Name, ServerID, Host, GamePort). ';' starts a comment anywhere.</summary>

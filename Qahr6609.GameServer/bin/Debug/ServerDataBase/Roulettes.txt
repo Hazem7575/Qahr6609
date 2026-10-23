@@ -1,0 +1,7 @@
+UID,TableNumber,MoneyType(1=Silver 2=CPs),MapID,X,Y,Mesh
+# Roulette tables of the Roulette Room (map 3852, client map/map/poker05; GameManager / casino teleport puts players at 56,65).
+# One table per line, no '#'. The official table coordinates are not in the client data, so no table is enabled here:
+# stand on each table spot in game, note X,Y and add a line. Mesh 30230 = client NpcType3023 "RouletteTable" (+0..7 = facing).
+# Lines starting with '#' are ignored. Example (remove the '#'):
+#9100001,1,1,3852,50,58,30230
+#9100002,2,2,3852,62,58,30230

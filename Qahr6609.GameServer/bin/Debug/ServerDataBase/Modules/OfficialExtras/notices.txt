@@ -1,0 +1,4 @@
+# Login notices (button next to the minimap). One per line: version|title|content
+# Raise the version for a new notice: players whose saved version is lower see the button glow.
+# Title max 127 bytes, content max 255 bytes. Then @notice reload in game.
+1|Welcome to MeGa|Welcome to MeGa Conquer Online 6609. Have fun and play fair!

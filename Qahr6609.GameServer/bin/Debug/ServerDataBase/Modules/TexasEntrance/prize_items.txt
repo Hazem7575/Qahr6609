@@ -1,0 +1,6 @@
+; reward names of texas_match_prize.dat -> item id (count = the number in front of the name)
+; e.g. [item 40%Bonus,15PokerTokens] gives 15 x PokerTokens; x%Bonus is only a label
+PokerTokens=3304719
+PokerToken=3304719
+PokerTokenFragmen=3305484
+PokerTokenFragment=3305484

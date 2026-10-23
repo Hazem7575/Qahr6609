@@ -1,0 +1,1 @@
+; festival|counter|uid|period|value (written by the server; daily periods older than today are dropped)

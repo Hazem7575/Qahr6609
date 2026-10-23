@@ -1,0 +1,648 @@
+[StageGoal]
+// ×Ü½×¶ÎÊý
+StageAmount=10
+
+[1]
+// ½×¶Î¿ªÆôµÈ¼¶£¬¶ÔÓ¦Êý¾Ý¿âcq_process_goal±íÖÐµÄ'open_lv'×Ö¶Î
+OpenLev=0001
+// ½×¶ÎµÄ°´Å¥Í¼Æ¬Title
+StageAni=Stage_01goalBtn
+// ¸Ã½×¶ÎµÄÄ¿±êÈÎÎñ¸öÊý£¬¶ÔÓ¦Êý¾Ý¿âcq_process_goal±íÖÐµÄ'task_num'×Ö¶Î
+GoalNum=5
+// ½×¶ÎµÄ½±Àø£¬¶ÔÓ¦Êý¾Ý¿âcq_process_goal±íÖÐµÄ½±ÀøÊý¾Ý
+// ¹æ·¶£ºÎïÆ·idType ÎïÆ·ÊýÁ¿ ÊÇ·ñÔùÆ·(0Îª·ÇÔù£¬1ÎªÔù)(Ò»¶¨ÒªÓÃ' '¸ô¿ª)
+Prize1=3005107 1 0
+
+
+// µÚ1½×¶ÎµÚ1¸öÄ¿±êÈÎÎñ
+[1-1]
+// ±êÌâÎÄ×Ö
+Title=[Novice] Level-up
+// ÈÎÎñ½éÉÜ,ÈôÒªÓÐ×Ô¶¯Ñ°Â·¹¦ÄÜÐè±êÊ¶<npc npcId mapId mapX mapY>NPCÃû×Ö</npc>
+// µØÍ¼µ¼º½Îª<map 0 mapId mapX mapY>µØÍ¼Ãû×Ö</map>
+// ¹ÖÎïµ¼º½Îª<mob 0 mapId mapX mapY>¹ÖÎïÃû×Ö</mob>
+Intro=Upgrade to Level 20.
+// Ä¿±êÈÎÎñ×Ü½ø¶È£¬¶ÔÓ¦Êý¾Ý¿âcq_process_task±íÖÐµÄ'schedule'×Ö¶Î
+Progress=20
+// Ä¿±êÈÎÎñ½±Àø£¬¶ÔÓ¦Êý¾Ý¿âcq_process_task±íÖÐµÄ½±ÀøÊý¾Ý(¹æ·¶Í¬ÉÏ)
+Prize1=3005117 1 1
+// ÈÎÎñÀàÐÍ£¬¶ÔÓ¦Êý¾Ý¿âcq_process_task±íÖÐµÄ'type'×Ö¶Î
+TaskType=1
+// ÈÎÎñÒªÇó£¬Ö÷ÒªÊÇ¶ÔÓ¦Êý¾Ý¿âcq_process_task±íÖÐµÄ'condition'×Ö¶Î£¬¿ÉÈ±Ê¡
+//Require=0
+
+[1-2]
+Title=[Novice] Obtain Equipment
+Intro=A set of Refined equipment (6 pieces)
+Progress=6
+Prize1=1088001 1 1
+TaskType=5
+Require=6
+
+[1-3]
+Title=[Novice] Fierce XP
+Intro=Kill 20 monsters while XP skill in effect.
+Progress=1
+Prize1=723700 1 1
+TaskType=4
+Require=20
+
+[1-4]
+Title=[Novice] New in the world.
+Intro=Complete beginner tutorial.
+Progress=1
+Prize1=723017 1 1
+TaskType=3
+
+[1-5]
+Title=[Novice] Promotion
+Intro=Get promoted for a higher class title.
+Progress=1
+Prize1=723700 1 1
+TaskType=6
+
+[2]
+OpenLev=31
+StageAni=Stage_02goalBtn
+GoalNum=7
+Prize1=3005108 1 1
+
+[2-1]
+Title=[Rising Star] Level-up
+Intro=Upgrade to Level 50
+Progress=50
+Prize1=3005118 1 1
+TaskType=1
+
+[2-2]
+Title=[Rising Star] Obtain Equipment
+Intro=A set of Unique equipment (6 pieces)
+Progress=6
+Prize1=1088001 3 1
+TaskType=5
+Require=7
+
+[2-3]
+Title=[Rising Star] Teamwork
+Intro=Make/Join a Team
+Progress=1
+Prize1=723017 1 1
+TaskType=12
+
+[2-4]
+Title=[Rising Star] Arena
+Intro=Win a fight in Arena.
+Progress=1
+Prize1=1200000 1 1
+TaskType=7
+
+[2-5]
+Title=[Rising Star] Equipment Improving
+Intro=Upgrade equipment with Meteor, once.
+Progress=1
+Prize1=300000 1 1
+TaskType=45
+
+[2-6]
+Title=[Rising Star] EXP Potion
+Intro=Try a bottle of EXP potion,and gain 60 minutes' double EXP time.
+Progress=1
+Prize1=723017 1 1
+TaskType=9
+
+[2-7]
+Title=[Rising Star] Mount
+Intro=Equip a random steed.
+Progress=1
+Prize1=1088001 1 1
+TaskType=44
+
+[3]
+OpenLev=61
+StageAni=Stage_03goalBtn
+GoalNum=6
+Prize1=3005109 1 1
+
+[3-1]
+Title=[Expert] Level-up
+Intro=Upgrade to Level 80.
+Progress=80
+Prize1=3005119 1 1
+TaskType=1
+
+[3-2]
+Title=[Expert] Obtain Equipment
+Intro=A set of Elite equipment (6 pieces).
+Progress=6
+Prize1=3001264 1 1
+TaskType=5
+Require=8
+
+[3-3]
+Title=[Expert] Guild
+Intro=Create/join a guild.
+Progress=1
+Prize1=3005123 1 1
+TaskType=11
+
+[3-4]
+Title=[Expert] Friends
+Intro=Add at least 5 friends.
+Progress=5
+Prize1=730001 1 1
+TaskType=13
+
+[3-5]
+Title=[Expert] Team Qualifier
+Intro=Win a battle in Team Qualifier.
+Progress=1
+Prize1=1200001 1 1
+TaskType=14
+
+[3-6]
+Title=[Expert] Lottery
+Intro=Play lottery, once.
+Progress=1
+Prize1=723700 3 1
+TaskType=15
+
+[4]
+OpenLev=101
+StageAni=Stage_04goalBtn
+GoalNum=9
+Prize1=3005110 1 1
+
+[4-1]
+Title=[Standout] Level-up
+Intro=Upgrade to Level 110
+Progress=110
+Prize1=3005120 1 1
+TaskType=1
+
+[4-2]
+Title=[Standout] Obtain Equipment
+Intro=A set of Super equipment (6 pieces)
+Progress=6
+Prize1=721052 1 1
+TaskType=5
+Require=9
+
+[4-3]
+Title=[Standout] Equipment Composing
+Intro=Compose equipment with Ú or minor equipment, once.
+Progress=1
+Prize1=1088001 3 1
+TaskType=16
+
+[4-4]
+Title=[Standout] Dis City
+Intro=Go to Ape City and take the challenge of `Dis City`, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=39
+
+[4-5]
+Title=[Standout] Elite PK Tournament
+Intro=Compete in the Elite PK Tournament, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=17
+
+[4-6]
+Title=[Standout] Team PK Tournament
+Intro=Compete in the Team PK Tournament, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=18
+
+[4-7]
+Title=[Standout] Skill Team PK Tournament
+Intro=Compete in the Skill Team PK Tournament, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=19
+
+[4-8]
+Title=[Standout] Super Talisman
+Intro=Obtain 2 Super Talismans.
+Progress=2
+Prize1=3005123 1 1
+TaskType=20
+
+[4-9]
+Title=[Standout] Daily Quest
+Intro=Complete all Daily Quests, once.
+Progress=1
+Prize1=1200001 1 1
+TaskType=40
+
+
+[5]
+OpenLev=1015
+StageAni=Stage_05goalBtn
+GoalNum=7
+Prize1=3005111 1 1
+
+[5-1]
+Title=[Famous] Rebirth
+Intro=Get 1st-reborn.
+Progress=1
+Prize1=3005121 1 1
+TaskType=2
+
+[5-2]
+Title=[Famous] Socket
+Intro=All equipped gears have totally 1 embedded gem.
+Progress=1
+Prize1=3005130 1 1
+TaskType=27
+
+[5-3]
+Title=[Famous] Equipment Composing
+Intro=Equip at least 1 piece of  equipment.
+Progress=3
+Prize1=730002 1 1
+TaskType=23
+
+[5-4]
+Title=[Famous] Sub-class
+Intro=Join a sub-class.
+Progress=1
+Prize1=3005124 1 1
+TaskType=24
+
+[5-5]
+Title=[Famous] Champion`s Arena
+Intro=Join the Champion`s Arena, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=26
+
+[5-6]
+Title=[Famous] Arena
+Intro=Win 20 fights in Arena.
+Progress=20
+Prize1=723700 1 1
+TaskType=7
+
+[5-7]
+Title=[Famous] Team Qualifier
+Intro=Win 20 battles in the Team Qualifier.
+Progress=20
+Prize1=723700 1 1
+TaskType=14
+
+[6]
+OpenLev=1101
+StageAni=Stage_06goalBtn
+GoalNum=9
+Prize1=3005112 1 1
+
+[6-1]
+Title=[Hero] Socket
+Intro=All equipped gears have totally 4 embedded gems.
+Progress=4
+Prize1=3005130 2 1
+TaskType=27
+
+[6-2]
+Title=[Hero] Equipment Composing
+Intro=Total bonus level of all equipped gears reaches 15.
+Progress=15
+Prize1=730002 1 1
+TaskType=22
+
+[6-3]
+Title=[Hero] Embedded Super Gem
+Intro=All equipped gears have totally 2 embeded Super Gems.
+Progress=2
+Prize1=730002 1 1
+TaskType=28
+
+[6-4]
+Title=[Hero] Dragon Soul
+Intro=A random equipped gear has been purified with P1 Dragon Soul.
+Progress=1
+Prize1=723694 1 1
+TaskType=29
+Require=3
+
+[6-5]
+Title=[Hero] Chi Study
+Intro=Unlock Chi system. Total Chi score reaches 500.
+Progress=500
+Prize1=3005126 1 1
+TaskType=30
+
+[6-6]
+Title=[Hero] Enlightenment
+Intro=Enlighten the younger, once.
+Progress=1
+Prize1=1088001 3 1
+TaskType=31
+
+[6-7]
+Title=[Hero] Guild PK Tournament
+Intro=Join Guild PK Tournament, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=32
+
+[6-8]
+Title=[Hero] Sub-class
+Intro=Join 2 Sub-classes.
+Progress=2
+Prize1=3005125 1 1
+TaskType=24
+
+[6-9]
+Title=[Hero] Capture the Flag
+Intro=Sign up for CTF at the Guild Controller, once.
+Progress=1
+Prize1=723700 1 1
+TaskType=33
+
+[7]
+OpenLev=2015
+StageAni=Stage_07goalBtn
+GoalNum=11
+Prize1=3005113 1 0
+
+[7-1]
+Title=[Super Hero] Rebirth
+Intro=Get 2nd-reborn.
+Progress=2
+Prize1=3005122 1 1
+TaskType=2
+
+[7-2]
+Title=[Super Hero] Chi Study
+Intro=Unlock Chi system. Total Chi score reaches 1300.
+Progress=1300
+Prize1=3003126 1 1
+TaskType=30
+
+[7-3]
+Title=[Super Hero] Jiang Hu
+Intro=Total Jiang Hu score reaches 10,000.
+Progress=10000
+Prize1=3005126 1 1
+TaskType=34
+
+[7-4]
+Title=[Super Hero] House
+Intro=Buy a house.
+Progress=1
+Prize1=3005131 1 1
+TaskType=35
+
+[7-5]
+Title=[Super Hero] Mentor
+Intro=Take an apprentice.
+Progress=1
+Prize1=730002 1 1
+TaskType=41
+
+[7-6]
+Title=[Super Hero] Equipment Composing
+Intro=Total bonus level of all equipped gears reaches 50.
+Progress=50
+Prize1=730003 1 1
+TaskType=22
+
+[7-7]
+Title=[Super Hero] Embed Super Gem
+Intro=All equipped gears have totally 8 embeded Super Gems.
+Progress=8
+Prize1=700072 1 1
+TaskType=28
+
+[7-8]
+Title=[Super Hero] Socket
+Intro=All equipped gears have totally 8 embedded gems.
+Progress=8
+Prize1=3005132 1 1
+TaskType=27
+
+[7-9]
+Title=[Super Hero] Fierce BOSS
+Intro=Kill Snow Banshee or Terato Dragon, once.
+Progress=1
+Prize1=3005133 1 1
+TaskType=42
+
+[7-10]
+Title=[Super Hero] Marriage
+Intro=Marry the beloved.
+Progress=1
+Prize1=3005134 1 1
+TaskType=36
+
+[7-11]
+Title=[Super Hero] Sub-class
+Intro=Join 3 sub-classes.
+Progress=3
+Prize1=3005125 1 1
+TaskType=24
+
+[8]
+OpenLev=2121
+StageAni=Stage_08goalBtn
+GoalNum=8
+Prize1=3005114 1 0
+
+[8-1]
+Title=[Talent] Elite PK Tournament
+Intro=Rank Top 8 in Elite PK Tournament, once.
+Progress=1
+Prize1=3005127 1 1
+TaskType=38
+Require=8
+
+[8-2]
+Title=[Talent] Equipment Composing
+Intro=Total bonus level of all equipped gears reaches 70.
+Progress=70
+Prize1=730003 1 1
+TaskType=22
+
+
+[8-3]
+Title=[Talent] Socket
+Intro=All equipped gears have totally 12 embedded gems.
+Progress=12
+Prize1=3005132 1 1
+TaskType=27
+
+[8-4]
+Title=[Talent] Chi Study
+Intro=Total Chi score reaches 1,400.
+Progress=1400
+Prize1=3003126 3 1
+TaskType=30
+
+[8-5]
+Title=[Talent] Jiang Hu Training
+Intro=Total Jiang Hu score reaches 20000
+Progress=20000
+Prize1=3005127 1 1
+TaskType=34
+
+[8-6]
+Title=[Talent] Nobility
+Intro=Nobility donation reaches 30,000,000 Silver.
+Progress=30000000
+Prize1=3005127 1 1
+TaskType=37
+
+[8-7]
+Title=[Talent] Dragon Soul
+Intro=A random equipped gear has been purified with P4 Dragon Soul.
+Progress=4
+Prize1=3005127 1 1
+TaskType=29
+Require=3
+
+[8-8]
+Title=[Talent] Refinery
+Intro=Equip equipment with P1 Refinery.
+Progress=1
+Prize1=3005127 1 1
+TaskType=46
+Require=3
+
+[9]
+OpenLev=2121
+StageAni=Stage_09goalBtn
+GoalNum=9
+Prize1=3005115 1 0
+
+[9-1]
+Title=[Great Talent] Elite PK Tournament
+Intro=Rank Top 3 in Elite PK Tournament, once.
+Progress=1
+Prize1=3005128 1 1
+TaskType=38
+Require=3
+
+[9-2]
+Title=[Great Talent] Equipment Composing
+Intro=Total bonus level of all equipped gears reaches 100.
+Progress=100
+Prize1=3005128 1 1
+TaskType=22
+
+[9-3]
+Title=[Great Talent] Embed Super Gem
+Intro=All equipped gears have totally 12 embeded Super Gems.
+Progress=12
+Prize1=3005135 1 1
+TaskType=28
+
+[9-4]
+Title=[Great Talent] Socket
+Intro=All equipped gears have totally 18 embedded gems.
+Progress=18
+Prize1=728919 3 1
+TaskType=27
+
+[9-5]
+Title=[Great Talent] Chi Study
+Intro=Total Chi score reaches 1,450.
+Progress=1450
+Prize1=3003126 5 1
+TaskType=30
+
+[9-6]
+Title=[Great Talent] Jiang Hu Training
+Intro=Total Jiang Hu score reaches 30,000.
+Progress=30000
+Prize1=3005128 1 1
+TaskType=34
+
+[9-7]
+Title=[Great Talent] Nobility
+Intro=Nobility donation reaches 100 million Silver.
+Progress=100000000
+Prize1=3005128 1 1
+TaskType=37
+
+[9-8]
+Title=[Great Talent] Dragon Soul
+Intro=A random equipped gear has been purified with P6 Dragon Soul.
+Progress=6
+Prize1=3005128 1 1
+TaskType=29
+Require=3
+
+[9-9]
+Title=[Great Talent] Refinery
+Intro=Equip equipment with P5 Refinery.
+Progress=5
+Prize1=3005128 1 1
+TaskType=46
+Require=3
+
+[10]
+OpenLev=2121
+StageAni=Stage_10goalBtn
+GoalNum=8
+Prize1=3005116 1 0
+
+[10-1]
+Title=[Grandmaster] Battle Power
+Intro=Battle Power reaches 350.
+Progress=350
+Prize1=723695 1 1
+TaskType=43
+
+[10-2]
+Title=[Grandmaster] Elite PK Tournament
+Intro=Win championship in Elite PK Tournament, once.
+Progress=1
+Prize1=3005129 1 1
+TaskType=38
+Require=1
+
+[10-3]
+Title=[Grandmaster] Chi Study
+Intro=Total Chi score reaches 1,580.
+Progress=1580
+Prize1=3003126 10 1
+TaskType=30
+
+[10-4]
+Title=[Grandmaster] Jiang Hu Training
+Intro=Total Jiang Hu score reaches 50,000.
+Progress=50000
+Prize1=3005129 1 1
+TaskType=34
+
+[10-5]
+Title=[Grandmaster] Nobility
+Intro=Nobility donation reaches 500 million Silver.
+Progress=500000000
+Prize1=3005129 1 1
+TaskType=37
+
+[10-6]
+Title=[Grandmaster] Embed Super Gem
+Intro=All equipped gears have totally 16 embeded Super Gems.
+Progress=16
+Prize1=3005135 1 1
+TaskType=28
+
+[10-7]
+Title=[Grandmaster] Equipment Composing
+Intro=Total bonus level of all equipped gears reaches 120.
+Progress=120
+Prize1=3005129 1 1
+TaskType=22
+
+[10-8]
+Title=[Grandmaster] Soul
+Intro=Equip equipment with P7 stabilized soul.
+Progress=7
+Prize1=3005129 1 1
+TaskType=29
+Require=2

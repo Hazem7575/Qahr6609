@@ -165,6 +165,35 @@ namespace Conquer6609.Database
             return null;
         }
 
+        /// <summary>key (lower case) -> value of one section of HazemConfig.ini (null = no file). ';' starts a comment anywhere,
+        /// the same as configure.ps1 reads it.</summary>
+        public static Dictionary<string, string> ReadRegistrySection(string section)
+        {
+            string path = FindRegistry();
+            if (path == null)
+                return null;
+            var d = new Dictionary<string, string>();
+            bool inside = false;
+            foreach (var raw in File.ReadAllLines(path))
+            {
+                string line = raw;
+                int sc = line.IndexOf(';');
+                if (sc >= 0) line = line.Substring(0, sc);
+                line = line.Trim();
+                if (line.Length == 0)
+                    continue;
+                if (line[0] == '[')
+                {
+                    inside = string.Equals(line.Trim('[', ']').Trim(), section, StringComparison.OrdinalIgnoreCase);
+                    continue;
+                }
+                int eq = line.IndexOf('=');
+                if (inside && eq > 0)
+                    d[line.Substring(0, eq).Trim().ToLowerInvariant()] = line.Substring(eq + 1).Trim();
+            }
+            return d;
+        }
+
         static void Fatal(string message)
         {
             ConsoleColor old = Console.ForegroundColor;

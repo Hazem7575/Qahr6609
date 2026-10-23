@@ -324,7 +324,25 @@ namespace Conquer6609.Database
             string dbHost = IniFile.ReadString("ServerInfo", "DbHost", "localhost");
             string dbUser = IniFile.ReadString("ServerInfo", "DbUser", "root");
             uint dbPort = IniFile.ReadUInt16("ServerInfo", "DbPort", 3306);
-            DB = IniFile.ReadInt32("CPFestival", "DB", 0);
+            // The database settings live in one place: HazemConfig.ini [Global] MySql* (the same values the AccountServer
+            // uses). shell.ini Db* is only the fallback when no HazemConfig.ini is found.
+            try
+            {
+                var g = ClusterConfig.ReadRegistrySection("Global");
+                string v;
+                if (g != null && g.TryGetValue("mysqldatabase", out v) && v.Length > 0)
+                {
+                    DbName = v;
+                    DbPass = g.TryGetValue("mysqlpassword", out v) ? v : "";
+                    dbHost = g.TryGetValue("mysqlhost", out v) && v.Length > 0 ? v : "localhost";
+                    dbUser = g.TryGetValue("mysqluser", out v) && v.Length > 0 ? v : "root";
+                    ushort port;
+                    dbPort = g.TryGetValue("mysqlport", out v) && ushort.TryParse(v, out port) ? port : (uint)3306;
+                    MyConsole.WriteLine("MySQL settings from " + ClusterConfig.FindRegistry() + " (" + dbUser + "@" + dbHost + ":" + dbPort + "/" + DbName + ").");
+                }
+            }
+            catch (Exception e) { MyConsole.WriteLine("HazemConfig.ini could not be read, using shell.ini Db*: " + e.Message); }
+            DB =IniFile.ReadInt32("CPFestival", "DB", 0);
             Plus3Stone = IniFile.ReadInt32("CPFestival", "Plus3Stone", 0);
             Parement = IniFile.ReadInt32("CPFestival", "Parement", 0);
             ChiPack = IniFile.ReadInt32("CPFestival", "ChiPack", 0);
@@ -337,6 +355,13 @@ namespace Conquer6609.Database
 
             Program.ServerConfig.DbLocation = IniFile.ReadString("Database", "Location","");
             Program.ServerConfig.CO2Folder = IniFile.ReadString("Database", "CO2FOLDER","");
+            // player folders: git does not keep empty folders, so a fresh copy of the source has none of them
+            foreach (var folder in new[] { "Users", "PlayersItems", "PlayersMail", "PlayersSpells", "PlayersProfs", "Quests", "Halo_Flag",
+                "Guilds", "Clans", "Houses", "Agates", "Unions", "Retreate", "BackUp", "AABackUP" })
+            {
+                try { System.IO.Directory.CreateDirectory(System.IO.Path.Combine(Program.ServerConfig.DbLocation, folder)); }
+                catch (Exception e) { MyConsole.WriteLine("Could not create " + folder + ": " + e.Message); }
+            }
             // [FastBoot, from Qahr] shell.ini [Performance] FastBoot (default 1): read gamemap.dat + the DMap files on pool
             // threads while the loaders below run; the "Role.GameMap.LoadMaps" step waits for them and builds the maps as before.
             if (Conquer6609.Framework.Settings.Bool("Performance", "FastBoot", true))
