@@ -66,7 +66,9 @@ namespace Conquer6609.Game.MsgServer
                 // [Security] the identifier is the random token the account server stored in login_tokens.Token: the account is
                 // looked up by it (was Decrypt(identifier) = the EntityID, fixed and reversible: a known UID could claim the handoff)
                 uint byToken;
-                if (!LoginTokenCheck.ResolveToken(client.Key, out byToken))
+                // after "character created" the client sends the login again on the same connection: its token is
+                // already used, so take the UID this connection was verified for
+                if (!LoginTokenCheck.VerifiedUidOf(client, out byToken) && !LoginTokenCheck.ResolveToken(client.Key, out byToken))
                 {
                     Conquer6609.Security.Guard.Audit("login-rejected", 0, "", "unknown or expired login token ip=" + client.Socket.RemoteIp);
                     Game.MsgLoader.HazemShield.SendForceClose(client, "Login", "Your login session is invalid or expired. Please log in again.");
@@ -365,6 +367,20 @@ namespace Conquer6609.Game.MsgServer
         static readonly System.Runtime.CompilerServices.ConditionalWeakTable<Client.GameClient, VerifiedUid> verified =
             new System.Runtime.CompilerServices.ConditionalWeakTable<Client.GameClient, VerifiedUid>();
         static readonly object verifiedLock = new object();
+
+        /// <summary>The UID this connection was already verified for (its token is used up by then), else false.</summary>
+        public static bool VerifiedUidOf(Client.GameClient client, out uint uid)
+        {
+            uid = 0;
+            VerifiedUid known;
+            lock (verifiedLock)
+            {
+                if (!verified.TryGetValue(client, out known))
+                    return false;
+            }
+            uid = known.Uid;
+            return true;
+        }
         static int enabled = -1;
         static int verifyIp = 1;
         static readonly object configLock = new object();
@@ -535,7 +551,14 @@ namespace Conquer6609.Game.MsgServer
         {
             failure = "";
             if (!Enabled)
+            {
+                lock (verifiedLock)
+                {
+                    verified.Remove(client);
+                    verified.Add(client, new VerifiedUid { Uid = uid });
+                }
                 return true;
+            }
 
             VerifiedUid known;
             lock (verifiedLock)
